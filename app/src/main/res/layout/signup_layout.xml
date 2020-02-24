@@ -10,7 +10,7 @@
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
         android:layout_margin="10dp"
-        android:hint="Email"/>
+        android:hint="Email" />
 
     <EditText
         android:id="@+id/password"
@@ -28,7 +28,8 @@
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
         android:layout_margin="10dp"
-        android:hint="Confirm password"/>
+        android:hint="Confirm password"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/confirm"
