@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="LoginViewBinding">
         <variable
@@ -43,8 +44,14 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:onClick="@{()-> loginViewModel.onLoginClicked()}"
-            android:text="login" />
+            android:text="@string/login" />
 
-
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/sign_up"
+            tools:text="Sign up" />
     </LinearLayout>
 </layout>
