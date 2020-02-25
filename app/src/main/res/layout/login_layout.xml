@@ -56,5 +56,16 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:text="@string/sign_up" />
+
+        <Button
+            android:id="@+id/forgot_password"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/forgot_password" />
+
     </LinearLayout>
 </layout>

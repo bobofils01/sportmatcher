@@ -3,4 +3,7 @@
     <string name="login">login</string>
     <string name="sign_up">sign up</string>
     <string name="confirm">confirm</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="new_password">new password</string>
+    />
 </resources>

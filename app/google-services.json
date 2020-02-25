@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "487883386574",
+    "firebase_url": "https://sportmatcher-16f75.firebaseio.com",
+    "project_id": "sportmatcher-16f75",
+    "storage_bucket": "sportmatcher-16f75.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487883386574:android:ef2e98acb8b94dbcd52a9f",
+        "android_client_info": {
+          "package_name": "com.example.sportmatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487883386574-rmsgn7c7j1pf2p0rg5dcls1kctlbnh5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7mFIDsj32Yy-lRwUSa6s42Tdl2I_aL6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487883386574-rmsgn7c7j1pf2p0rg5dcls1kctlbnh5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
