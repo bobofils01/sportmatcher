@@ -1,11 +1,11 @@
-package com.example.sportmatcher.vewModels.authentication
+package com.example.sportmatcher.viewModels.authentication
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.model.authentication.LoginInfo
-import com.example.sportmatcher.service.repository.UserRepository
+import com.example.sportmatcher.repository.UserRepository
 
 
 class LoginViewModel: ViewModel() {

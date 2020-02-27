@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="LoginViewBinding">
+
         <variable
             name="loginViewModel"
-            type="com.example.sportmatcher.vewModels.authentication.LoginViewModel" />
+            type="com.example.sportmatcher.viewModels.authentication.LoginViewModel" />
     </data>
 
     <LinearLayout

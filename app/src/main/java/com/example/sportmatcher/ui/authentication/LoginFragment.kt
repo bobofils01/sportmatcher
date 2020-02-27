@@ -1,6 +1,5 @@
 package com.example.sportmatcher.ui.authentication
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.LoginViewBinding
-import com.example.sportmatcher.vewModels.authentication.LoginViewModel
+import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class LoginFragment :  Fragment(){
 
