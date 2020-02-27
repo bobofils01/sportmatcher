@@ -17,8 +17,13 @@ class LoginViewModel: ViewModel() {
 
     fun onLoginClicked(): LiveData<String> {
         Log.i("ee", "email :${email.value} password : ${password.value}")
-        val response = userRepository.login(LoginInfo(email.value ,password.value))
-        Log.i("e", "answer : ${response.value}")
-        return response
+        if(email.value !=null && password.value  != null) {
+            val response = userRepository.login(LoginInfo(email.value!!, password.value!!))
+            Log.i("e", "answer : ${response.value}")
+            return response
+        }else{
+
+            return MutableLiveData<String>()
+        }
     }
 }
