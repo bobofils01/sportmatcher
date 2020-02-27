@@ -1,6 +1,5 @@
-package com.example.sportmatcher.service.repository
+package com.example.sportmatcher.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.sportmatcher.model.authentication.LoginInfo
