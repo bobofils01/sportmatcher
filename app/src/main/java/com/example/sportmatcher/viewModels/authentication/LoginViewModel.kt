@@ -10,14 +10,29 @@ import com.example.sportmatcher.repository.UserRepository
 
 class LoginViewModel: ViewModel() {
 
-    var email = MutableLiveData<String>()
-    var password = MutableLiveData<String>()
+    /**
+    Inutile d'en faire des variables, dans ce cas ci c'est bon si c'est immuable
+    car on va créer le MutableLiveDate une fois et update la valeur plusieurs fois
 
-    private var userRepository : UserRepository = UserRepository()
+    val + lazy -> C'est la vie
+     */
+    val email by lazy {
+        MutableLiveData<String>()
+    }
+    val password by lazy {
+        MutableLiveData<String>()
+    }
+
+    /**
+     * Inutile de préciser les types sauf si c'est nécessaire pour interfacer/abstraire, Kotlin le fait à la compilation
+     */
+    private val userRepository by lazy {
+        UserRepository()
+    }
 
     fun onLoginClicked(): LiveData<String> {
         Log.i("ee", "email :${email.value} password : ${password.value}")
-        val response = userRepository.login(LoginInfo(email.value ,password.value))
+        val response = userRepository.login(LoginInfo(email.value, password.value))
         Log.i("e", "answer : ${response.value}")
         return response
     }
