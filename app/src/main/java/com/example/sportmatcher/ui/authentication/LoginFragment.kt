@@ -12,6 +12,9 @@ import com.example.sportmatcher.databinding.LoginViewBinding
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class LoginFragment : Fragment() {
+    companion object {
+        fun newInstance() = LoginFragment()
+    }
 
     lateinit var binding: LoginViewBinding
     /**
@@ -37,11 +40,6 @@ class LoginFragment : Fragment() {
          * https://android.jlelse.eu/dive-deep-into-androids-viewmodel-android-architecture-components-e0a7ded26f70
          */
         ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
-
-
-    companion object {
-        fun newInstance() = LoginFragment()
     }
 
 
