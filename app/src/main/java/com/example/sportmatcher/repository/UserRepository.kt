@@ -1,61 +1,54 @@
 package com.example.sportmatcher.service.repository
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.sportmatcher.model.authentication.LoginInfo
-import com.example.sportmatcher.service.FirebaseAuthService
-import java.util.regex.Pattern
+import com.example.sportmatcher.model.User
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import io.reactivex.Observable
 
-class UserRepository{
 
-    private val authService : FirebaseAuthService = FirebaseAuthService()
+object UserRepository {
 
-    fun login(loginInfo: LoginInfo) :LiveData<String>{
-        val errorMessage = MutableLiveData<String>()
+    private val userTableRef by lazy {
+        FirebaseDatabase.getInstance().getReference("/users")
+    }
 
-        if(isEmailValid(loginInfo.email)){
-            if(loginInfo.userPassWord.length<8 && !isPasswordValid(loginInfo.userPassWord)){
-                errorMessage.value = "Invalid Password"
-            }else{
-                authService.signIn(loginInfo.email, loginInfo.userPassWord)
-                errorMessage.value = "Successful Login"
-            }
-        }else{
-            errorMessage.value = "Invalid Email"
+    fun createUser(user: User): User {
+        if (user.uid == null) {
+            throw IllegalArgumentException("useruuid is null")
         }
 
-        return  errorMessage
+        userTableRef.child(user.uid!!).setValue(user.toMap())
+        Log.i("t", "create user succeeded : $user")
+
+        return user
     }
 
+    fun updateUser(user: User): User? {
 
-    fun signup(email: String, password: String, confirmPassword:String) : LiveData<String>{
-        val errorMessage = MutableLiveData<String>()
+        return user
+    }
 
-        if(isEmailValid(email)){
-            if(password.length<8 && !isPasswordValid(password)){
-                errorMessage.value = "Invalid Password"
-            }else if(!password.equals(confirmPassword)){
-                errorMessage.value = "unmatch password"
-            }else{
-                authService.register(email, password)
-                errorMessage.value = "Successful register"
+    fun getUser(uid: String): Observable<User> {
+
+        var user = MutableLiveData<User>()
+        //TODO find a way to create a good observable
+        var us: Observable<User> = Observable.just(User())
+        userTableRef.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                user.value = dataSnapshot.getValue(User::class.java)
+                Log.i("t", "signin user $user")
+                us = Observable.just(user.value)
             }
-        }else{
-            errorMessage.value = "Invalid Email"
-        }
-        return  errorMessage
-    }
-    fun isEmailValid(email: String): Boolean {
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(email)
-        return matcher.matches()
-    }
 
-    fun isPasswordValid(password: String): Boolean{
-        val expression  ="^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#\$%^&+=!])(?=\\\\S+\$).{4,}\$";
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(password)
-        return matcher.matches()
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
+
+
+        return us
     }
 }

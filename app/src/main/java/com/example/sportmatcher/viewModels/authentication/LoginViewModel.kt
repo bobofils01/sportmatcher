@@ -1,27 +1,23 @@
 package com.example.sportmatcher.viewModels.authentication
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.model.authentication.LoginInfo
-import com.example.sportmatcher.service.repository.UserRepository
+import com.example.sportmatcher.service.FirebaseAuthService
 
 
 class LoginViewModel: ViewModel() {
 
-    var email = MutableLiveData<String>()
-    var password = MutableLiveData<String>()
-
-    private val userRepository : UserRepository = UserRepository()
-
+    val email by lazy { MutableLiveData<String>() }
+    val password by lazy { MutableLiveData<String>() }
+    private val firebaseAuthService: FirebaseAuthService = FirebaseAuthService
     fun onLoginClicked(): LiveData<String> {
 
         return if(email.value !=null && password.value  != null) {
-            val response = userRepository.login(LoginInfo(email.value!!, password.value!!))
+            val response = firebaseAuthService.login(LoginInfo(email.value!!, password.value!!))
             response
         }else{
-
             MutableLiveData<String>()
         }
     }

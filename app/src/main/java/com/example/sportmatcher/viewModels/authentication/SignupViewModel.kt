@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sportmatcher.service.repository.UserRepository
+import com.example.sportmatcher.service.FirebaseAuthService
 
 
 class SignupViewModel: ViewModel() {
@@ -13,12 +13,12 @@ class SignupViewModel: ViewModel() {
     var password = MutableLiveData<String>()
     var confirmPassword = MutableLiveData<String>()
 
-    private val userRepository: UserRepository = UserRepository()
-
-
+    private val firebaseAuthService: FirebaseAuthService = FirebaseAuthService
     fun onSignupClicked(): LiveData<String> {
         if (email.value != null && password.value != null && confirmPassword.value != null) {
-            val response = userRepository.signup(email.value!!,password.value!!,confirmPassword.value!!)
+            val response =
+                firebaseAuthService.signup(email.value!!, password.value!!, confirmPassword.value!!)
+            Log.i("f", "$response")
             return response
         } else {
             return MutableLiveData<String>()
