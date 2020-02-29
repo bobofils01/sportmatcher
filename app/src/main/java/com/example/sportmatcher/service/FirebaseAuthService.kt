@@ -2,88 +2,106 @@ package com.example.sportmatcher.service
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.sportmatcher.model.User
-import com.example.sportmatcher.model.authentication.LoginInfo
-import com.example.sportmatcher.service.repository.UserRepository
+import com.example.sportmatcher.model.authentication.AuthenticatedState
+import com.example.sportmatcher.model.authentication.AuthenticationState
+import com.example.sportmatcher.model.authentication.NotAuthenticated
+import com.example.sportmatcher.repository.FirebaseUserRepository
 import com.google.firebase.auth.FirebaseAuth
-import java.util.regex.Pattern
+import io.reactivex.*
+import io.reactivex.subjects.BehaviorSubject
 
 
-object FirebaseAuthService {
+class FirebaseAuthService : IAuthService {
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val userRepository by lazy { UserRepository }
-    val currentAuthenticatedUser by lazy { MutableLiveData<User>(null) }
+    private val userRepository by lazy { FirebaseUserRepository() }
+    private val subject by lazy {
+        BehaviorSubject.create<AuthenticationState>()
+    }
 
-    fun signIn(email : String ,password :String){
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val userId = firebaseAuth.currentUser!!.uid
 
-                    //TODO code need tobe refactored use observable a good library
-                    val listener = userRepository.getUser(userId).subscribe { user ->
-                        if (user.email != null) {
+    override fun signIn(email: String, password: String): Single<AuthenticationState> {
+        return Single.create { emitter ->
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success")
+                        val userId = firebaseAuth.currentUser!!.uid
+
+
+                        userRepository.getUser(userId).subscribe({ user ->
                             Log.d(TAG, "user connect : $user")
-                            updateCurrentUser(user)
+                            updateCurrentUser(user, emitter)
                         }
+                        ) { throwable ->
+                            Log.e(TAG, "error ", throwable)
+                            updateCurrentUser(emit = emitter)
+                        }
+
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.e(TAG, "signInWithEmail:failure", task.exception)
+                        updateCurrentUser(emit = emitter)
+                        //TODO SHOW ERROR MESSAGE
                     }
-
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    updateCurrentUser(null)
-                    //TO DO SHOW ERROR MESSAGE
                 }
-            }
+        }
     }
 
 
-    fun register(email : String ,password :String){
-        Log.d(TAG, "init:success")
-        firebaseAuth
-            .createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val userId = firebaseAuth.currentUser!!.uid
-                    //Verify Email
-                    verifyEmail()
+    override fun register(email: String, password: String): Single<AuthenticationState> {
+        return Single.create { emitter ->
+            Log.d(TAG, "init:success")
+            firebaseAuth
+                .createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val userId = firebaseAuth.currentUser!!.uid
+                        //Verify Email
+                        verifyEmail()
 
-                    val createdUser =
-                        User(uid = userId, email = email, firstName = email, lastName = email)
-                    val user = userRepository.createUser(createdUser)
-                    updateCurrentUser(user)
+                        val createdUser =
+                            User(uid = userId, email = email, firstName = email, lastName = email)
+                        userRepository.createUser(createdUser).subscribe({ user ->
+                            Log.d(TAG, "user registered : $user")
+                            updateCurrentUser(user, emitter)
+                        }) { throwable ->
+                            Log.e(TAG, "error ", throwable)
+                            updateCurrentUser(emit = emitter)
+                        }
 
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    //TO DO SHOW ERROR MESSAGE
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        //TO DO SHOW ERROR MESSAGE
+                        updateCurrentUser(emit = emitter)
+                    }
                 }
-            }
+        }
     }
 
 
-    fun logout(){
-        firebaseAuth.signOut()
+    override fun logout(): Single<AuthenticationState> {
+        return Single.create { emitter ->
+            firebaseAuth.signOut()
+            updateCurrentUser(emit = emitter)
+        }
     }
 
 
-    fun forgotPassword(email: String) {
+    override fun forgotPassword(email: String) {
         firebaseAuth!!
             .sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val message = "Email sent."
                     Log.d(TAG, message)
-                    updateCurrentUser(null)
+                    updateCurrentUser(null, null)
                 } else {
                     Log.w(TAG, task.exception!!.message!!)
                 }
@@ -104,64 +122,24 @@ object FirebaseAuthService {
     }
 
     //TO DO if succeeded go to the next page if fail or disconnect dismiss everything ans show  error message
-    fun updateCurrentUser(user: User?) {
-        if(user != null){
+    private fun updateCurrentUser(
+        user: User? = null,
+        emit: SingleEmitter<AuthenticationState>? = null
+    ) {
+        if (user != null) {
             Log.i("connect", " $user is connected.")
-            currentAuthenticatedUser.value = user
-
-        }else{
-            currentAuthenticatedUser.value = null
-        }
-    }
-
-
-    fun login(loginInfo: LoginInfo): LiveData<String> {
-        val errorMessage = MutableLiveData<String>()
-
-        if (isEmailValid(loginInfo.email)) {
-            if (loginInfo.userPassWord.length < 8 && !isPasswordValid(loginInfo.userPassWord)) {
-                errorMessage.value = "Invalid Password"
-            } else {
-                this.signIn(loginInfo.email, loginInfo.userPassWord)
-                errorMessage.value = "Successful Login"
-            }
+            val auth = AuthenticatedState(user)
+            subject.onNext(auth)
+            emit?.onSuccess(auth)
         } else {
-            errorMessage.value = "Invalid Email"
+            subject.onNext(NotAuthenticated)
+            emit?.onSuccess(NotAuthenticated)
         }
+    }
 
-        return errorMessage
+    override fun getAuthenticationState(): Observable<AuthenticationState> {
+        return subject
     }
 
 
-    fun signup(email: String, password: String, confirmPassword: String): LiveData<String> {
-        val errorMessage = MutableLiveData<String>()
-
-        if (isEmailValid(email)) {
-            if (password.length < 8 && !isPasswordValid(password)) {
-                errorMessage.value = "Invalid Password"
-            } else if (!password.equals(confirmPassword)) {
-                errorMessage.value = "unmatch password"
-            } else {
-                this.register(email, password)
-                errorMessage.value = "Successful register"
-            }
-        } else {
-            errorMessage.value = "Invalid Email"
-        }
-        return errorMessage
-    }
-
-    fun isEmailValid(email: String): Boolean {
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(email)
-        return matcher.matches()
-    }
-
-    fun isPasswordValid(password: String): Boolean {
-        val expression = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#\$%^&+=!])(?=\\\\S+\$).{4,}\$"
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(password)
-        return matcher.matches()
-    }
 }
