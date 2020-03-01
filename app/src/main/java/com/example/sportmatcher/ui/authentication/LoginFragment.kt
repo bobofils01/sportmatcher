@@ -11,21 +11,27 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.LoginViewBinding
 import com.example.sportmatcher.ui.ForgotPasswordActivity
-import com.example.sportmatcher.ui.SignupActivity
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
 
 class LoginFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LoginFragment()
+        private const val EXTRA_VILLE = "extraVille"
+        fun newInstance(ville:String):Fragment{
+            return LoginFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_VILLE, ville)
+                }
+            }
+        }
     }
 
     lateinit var binding: LoginViewBinding
 
     //view models always initialised like this
     private val viewmodel: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
+        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
     }
 
 
@@ -42,16 +48,15 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val ville = arguments?.getString(EXTRA_VILLE)
         // listen to buttons
         btn_login.setOnClickListener {
             viewmodel.onLoginClicked()
         }
 
         signup_btn.setOnClickListener {
-            startActivity(Intent(view.context, SignupActivity::class.java))
+            viewmodel.onSignUpClicked()
         }
-
         forgot_password_btn.setOnClickListener {
             startActivity(Intent(view.context, ForgotPasswordActivity::class.java))
         }
