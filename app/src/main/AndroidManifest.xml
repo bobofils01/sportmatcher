@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.ForgotPasswordActivity"></activity>
-        <activity android:name=".ui.SignupActivity" />
+        <activity android:name=".ui.Sport"></activity>
+        <activity android:name=".ui.SignupActivity"/>
+        <activity android:name=".ui.SportChoice"/>
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -45,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
-                        //TODO show the homepage
-                        Toast.makeText(this, "Fayen ah fou", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, SportChoice::class.java)
+                        startActivity(intent)
                     }
                     is AuthenticationInProgress -> {
                         //TODO show progress bar
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     else -> {
                         //TODO do nothing
-                        Toast.makeText(this, "Ntm sale merde", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
                 }
             }

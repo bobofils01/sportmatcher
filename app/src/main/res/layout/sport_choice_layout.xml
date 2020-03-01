@@ -12,61 +12,62 @@
             android:id="@+id/basketball"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Basketball" />
+            android:text="@string/basketball"
+            />
 
         <Button
             android:id="@+id/hockey"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Hockey" />
+            android:text="@string/hockey" />
 
         <Button
             android:id="@+id/soccer"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Soccer" />
+            android:text="@string/soccer" />
 
         <Button
             android:id="@+id/futsal"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Futsal" />
+            android:text="@string/futsal" />
 
         <Button
             android:id="@+id/handball"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Handball" />
+            android:text="@string/handball" />
 
         <Button
             android:id="@+id/voleyball"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Voleyball" />
+            android:text="@string/voleyball" />
 
         <Button
             android:id="@+id/tennis"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Tennis" />
+            android:text="@string/tennis" />
 
         <Button
             android:id="@+id/badminton"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Badminton" />
+            android:text="@string/badminton" />
 
         <Button
             android:id="@+id/squash"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Squash" />
+            android:text="@string/squash" />
 
         <Button
             android:id="@+id/ping_pong"
             android:layout_width="match_parent"
             android:layout_height="82dp"
-            android:text="Ping-Pong" />
+            android:text="@string/ping_pong" />
 
     </LinearLayout>
 </ScrollView>
