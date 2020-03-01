@@ -15,15 +15,19 @@
             android:value="AIzaSyCdy3BTyptF8y4V-pJo5KtMEc6NuOEPBks"/>
 
         <activity android:name=".ui.ForgotPasswordActivity"></activity>
-        <activity android:name=".ui.map.MapActivity"/>
+        <activity android:name=".ui.map.MapActivity" />
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.FirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
-
-
 </manifest>

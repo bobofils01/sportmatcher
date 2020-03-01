@@ -1,14 +1,17 @@
-package com.example.sportmatcher.domain
+package com.example.sportmatcher.domain.auth
 
+import com.example.sportmatcher.di.ServiceProvider
+import com.example.sportmatcher.domain.UseCase
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.model.authentication.AuthenticationState
-import com.example.sportmatcher.model.authentication.LoginInfo
+import com.example.sportmatcher.model.authentication.NotAuthenticated
 import com.example.sportmatcher.model.authentication.SignupInfo
 import com.example.sportmatcher.service.IAuthService
 import io.reactivex.Single
 
-class SignUpUseCase(private val iAuthService: IAuthService) : UseCase<SignupInfo, Single<AuthenticationState>> {
+class SignUpUseCase(private val iAuthService: IAuthService) :
+    UseCase<SignupInfo, Single<AuthenticationState>> {
 
     override fun execute(payload: SignupInfo): Single<AuthenticationState> {
         if (verifyPayload(
@@ -19,7 +22,11 @@ class SignUpUseCase(private val iAuthService: IAuthService) : UseCase<SignupInfo
         ) {
             return Single.error(IllegalStateException("Invalid sign up payload"))
         }
-        return iAuthService.register(payload.email!!, payload.passWord!!)
+
+        return iAuthService.register(payload.email!!, payload.passWord!!).map{
+            ServiceProvider.registerToNotificationsUseCase.execute()
+            it
+        }.onErrorResumeNext(Single.just(NotAuthenticated))
     }
 
 
