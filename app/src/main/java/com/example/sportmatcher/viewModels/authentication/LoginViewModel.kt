@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
-import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.model.authentication.AuthenticationState
 import com.example.sportmatcher.model.authentication.LoginInfo
+import com.example.sportmatcher.model.authentication.NotAuthenticated
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import io.reactivex.disposables.CompositeDisposable
 
@@ -23,7 +23,7 @@ class LoginViewModel : ViewModel() {
     fun getLoginViewStateLiveData(): LiveData<LoginViewState> = loginViewStateLiveData
 
     private val authenticationState: MutableLiveData<AuthenticationState> by lazy {
-        MutableLiveData<AuthenticationState>(AuthenticationInProgress)
+        MutableLiveData<AuthenticationState>(NotAuthenticated)
     }
 
     fun getAuthenticationStateLiveDate(): LiveData<AuthenticationState> = authenticationState

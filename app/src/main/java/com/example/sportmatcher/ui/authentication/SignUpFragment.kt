@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -46,7 +45,7 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        confirm_register.setOnClickListener { viewmodel.onSignupClicked() }
+        confirm_register.setOnClickListener { viewmodel.onRegisterClicked() }
 /*
         //set Listener of authenticated user and show the right
         FirebaseAuthService.currentAuthenticatedUser.observe(this, Observer { user ->

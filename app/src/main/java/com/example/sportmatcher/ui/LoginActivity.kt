@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
@@ -16,8 +15,6 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login.*
-import java.lang.IllegalArgumentException
 
 class LoginActivity : AppCompatActivity() {
 
@@ -48,12 +45,15 @@ class LoginActivity : AppCompatActivity() {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
+                        //TODO show the homepage
                         Toast.makeText(this, "Fayen ah fou", Toast.LENGTH_LONG).show()
                     }
                     is AuthenticationInProgress -> {
+                        //TODO show progress bar
                         Toast.makeText(this, "Attends ah fdp", Toast.LENGTH_LONG).show()
                     }
                     else -> {
+                        //TODO do nothing
                         Toast.makeText(this, "Ntm sale merde", Toast.LENGTH_LONG).show()
                     }
                 }
