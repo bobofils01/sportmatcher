@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.authentication
 
+import MapActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.LoginViewBinding
 import com.example.sportmatcher.ui.ForgotPasswordActivity
-import com.example.sportmatcher.ui.map.MapActivity
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
 

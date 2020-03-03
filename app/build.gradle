@@ -68,4 +68,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    //library for the sliding up map.
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
 }
