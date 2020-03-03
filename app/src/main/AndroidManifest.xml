@@ -14,8 +14,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCdy3BTyptF8y4V-pJo5KtMEc6NuOEPBks"/>
 
-        <activity android:name=".ui.ForgotPasswordActivity"></activity>
-        <activity android:name=".ui.map.MapActivity"/>
+        <activity android:name=".ui.authentication.ForgotPasswordActivity"></activity>
+        <activity android:name=".ui.sports.SportHomePageActivity"></activity>
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

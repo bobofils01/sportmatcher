@@ -1,4 +1,3 @@
 package com.example.sportmatcher.adapters
 
-class SportsListAdapter {
-}
+import androidx.recyclerview.widget.RecyclerView

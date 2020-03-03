@@ -1,6 +1,5 @@
 package com.example.sportmatcher.ui.authentication
 
-import MapActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.LoginViewBinding
-import com.example.sportmatcher.ui.ForgotPasswordActivity
+import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
 
@@ -59,7 +58,7 @@ class LoginFragment : Fragment() {
             viewmodel.onSignUpClicked()
         }
         forgot_password_btn.setOnClickListener {
-            startActivity(Intent(view.context, MapActivity::class.java))
+            startActivity(Intent(view.context, SportHomePageActivity::class.java))
         }
 
     }

@@ -34,8 +34,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center|top"
-                android:text="The Awesome Sliding Up Panel"
+                android:text="Add a search tool bar //filter"
                 android:textSize="16sp" />
+            <ListView
+                android:id="@+id/sports_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </RelativeLayout>
 
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>

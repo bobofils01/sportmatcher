@@ -1,4 +1,4 @@
-package com.example.sportmatcher.ui
+package com.example.sportmatcher.ui.authentication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

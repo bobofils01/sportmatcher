@@ -1,4 +1,4 @@
-package com.example.sportmatcher.ui.map
+package com.example.sportmatcher.ui.sports
 
 import android.os.Bundle
 import com.example.sportmatcher.R
