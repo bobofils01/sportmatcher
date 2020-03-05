@@ -7,7 +7,7 @@ import com.example.sportmatcher.service.INotificationService
 import io.reactivex.Observable
 
 
-class SendPushNotificationsUsecase(val notificationService: INotificationService, val notificationRepository: INotificationsRepository) :
+class SendPushNotificationsUseCase(val notificationService: INotificationService, val notificationRepository: INotificationsRepository) :
     UseCase<NotificationType, Boolean> {
     override fun execute(payload: NotificationType): Boolean {
         val notifiableDevices : Observable<String> = notificationRepository.getNotifiableDevices()

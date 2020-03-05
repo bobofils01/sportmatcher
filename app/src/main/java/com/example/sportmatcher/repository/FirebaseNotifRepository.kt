@@ -13,7 +13,7 @@ class FirebaseNotifRepository : INotificationsRepository {
         private const val PATH = "notifiableDevices"
     }
 
-    private val userTableRef by lazy {
+    private val notificationTableRef by lazy {
         FirebaseDatabase.getInstance().getReference("/${FirebaseNotifRepository.PATH}")
     }
 
@@ -21,7 +21,7 @@ class FirebaseNotifRepository : INotificationsRepository {
 
         return Observable.create<String>{
             emitter ->
-            userTableRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            notificationTableRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     dataSnapshot.children.mapNotNull{ it ->
                         it.getValue(String::class.java)?.let {
@@ -44,13 +44,13 @@ class FirebaseNotifRepository : INotificationsRepository {
     override fun addNotifiableDevice(token: String?) {
         if(token != null){
             //TODO add in the database sorted by sportCategory
-            val key  = userTableRef.push().key
+            val key  = notificationTableRef.push().key
 
             if (key == null) {
                 Log.w(TAG, "Couldn't get push key for notifiableDevices")
                 return
             }
-            userTableRef.child(key).setValue(token)
+            notificationTableRef.child(key).setValue(token)
 
         }
     }
