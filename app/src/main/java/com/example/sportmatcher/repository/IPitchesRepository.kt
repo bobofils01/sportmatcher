@@ -8,6 +8,6 @@ interface IPitchesRepository {
 
     fun addPitch(pitch : Pitch): Single<Pitch>
     fun updatePitch(pitch : Pitch): Single<Pitch>
-    fun getAllPitches(): Observable<Pitch>
+    fun getAllPitches(): Observable<List<Pitch>>
 
 }

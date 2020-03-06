@@ -26,10 +26,7 @@ class FirebasePitchesRepository : IPitchesRepository {
         }
         val key  = pitchesTableRef.push().key
         pitch.uid = key
-        Log.d("ONADDPITCH", "Before")
-        Log.d("ONADDPITCH", pitch.toMap().toString())
         return Single.create { emitter ->
-            Log.d("ONADDPITCH", "OK")
             pitchesTableRef.child(key!!).setValue(pitch.toMap())
             emitter.onSuccess(pitch)
         }
@@ -39,18 +36,14 @@ class FirebasePitchesRepository : IPitchesRepository {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllPitches(): Observable<Pitch> {
+    override fun getAllPitches(): Observable<List<Pitch>> {
         return Observable.create { emitter ->
             pitchesTableRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    dataSnapshot.children.mapNotNull {pitch ->
-                        /*var p = pitch.getValue(Pitch::class.java)
-                        Log.d("WESH ", p.toString())
-                        */
-                        pitch.getValue(Pitch::class.java)?.let {
-                            emitter.onNext(it)
-                        }
+                    val list = dataSnapshot.children.mapNotNull {pitch ->
+                        pitch.getValue(Pitch::class.java)
                     }
+                    emitter.onNext(list)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
