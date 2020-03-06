@@ -17,7 +17,7 @@ class FirebasePitchesRepository : IPitchesRepository {
     }
 
     private val pitchesTableRef by lazy {
-        FirebaseDatabase.getInstance().getReference("/${FirebasePitchesRepository.PITCHES_PATH}")
+        FirebaseDatabase.getInstance().getReference("/$PITCHES_PATH")
     }
 
     override fun addPitch(pitch: Pitch): Single<Pitch> {
@@ -27,6 +27,7 @@ class FirebasePitchesRepository : IPitchesRepository {
         val key  = pitchesTableRef.push().key
         pitch.uid = key
         Log.d("ONADDPITCH", "Before")
+        Log.d("ONADDPITCH", pitch.toMap().toString())
         return Single.create { emitter ->
             Log.d("ONADDPITCH", "OK")
             pitchesTableRef.child(key!!).setValue(pitch.toMap())
@@ -43,7 +44,7 @@ class FirebasePitchesRepository : IPitchesRepository {
             pitchesTableRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     dataSnapshot.children.mapNotNull {pitch ->
-                        /*var p = pitch.getValue(true)
+                        /*var p = pitch.getValue(Pitch::class.java)
                         Log.d("WESH ", p.toString())
                         */
                         pitch.getValue(Pitch::class.java)?.let {

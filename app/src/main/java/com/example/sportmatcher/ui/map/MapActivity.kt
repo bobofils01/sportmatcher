@@ -21,21 +21,23 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.map_layout)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        val aPUC = AddPitchUseCase(FirebasePitchesRepository())
+
+        /*val aPUC = AddPitchUseCase(FirebasePitchesRepository())
+        Log.d("FYN", "BEFORE ADD")
         aPUC.execute(Pitch(address = "Rue Du Foyer Schaerbeekois 23", sport = "PingPong", latitude = 30.2, longitude = 32.9))
+            .subscribe()
         Log.d("FYN", "AFTER ADD")
-        /*val aPUC = GetAllPitchesUseCase(FirebasePitchesRepository())
-        val pitches = aPUC.execute()
-        pitches.forEach{
-            print("pitch "+ it)
-        }*/
+        */val aPUC = GetAllPitchesUseCase(FirebasePitchesRepository())
+        val pitches = aPUC.execute().subscribe { pitch ->
+            Log.d("RESPONSE", pitch.toMap().toString())
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
