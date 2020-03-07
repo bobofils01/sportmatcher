@@ -1,6 +1,9 @@
 package com.example.sportmatcher.ui.sports
 
+import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +14,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.AddPitchViewBinding
 import com.example.sportmatcher.viewModels.sports.AddPitchViewModel
+import com.google.android.gms.common.api.Status
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.add_pitch_layout.*
+import java.lang.invoke.MethodHandles
+import java.util.*
 
-class AddPitchViewFragment: Fragment() {
+class AddPitchViewFragment: Fragment(), PlaceSelectionListener {
 
     companion object {
         private const val EXTRA_VILLE = "extraVille"
@@ -32,13 +42,35 @@ class AddPitchViewFragment: Fragment() {
         ViewModelProvider(requireActivity()).get(AddPitchViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Initialize the AutocompleteSupportFragment.
+        // Initialize the AutocompleteSupportFragment.
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.add_pitch_layout, container, false)
         binding.addPitchViewModel = viewmodel
+
+        val autocompleteFragment = activity!!.
+            supportFragmentManager.
+            findFragmentById(R.id.autocomplete_fragment) as? AutocompleteSupportFragment
+
+        if (!Places.isInitialized()) {
+            Places.initialize(activity!!.applicationContext, getString(R.string.google_api_key));
+        }
+        // Specify the types of place data to return.
+        // Specify the types of place data to return.
+        autocompleteFragment?.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+
+        // Set up a PlaceSelectionListener to handle the response.
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment?.setOnPlaceSelectedListener(this)
 
         return binding.root
     }
@@ -77,4 +109,16 @@ class AddPitchViewFragment: Fragment() {
         }
     }
     */
+    override fun onActivityResult(p0: Int, p1: Int, p2: Intent?) {
+        super.onActivityResult(p0, p1, p2)
+
+    }
+
+    override fun onPlaceSelected(place: Place) {
+        Log.d("TAG", "Place: " + place.name + ", " + place.id)
+    }
+
+    override fun onError(p0: Status) {
+        Log.d("TAG", "An error occurred: $p0")
+    }
 }

@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.multidex.MultiDex
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
+import com.example.sportmatcher.ui.sports.AddPitchViewFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -78,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
     private fun getFragment(tag: String):Fragment{
         return when (tag) {
             LOGIN_FRAG_TAG -> LoginFragment.newInstance("vide")
-            SIGNUP_FRAG_TAG -> SignUpFragment.newInstance("dhdh")
+            SIGNUP_FRAG_TAG -> AddPitchViewFragment.newInstance("dhdh")
             else -> throw IllegalArgumentException("Key doesn't exist")
         }
     }
@@ -90,5 +92,10 @@ class LoginActivity : AppCompatActivity() {
                 fragment,
                 tag
             ).commit()
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

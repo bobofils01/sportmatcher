@@ -27,7 +27,7 @@ class AddPitchViewModel: ViewModel() {
 
     fun onAddPitchClicked(){
         Log.d("ADDPITCH", address.value + " "+ latitude.value+ " "+longitude.value)
-        val newPitch = Pitch("", address.value, "football", 0.0, 0.1)
+        val newPitch = Pitch("", "terrain test", "terrain de zab","",address.value, "football", 0.0, 0.1)
         addPitchUseCase.execute(newPitch).subscribe()
     }
 
