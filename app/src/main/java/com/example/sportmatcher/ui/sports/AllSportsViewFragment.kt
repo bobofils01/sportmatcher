@@ -1,4 +1,5 @@
 package com.example.sportmatcher.ui.sports
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import kotlinx.android.synthetic.main.all_sports_view_layout.*
 
+
 class AllSportsViewFragment: Fragment(){
 
     private val allSportsViewModel : AllSportsViewModel by lazy {
@@ -23,9 +25,7 @@ class AllSportsViewFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val view : View = inflater.inflate(R.layout.all_sports_view_layout, container, false)
-        return view
+        return inflater.inflate(R.layout.add_pitch_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
