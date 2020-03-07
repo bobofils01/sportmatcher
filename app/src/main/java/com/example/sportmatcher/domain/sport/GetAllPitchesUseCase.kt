@@ -16,7 +16,4 @@ class GetAllPitchesUseCase(private val iPitchesRepository: IPitchesRepository):
         return iPitchesRepository.getAllPitches()
     }
 
-
-
-
 }

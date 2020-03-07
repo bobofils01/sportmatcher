@@ -2,23 +2,26 @@ package com.example.sportmatcher.viewModels.sports
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.sportmatcher.model.sport.Pitch
 
 
 class AllSportsViewModel : ViewModel(){
 
 
-    fun getAllSports() : MutableLiveData<List<String>>{
-        //TODO get it from the usecase call
-        val sportsMutableData = MutableLiveData<List<String>>()
+    fun getAllSports() : MutableLiveData<ArrayList<Pitch>>{
 
-        val sportList: MutableList<String> = ArrayList()
-        sportList.add("blocry")
-        sportList.add("mounier")
-        sportList.add("parc madou")
-        sportList.add("sainte Barbe")
-        sportList.add("Basic fit")
+        val sportsMutableData = MutableLiveData<ArrayList<Pitch>>()
+        //TODO get it from the usecase call and observe the change.
 
-        sportsMutableData.value = sportList
+        val sportList: MutableList<Pitch> = ArrayList()
+
+        sportList.add(Pitch(uid = "", name = "Blocry", description = "le bon bail de louvain", pitchPicture = "pas là", address = "rue de la blocry 1"))
+        sportList.add(Pitch(uid = "", name = "Basic fit", description = "le bon bail de louvain", pitchPicture = "pas là", address = "rue de la blocry 1"))
+        sportList.add(Pitch(uid = "", name = "Namen", description = "le bon bail de louvain", pitchPicture = "pas là", address = "rue de la blocry 1"))
+        sportList.add(Pitch(uid = "", name = "Alma", description = "le bon bail de louvain", pitchPicture = "pas là", address = "rue de la blocry 1"))
+        sportList.add(Pitch(uid = "", name = "KOTSport", description = "le bon bail de louvain", pitchPicture = "pas là", address = "rue de la blocry 1"))
+
+        sportsMutableData.value = sportList as ArrayList<Pitch>
 
         return sportsMutableData
     }
