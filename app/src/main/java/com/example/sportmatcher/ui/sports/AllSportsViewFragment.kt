@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.adapters.PitchesListAdapter
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import kotlinx.android.synthetic.main.all_sports_view_layout.*
 
@@ -35,9 +36,9 @@ class AllSportsViewFragment: Fragment(){
         //TODO add also item touchhelper listener
 
         val listView : ListView = sports_list as ListView
+
         allSportsViewModel.getAllSports().observe(requireActivity(), Observer{sports ->
-            val adapter : ArrayAdapter<String>
-                    = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, sports)
+            val adapter = PitchesListAdapter(sports, requireContext())
             listView.adapter =  adapter
         })
     }
