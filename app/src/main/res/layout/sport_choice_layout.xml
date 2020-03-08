@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/basketball"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/basketball"
+            android:onClick="onSportClick"
+            />
+
+        <Button
+            android:id="@+id/hockey"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/hockey"
+            android:onClick="onSportClick"
+            />
+
+        <Button
+            android:id="@+id/soccer"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/soccer"
+            android:onClick="onSportClick"
+            />
+
+        <Button
+            android:id="@+id/futsal"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/futsal"
+            android:onClick="onSportClick"
+            />
+
+        <Button
+            android:id="@+id/handball"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/handball"
+            android:onClick="onSportClick"/>
+
+        <Button
+            android:id="@+id/voleyball"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/voleyball"
+            android:onClick="onSportClick"/>
+
+        <Button
+            android:id="@+id/tennis"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/tennis"
+            android:onClick="onSportClick"/>
+
+        <Button
+            android:id="@+id/badminton"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/badminton"
+            android:onClick="onSportClick"/>
+
+        <Button
+            android:id="@+id/squash"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/squash"
+            android:onClick="onSportClick"/>
+
+        <Button
+            android:id="@+id/ping_pong"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="@string/ping_pong"
+            android:onClick="onSportClick"/>
+
+    </LinearLayout>
+</ScrollView>
