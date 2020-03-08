@@ -26,7 +26,7 @@ class AllSportsViewFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.add_pitch_layout, container, false)
+        return inflater.inflate(R.layout.all_sports_view_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

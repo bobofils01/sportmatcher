@@ -19,16 +19,6 @@
             android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             />
 
-        <EditText
-            android:id="@+id/editTextEmailIDPitch"
-            style="@style/Widget.AppCompat.EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:hint="Address"
-            android:text="@={addPitchViewModel.address}"/>
         <!--
         <EditText
             android:id="@+id/latitude"
