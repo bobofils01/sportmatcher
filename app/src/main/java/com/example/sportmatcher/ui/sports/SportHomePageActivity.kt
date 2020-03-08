@@ -10,6 +10,8 @@ class SportHomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sport_homepage)
 
+        val sportName = intent.getStringExtra("SPORT_NAME")
+
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.sportHomePageFragment,

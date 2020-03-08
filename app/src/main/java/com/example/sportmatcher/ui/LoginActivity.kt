@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     is AuthenticationInProgress -> {
                         //TODO show progress bar
-                        Toast.makeText(this, "Attends ah fdp", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
                     }
                     else -> {
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
