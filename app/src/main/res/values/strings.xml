@@ -6,4 +6,15 @@
     <string name="forgot_password">forgot password</string>
     <string name="new_password">new password</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCdy3BTyptF8y4V-pJo5KtMEc6NuOEPBks</string>
+    <string name="basketball">Basketball</string>
+    <string name="hockey">Hockey</string>
+    <string name="futsal">Futsal</string>
+    <string name="badminton">Badminton</string>
+    <string name="tennis">Tennis</string>
+    <string name="squash">Squash</string>
+    <string name="handball">Handball</string>
+    <string name="ping_pong">Ping-Pong</string>
+    <string name="voleyball">Voleyball</string>
+    <string name="soccer">Soccer</string>
+    />
 </resources>
