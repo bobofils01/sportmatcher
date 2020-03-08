@@ -16,15 +16,16 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.AddPitchViewBinding
 import com.example.sportmatcher.viewModels.sports.AddPitchViewModel
 import com.google.android.gms.common.api.Status
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import kotlinx.android.synthetic.main.add_pitch_layout.*
-import java.util.*
 
 
 class AddPitchViewFragment: Fragment(){
@@ -48,12 +49,6 @@ class AddPitchViewFragment: Fragment(){
 
     lateinit var autocompleteFragment: AutocompleteSupportFragment
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // Initialize the AutocompleteSupportFragment.
-        // Initialize the AutocompleteSupportFragment.
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +58,8 @@ class AddPitchViewFragment: Fragment(){
         binding = DataBindingUtil.inflate(inflater, R.layout.add_pitch_layout, container, false)
         binding.addPitchViewModel = viewmodel
 
+        // Initialize the AutocompleteSupportFragment.
+        // Initialize the AutocompleteSupportFragment.
         autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 
@@ -81,8 +78,16 @@ class AddPitchViewFragment: Fragment(){
             )
         )
 
+        // Use the builder to create a FindAutocompletePredictionsRequest.
+        // Use the builder to create a FindAutocompletePredictionsRequest.
+        val request :FindAutocompletePredictionsRequest =
+            FindAutocompletePredictionsRequest.builder() // Call either setLocationBias() OR setLocationRestriction().
+                .setCountries("BE")
+                .setTypeFilter(TypeFilter.ADDRESS)
+                .build()
+
         // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+        autocompleteFragment.setCountries("BE").setTypeFilter(TypeFilter.ADDRESS).setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) { // TODO: Get info about the selected place.
                 Log.d("PlaceTAG", "Place: " + place.name + ", " + place.id + " lat :lng " + place.latLng)
                 viewmodel.address.value = place.address
