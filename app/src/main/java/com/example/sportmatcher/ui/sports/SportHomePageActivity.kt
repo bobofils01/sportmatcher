@@ -14,7 +14,7 @@ class SportHomePageActivity : AppCompatActivity() {
             .replace(
                 R.id.sportHomePageFragment,
                 AllSportsViewFragment(),
-                "MAP_FRAGMENT"
+                "ALL SPORTS"
             ).commit()
 
     }

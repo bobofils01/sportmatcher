@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -36,7 +37,11 @@ class AllSportsViewFragment: Fragment(){
         //TODO add also item touchhelper listener
 
         val listView : ListView = sports_list as ListView
+        val go_create_pitch_btn = btn_add_pitch_view as Button
 
+        go_create_pitch_btn.setOnClickListener {
+            //TODO go to create view
+        }
         allSportsViewModel.getAllSports().observe(requireActivity(), Observer{sports ->
             val adapter = PitchesListAdapter(sports, requireContext())
             listView.adapter =  adapter
