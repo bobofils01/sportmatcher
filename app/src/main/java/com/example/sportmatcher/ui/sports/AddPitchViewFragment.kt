@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.add_pitch_layout.*
 import java.util.*
 
 
-class AddPitchViewFragment: Fragment() {
+class AddPitchViewFragment: Fragment(){
 
     companion object {
         private const val EXTRA_VILLE = "extraVille"
@@ -68,15 +68,8 @@ class AddPitchViewFragment: Fragment() {
 
 
         if (!Places.isInitialized()) {
-            Places.initialize(activity!!.applicationContext, getString(R.string.google_api_key));
+            Places.initialize(activity!!.applicationContext, getString(R.string.google_maps_key));
         }
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
 
         // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(
@@ -88,27 +81,36 @@ class AddPitchViewFragment: Fragment() {
             )
         )
 
-      /*  val fields: List<Place.Field> =
-            Arrays.asList(Place.Field.ID, Place.Field.NAME)
-
-        val intent = Autocomplete.IntentBuilder(
-            AutocompleteActivityMode.FULLSCREEN, fields
-        ).build(requireContext())
-
-        startActivityForResult(intent, 1)
-
-       */
-
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) { // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.name + ", " + place.id + " lat :lng " + place.latLng)
+                Log.d("PlaceTAG", "Place: " + place.name + ", " + place.id + " lat :lng " + place.latLng)
+                viewmodel.address.value = place.address
+                viewmodel.latitude.value = place.latLng?.latitude
+                viewmodel.longitude.value = place.latLng?.longitude
             }
 
             override fun onError(status: Status) { // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: $status")
+                Log.d("PlaceTAG", "An error occurred: $status")
             }
         })
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        /*  val fields: List<Place.Field> =
+              Arrays.asList(Place.Field.ID, Place.Field.NAME)
+
+          val intent = Autocomplete.IntentBuilder(
+              AutocompleteActivityMode.FULLSCREEN, fields
+          ).build(requireContext())
+
+          startActivityForResult(intent, 1)
+
+         */
 
         addPitchBtn.setOnClickListener {
             viewmodel.onAddPitchClicked()

@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 class AddPitchViewModel: ViewModel() {
 
     val address by lazy { MutableLiveData<String>() }
-    val latitude by lazy { MutableLiveData<Float>() }
+    val latitude by lazy { MutableLiveData<Double>() }
     val longitude by lazy { MutableLiveData<Double>() }
 
     val photo by lazy { MutableLiveData<String>() }
@@ -27,7 +27,7 @@ class AddPitchViewModel: ViewModel() {
 
     fun onAddPitchClicked(){
         Log.d("ADDPITCH", address.value + " "+ latitude.value+ " "+longitude.value)
-        val newPitch = Pitch("", "terrain test", "terrain de zab","",address.value, "football", 0.0, 0.1)
+        val newPitch = Pitch("", "terrain test", "terrain de test","",address.value, "football", latitude.value, longitude.value)
         addPitchUseCase.execute(newPitch).subscribe()
     }
 
