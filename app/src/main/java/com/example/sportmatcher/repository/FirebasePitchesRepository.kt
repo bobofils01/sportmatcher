@@ -38,7 +38,7 @@ class FirebasePitchesRepository : IPitchesRepository {
 
     override fun getAllPitches(): Observable<List<Pitch>> {
         return Observable.create { emitter ->
-            pitchesTableRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            pitchesTableRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val list = dataSnapshot.children.mapNotNull {pitch ->
                         pitch.getValue(Pitch::class.java)
