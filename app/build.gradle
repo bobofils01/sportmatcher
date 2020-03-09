@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -66,6 +67,14 @@ dependencies {
     //RX dependencies
     implementation "io.reactivex.rxjava2:rxjava:2.2.7"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    //library for the sliding up map.
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //library for the autocompletion
+    implementation 'com.google.android.libraries.places:places:2.2.0'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation "com.android.support:design:28.0.0"
 }

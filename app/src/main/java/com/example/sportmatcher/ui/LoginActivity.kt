@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.multidex.MultiDex
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
@@ -41,29 +42,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        /*val email: EditText = findViewById(R.id.email)
-        val password: EditText = findViewById(R.id.password)
-        val login: Button = findViewById(R.id.btn_login)*/
-
-        /*password.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                login.isEnabled = email.text.toString().equals("") == true && password.text.toString().equals("") == true
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })*/
-
         intent.extras?.getString("key")
         initLiveDatas()
     }
 
     private fun initLiveDatas(){
-        viewModel.getAuthenticationStateLiveDate().observe(this, Observer {
-
+        viewModel.getAuthenticationStateLiveData().observe(this, Observer {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
@@ -111,5 +95,10 @@ class LoginActivity : AppCompatActivity() {
                 fragment,
                 tag
             ).commit()
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

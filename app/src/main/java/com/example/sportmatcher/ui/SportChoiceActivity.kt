@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import com.example.sportmatcher.R
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.sport_choice_layout.*
+import com.example.sportmatcher.ui.sports.SportHomePageActivity
 
-class SportChoiceActivity : AppCompatActivity(){//, View.OnClickListener {
+class SportChoiceActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +18,7 @@ class SportChoiceActivity : AppCompatActivity(){//, View.OnClickListener {
     fun onSportClick(v: View) {
         val b = v as Button
         val sportName = b.text.toString()
-        val intent = Intent(this, Sport::class.java).apply {
+        val intent = Intent(this, SportHomePageActivity::class.java).apply {
             putExtra("SPORT_NAME", sportName)
         }
         startActivity(intent)

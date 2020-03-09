@@ -5,6 +5,7 @@
     <string name="confirm">confirm</string>
     <string name="forgot_password">forgot password</string>
     <string name="new_password">new password</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCdy3BTyptF8y4V-pJo5KtMEc6NuOEPBks</string>
     <string name="basketball">Basketball</string>
     <string name="hockey">Hockey</string>
     <string name="futsal">Futsal</string>
