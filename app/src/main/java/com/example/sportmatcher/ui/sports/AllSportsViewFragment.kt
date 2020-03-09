@@ -55,15 +55,18 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         val go_create_pitch_btn = btn_add_pitch_view as Button
 
         go_create_pitch_btn.setOnClickListener{
-            //TODO go the create pitch page
+            allSportsViewModel.onAddPitchClicked()
         }
+
         allSportsViewModel.getAllSports().observe(requireActivity(), Observer{sports ->
-            val adapter = PitchesListAdapter(sports, requireContext())
-            listView.adapter =  adapter
-            sports.forEach{
-                val tmp = LatLng(it.latitude!!, it.longitude!!)
-                mMap.addMarker(MarkerOptions().position(tmp).title(it.name))
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp))
+            context?.let {
+                val adapter = PitchesListAdapter(sports, requireContext())
+                listView.adapter =  adapter
+                sports.forEach{
+                    val tmp = LatLng(it.latitude!!, it.longitude!!)
+                    mMap.addMarker(MarkerOptions().position(tmp).title(it.name))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp))
+                }
             }
         })
     }

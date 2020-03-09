@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
             viewmodel.onSignUpClicked()
         }
         forgot_password_btn.setOnClickListener {
-            startActivity(Intent(view.context, SportHomePageActivity::class.java))
+            startActivity(Intent(view.context, ForgotPasswordActivity::class.java))
         }
 
     }

@@ -15,7 +15,6 @@ import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
-import com.example.sportmatcher.ui.sports.AddPitchViewFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -43,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initLiveDatas(){
-        viewModel.getAuthenticationStateLiveDate().observe(this, Observer {
+        viewModel.getAuthenticationStateLiveData().observe(this, Observer {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
@@ -79,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
     private fun getFragment(tag: String):Fragment{
         return when (tag) {
             LOGIN_FRAG_TAG -> LoginFragment.newInstance("vide")
-            SIGNUP_FRAG_TAG -> AddPitchViewFragment.newInstance("dhdh")
+            SIGNUP_FRAG_TAG -> SignUpFragment.newInstance("dhdh")
             else -> throw IllegalArgumentException("Key doesn't exist")
         }
     }

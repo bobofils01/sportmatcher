@@ -26,7 +26,7 @@ class LoginViewModel : ViewModel() {
         MutableLiveData<AuthenticationState>(NotAuthenticated)
     }
 
-    fun getAuthenticationStateLiveDate(): LiveData<AuthenticationState> = authenticationState
+    fun getAuthenticationStateLiveData(): LiveData<AuthenticationState> = authenticationState
 
 
     private val compositeDisposable: CompositeDisposable by lazy {
