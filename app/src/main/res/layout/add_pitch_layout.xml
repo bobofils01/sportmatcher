@@ -68,7 +68,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="Add Image" />
+            android:text="Add Image"
+            android:background="@drawable/button"/>
 
         <!--<ImageView
             android:layout_width="match_parent"
@@ -84,7 +85,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-            android:text="Add Pitch" />
+            android:text="Add Pitch"
+            android:background="@drawable/button"/>
 
     </LinearLayout>
 </layout>
