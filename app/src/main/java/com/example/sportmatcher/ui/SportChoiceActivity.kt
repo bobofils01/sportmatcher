@@ -25,4 +25,7 @@ class SportChoiceActivity : AppCompatActivity(){//, View.OnClickListener {
         }
         startActivity(intent)
     }
+
+    override fun onBackPressed() {
+    }
 }
