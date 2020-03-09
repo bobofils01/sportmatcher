@@ -15,6 +15,8 @@ class SportHomePageActivity : AppCompatActivity() {
         private const val ALL_SPORT_FRAG_TAG = "AllSportsFragmentTag"
     }
 
+    private lateinit var sportName: String
+
     private val allSportsViewModel : AllSportsViewModel by lazy {
         ViewModelProvider(this).get(AllSportsViewModel::class.java)
     }
@@ -23,7 +25,7 @@ class SportHomePageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sport_homepage)
 
-        val sportName = intent.getStringExtra("SPORT_NAME")
+        sportName = intent.getStringExtra("SPORT_NAME")
 
         initLiveDatas()
     }
@@ -46,7 +48,7 @@ class SportHomePageActivity : AppCompatActivity() {
 
     private fun getFragment(tag: String): Fragment {
         return when (tag) {
-            ADD_PITCH_FRAG_TAG -> AddPitchViewFragment.newInstance("vide")
+            ADD_PITCH_FRAG_TAG -> AddPitchViewFragment.newInstance(sportName)
             ALL_SPORT_FRAG_TAG -> AllSportsViewFragment()
             else -> throw IllegalArgumentException("Key doesn't exist")
         }

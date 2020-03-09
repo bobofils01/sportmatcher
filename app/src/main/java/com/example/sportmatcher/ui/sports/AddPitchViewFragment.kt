@@ -1,9 +1,5 @@
 package com.example.sportmatcher.ui.sports
 
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
-import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,13 +12,8 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.AddPitchViewBinding
 import com.example.sportmatcher.viewModels.sports.AddPitchViewModel
 import com.google.android.gms.common.api.Status
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.widget.Autocomplete
-import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.add_pitch_layout.*
@@ -31,11 +22,11 @@ import kotlinx.android.synthetic.main.add_pitch_layout.*
 class AddPitchViewFragment: Fragment(){
 
     companion object {
-        private const val EXTRA_VILLE = "extraVille"
-        fun newInstance(ville: String): Fragment {
+        private const val EXTRA_SPORT = "extraSport"
+        fun newInstance(extra: String): Fragment {
             return AddPitchViewFragment().apply {
                 arguments = Bundle().apply {
-                    putString(EXTRA_VILLE, ville)
+                    putString(EXTRA_SPORT, extra)
                 }
             }
         }
@@ -77,22 +68,15 @@ class AddPitchViewFragment: Fragment(){
                 Place.Field.ADDRESS
             )
         )
-
-        // Use the builder to create a FindAutocompletePredictionsRequest.
-        // Use the builder to create a FindAutocompletePredictionsRequest.
-        val request :FindAutocompletePredictionsRequest =
-            FindAutocompletePredictionsRequest.builder() // Call either setLocationBias() OR setLocationRestriction().
-                .setCountries("BE")
-                .setTypeFilter(TypeFilter.ADDRESS)
-                .build()
-
+        
         // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setCountries("BE").setTypeFilter(TypeFilter.ADDRESS).setOnPlaceSelectedListener(object : PlaceSelectionListener {
+        autocompleteFragment.setHint("Enter Location").setCountries("BE").setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) { // TODO: Get info about the selected place.
                 Log.d("PlaceTAG", "Place: " + place.name + ", " + place.id + " lat :lng " + place.latLng)
                 viewmodel.address.value = place.address
                 viewmodel.latitude.value = place.latLng?.latitude
                 viewmodel.longitude.value = place.latLng?.longitude
+                viewmodel.sport.value = arguments?.getString(EXTRA_SPORT)
             }
 
             override fun onError(status: Status) { // TODO: Handle the error.
@@ -137,24 +121,5 @@ class AddPitchViewFragment: Fragment(){
         }
         */
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.i(TAG, "We are here ")
-        if (requestCode === 1) {
-
-            if (resultCode === RESULT_OK) {
-                val place = Autocomplete.getPlaceFromIntent(data!!)
-                Log.i(TAG, "Place: " + place.name + ", " + place.id)
-            } else if (resultCode === AutocompleteActivity.RESULT_ERROR) { // TODO: Handle the error.
-                val status =
-                    Autocomplete.getStatusFromIntent(data!!)
-                Log.i(TAG, status.statusMessage)
-            } else if (resultCode === RESULT_CANCELED) { // The user canceled the operation.
-            }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
 
 }

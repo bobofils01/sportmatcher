@@ -16,7 +16,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCdy3BTyptF8y4V-pJo5KtMEc6NuOEPBks"/>
+            android:value="@string/google_maps_key"/>
 
         <activity android:name=".ui.authentication.ForgotPasswordActivity"></activity>
         <activity android:name=".ui.sports.SportHomePageActivity"></activity>
