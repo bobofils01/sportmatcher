@@ -22,9 +22,11 @@
         <activity android:name=".ui.sports.SportHomePageActivity"></activity>
         <activity android:name=".ui.Sport"></activity>
         <activity android:name=".ui.SportChoiceActivity"/>
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
