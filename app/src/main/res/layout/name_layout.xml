@@ -10,7 +10,8 @@
         android:layout_marginBottom="618dp"
         android:gravity="center"
         android:text="What's your name ?"
-        android:textSize="20dp" />
+        android:textSize="25dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/first_name"
