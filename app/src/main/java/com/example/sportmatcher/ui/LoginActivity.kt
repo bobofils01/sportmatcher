@@ -3,6 +3,11 @@ package com.example.sportmatcher.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -51,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     is AuthenticationInProgress -> {
                         //TODO show progress bar
-                        Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Attends ah fdp", Toast.LENGTH_LONG).show()
                     }
                     else -> {
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()

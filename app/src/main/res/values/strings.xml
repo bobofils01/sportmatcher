@@ -16,5 +16,6 @@
     <string name="ping_pong">Ping-Pong</string>
     <string name="voleyball">Voleyball</string>
     <string name="soccer">Soccer</string>
+    <string name="log_in">Log In</string>
     />
 </resources>
