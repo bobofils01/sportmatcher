@@ -28,9 +28,11 @@ class LoginActivity : AppCompatActivity() {
         private const val LOGIN_FRAG_TAG = "LoginFragmentTag"
         private const val SIGNUP_FRAG_TAG = "signupFragmentTag"
 
-        fun getIntent(context: Context): Intent {
+        private const val SCREEN_STATE_KEY = "state"
+
+        fun getIntent(context: Context, state : LoginViewState): Intent {
             return Intent(context, LoginActivity::class.java).apply {
-                putExtra("key", "value")
+                putExtra(SCREEN_STATE_KEY, state)
             }
         }
     }
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        intent.extras?.getString("key")
+        viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }
 
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     is AuthenticationInProgress -> {
                         //TODO show progress bar
-                        Toast.makeText(this, "Attends ah fdp", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
                     }
                     else -> {
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()

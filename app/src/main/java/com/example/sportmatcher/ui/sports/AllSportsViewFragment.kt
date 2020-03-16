@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
@@ -65,7 +64,8 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
                 sports.forEach{
                     val tmp = LatLng(it.latitude!!, it.longitude!!)
                     mMap.addMarker(MarkerOptions().position(tmp).title(it.name))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(tmp))
+                    val zoomLevel = 16.0f
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tmp, zoomLevel))
                 }
             }
         })

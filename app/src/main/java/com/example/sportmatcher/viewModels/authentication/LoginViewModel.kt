@@ -16,7 +16,7 @@ class LoginViewModel : ViewModel() {
     val email by lazy { MutableLiveData<String>() }
     val password by lazy { MutableLiveData<String>() }
 
-    private val loginViewStateLiveData: MutableLiveData<LoginViewState> by lazy {
+    val loginViewStateLiveData: MutableLiveData<LoginViewState> by lazy {
         MutableLiveData<LoginViewState>(LoginViewState.SIGNIN)
     }
 
