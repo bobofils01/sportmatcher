@@ -21,7 +21,7 @@ class FirebasePitchesRepository : IPitchesRepository {
     }
 
     override fun addPitch(pitch: Pitch): Single<Pitch> {
-        if (pitch.address.isNullOrBlank()) {
+        /*if (pitch.address.isNullOrBlank()) {
             return Single.error(IllegalArgumentException("pitch address null or blank"))
         }
         val key  = pitchesTableRef.push().key
@@ -29,7 +29,8 @@ class FirebasePitchesRepository : IPitchesRepository {
         return Single.create { emitter ->
             pitchesTableRef.child(key!!).setValue(pitch.toMap())
             emitter.onSuccess(pitch)
-        }
+        }*/
+        return addPitchFor(pitch.sport!!, pitch)
     }
 
     override fun updatePitch(pitch: Pitch): Single<Pitch> {
@@ -53,6 +54,39 @@ class FirebasePitchesRepository : IPitchesRepository {
                     )
                 }
             })
+        }
+    }
+
+    override fun getPitchesFor(sportID: String): Observable<List<Pitch>> {
+        return Observable.create { emitter ->
+            pitchesTableRef.child(sportID).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    val list = dataSnapshot.children.mapNotNull {pitch ->
+                        pitch.getValue(Pitch::class.java)
+                    }
+                    emitter.onNext(list)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received")
+                    )
+                }
+            })
+        }
+    }
+
+    override fun addPitchFor(sportID: String, pitch: Pitch): Single<Pitch> {
+        if (pitch.address.isNullOrBlank()) {
+            return Single.error(IllegalArgumentException("pitch address null or blank"))
+        }
+        val key  = pitchesTableRef.child(sportID).push().key
+        pitch.uid = key
+        return Single.create { emitter ->
+            pitchesTableRef.child(sportID).child(key!!).setValue(pitch.toMap())
+            emitter.onSuccess(pitch)
         }
     }
 

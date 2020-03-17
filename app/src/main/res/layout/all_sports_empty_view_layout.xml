@@ -7,6 +7,14 @@
         android:id="@+id/sport"
         android:layout_width="match_parent"
         android:layout_height="509dp"
-        android:text="Sport"
+        android:text="There is no pitch available in this sport. Please add a pitch of your choice."
         android:textSize="80dp" />
+
+    <Button
+        android:id="@+id/addPitchBtn_1"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:text="Add Pitch"
+        />
+
 </LinearLayout>

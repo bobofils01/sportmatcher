@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.AddPitchViewBinding
 import com.example.sportmatcher.viewModels.sports.AddPitchViewModel
+import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.add_pitch_layout.*
 class AddPitchViewFragment: Fragment(){
 
     companion object {
-        private const val EXTRA_SPORT = "extraSport"
+        private const val EXTRA_SPORT = "SPORT_NAME"
         fun newInstance(extra: String): Fragment {
             return AddPitchViewFragment().apply {
                 arguments = Bundle().apply {
@@ -33,6 +34,10 @@ class AddPitchViewFragment: Fragment(){
     }
 
     lateinit var binding: AddPitchViewBinding
+
+    private val allSportsViewModel : AllSportsViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(AllSportsViewModel::class.java)
+    }
 
     private val viewmodel: AddPitchViewModel by lazy {
         ViewModelProvider(requireActivity()).get(AddPitchViewModel::class.java)
@@ -45,6 +50,8 @@ class AddPitchViewFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //get the sportID from the extra bundle
+        viewmodel.sport.value = arguments?.getString(EXTRA_SPORT)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.add_pitch_layout, container, false)
         binding.addPitchViewModel = viewmodel
@@ -103,6 +110,7 @@ class AddPitchViewFragment: Fragment(){
 
         addPitchBtn.setOnClickListener {
             viewmodel.onAddPitchClicked()
+            allSportsViewModel.goBackSportHomepage()
         }
 
         /*
