@@ -2,6 +2,7 @@ package com.example.sportmatcher.viewModels.sports
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.sport.Pitch
@@ -9,9 +10,11 @@ import com.example.sportmatcher.model.sport.Pitch
 
 class AllSportsViewModel : ViewModel(){
 
-    private val getAllPitchesUseCase by lazy {
-        ServiceProvider.getAllPitchesUseCase
+    private val getPitchesForUseCase by lazy {
+        ServiceProvider.getPitchesForUseCase
     }
+
+    val sportName by lazy { MutableLiveData<String>() }
 
     private val addPitchClicked: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
@@ -27,7 +30,7 @@ class AllSportsViewModel : ViewModel(){
 
         val sportsMutableData = MutableLiveData<ArrayList<Pitch>>()
 
-        getAllPitchesUseCase.execute().subscribe{
+        getPitchesForUseCase.execute(sportName.value!!).subscribe{
             sportsMutableData.value = it as ArrayList<Pitch>
         }
 

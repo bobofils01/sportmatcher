@@ -49,7 +49,7 @@ class SportHomePageActivity : AppCompatActivity() {
     private fun getFragment(tag: String): Fragment {
         return when (tag) {
             ADD_PITCH_FRAG_TAG -> AddPitchViewFragment.newInstance(sportName)
-            ALL_SPORT_FRAG_TAG -> AllSportsViewFragment()
+            ALL_SPORT_FRAG_TAG -> AllSportsViewFragment.newInstance(sportName)
             else -> throw IllegalArgumentException("Key doesn't exist")
         }
     }

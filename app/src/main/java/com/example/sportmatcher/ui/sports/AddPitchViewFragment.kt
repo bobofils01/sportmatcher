@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.add_pitch_layout.*
 class AddPitchViewFragment: Fragment(){
 
     companion object {
-        private const val EXTRA_SPORT = "extraSport"
+        private const val EXTRA_SPORT = "SPORT_NAME"
         fun newInstance(extra: String): Fragment {
             return AddPitchViewFragment().apply {
                 arguments = Bundle().apply {
@@ -45,6 +45,8 @@ class AddPitchViewFragment: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //get the sportID from the extra bundle
+        viewmodel.sport.value = arguments?.getString(EXTRA_SPORT)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.add_pitch_layout, container, false)
         binding.addPitchViewModel = viewmodel

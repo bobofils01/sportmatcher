@@ -23,6 +23,16 @@ import kotlinx.android.synthetic.main.all_sports_view_layout.*
 
 class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
 
+    companion object {
+        private const val EXTRA_SPORT = "SPORT_NAME"
+        fun newInstance(extra: String): Fragment {
+            return AddPitchViewFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_SPORT, extra)
+                }
+            }
+        }
+    }
     private lateinit var mMap: GoogleMap
 
     private val allSportsViewModel : AllSportsViewModel by lazy {
@@ -34,7 +44,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        allSportsViewModel.sportName.value = arguments?.getString(EXTRA_SPORT)
         val view = inflater.inflate(R.layout.all_sports_view_layout, container, false)
 
         val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment

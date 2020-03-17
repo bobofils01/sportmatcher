@@ -7,6 +7,7 @@ import com.example.sportmatcher.domain.auth.SignUpUseCase
 import com.example.sportmatcher.domain.notifications.RegisterToNotificationsUseCase
 import com.example.sportmatcher.domain.sport.AddPitchUseCase
 import com.example.sportmatcher.domain.sport.GetAllPitchesUseCase
+import com.example.sportmatcher.domain.sport.GetPitchesForUseCase
 import com.example.sportmatcher.repository.FirebaseNotifRepository
 import com.example.sportmatcher.repository.FirebasePitchesRepository
 import com.example.sportmatcher.repository.INotificationsRepository
@@ -43,4 +44,5 @@ object ServiceProvider {
     //pitches
     val addPitchUseCase = AddPitchUseCase(firebasePitchesRepo)
     val getAllPitchesUseCase = GetAllPitchesUseCase(firebasePitchesRepo)
+    val getPitchesForUseCase= GetPitchesForUseCase(firebasePitchesRepo)
 }
