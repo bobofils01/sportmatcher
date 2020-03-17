@@ -68,14 +68,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
-<<<<<<< HEAD
             android:text="Add Image"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button"/>-->
 
-=======
-            android:text="Add Image" />
-        -->
->>>>>>> origin/feature/AddPitchView
         <!--<ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

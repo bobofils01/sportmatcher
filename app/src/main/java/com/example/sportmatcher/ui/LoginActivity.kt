@@ -1,13 +1,16 @@
 package com.example.sportmatcher.ui
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -21,6 +24,7 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
+import kotlinx.android.synthetic.main.signup_layout.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,6 +48,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        /*email.setText("")
+        password.setText("")*/
+
         viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }
@@ -53,6 +61,8 @@ class LoginActivity : AppCompatActivity() {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
+                        /*val progressBar: ProgressBar = findViewById(R.id.progress_bar)
+                        progressBar.visibility = View.VISIBLE*/
                         val intent = Intent(this, SportChoiceActivity::class.java)
                         startActivity(intent)
                     }
@@ -61,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
                     }
                     else -> {
-                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
                 }
             }
