@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.AddPitchViewBinding
 import com.example.sportmatcher.viewModels.sports.AddPitchViewModel
+import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -33,6 +34,10 @@ class AddPitchViewFragment: Fragment(){
     }
 
     lateinit var binding: AddPitchViewBinding
+
+    private val allSportsViewModel : AllSportsViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(AllSportsViewModel::class.java)
+    }
 
     private val viewmodel: AddPitchViewModel by lazy {
         ViewModelProvider(requireActivity()).get(AddPitchViewModel::class.java)
@@ -105,6 +110,7 @@ class AddPitchViewFragment: Fragment(){
 
         addPitchBtn.setOnClickListener {
             viewmodel.onAddPitchClicked()
+            allSportsViewModel.goBackSportHomepage()
         }
 
         /*

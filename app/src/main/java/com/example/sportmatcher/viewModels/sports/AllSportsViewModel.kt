@@ -14,8 +14,6 @@ class AllSportsViewModel : ViewModel(){
         ServiceProvider.getPitchesForUseCase
     }
 
-    val sportName by lazy { MutableLiveData<String>() }
-
     private val addPitchClicked: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>(false)
     }
@@ -26,18 +24,17 @@ class AllSportsViewModel : ViewModel(){
         addPitchClicked.value = true
     }
 
-    fun getAllSports() : MutableLiveData<ArrayList<Pitch>>{
+    fun getAllSports( sportName : String) : MutableLiveData<ArrayList<Pitch>>{
 
         val sportsMutableData = MutableLiveData<ArrayList<Pitch>>()
-
-        getPitchesForUseCase.execute(sportName.value!!).subscribe{
+        getPitchesForUseCase.execute(sportName).subscribe{
             sportsMutableData.value = it as ArrayList<Pitch>
         }
 
         return sportsMutableData
     }
 
-    fun reset() {
+    fun goBackSportHomepage() {
         addPitchClicked.value = false
     }
 

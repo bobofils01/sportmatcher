@@ -38,7 +38,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         }
     }
     private lateinit var mMap: GoogleMap
-
+    private lateinit var sportName: String
     private val allSportsViewModel : AllSportsViewModel by lazy {
         ViewModelProvider(requireActivity()).get(AllSportsViewModel::class.java)
     }
@@ -48,7 +48,8 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        allSportsViewModel.sportName.value = arguments?.getString(EXTRA_SPORT)
+        sportName = arguments?.getString(EXTRA_SPORT)!!
+
         val view = inflater.inflate(R.layout.all_sports_view_layout, container, false)
 
         val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -70,7 +71,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
             allSportsViewModel.onAddPitchClicked()
         }
 
-        allSportsViewModel.getAllSports().observe(requireActivity(), Observer{sports ->
+        allSportsViewModel.getAllSports(sportName).observe(requireActivity(), Observer{sports ->
             context?.let {
                 val adapter = PitchesListAdapter(sports, requireContext())
                 listView.adapter =  adapter
