@@ -30,7 +30,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
     companion object {
         private const val EXTRA_SPORT = "SPORT_NAME"
         fun newInstance(extra: String): Fragment {
-            return AddPitchViewFragment().apply {
+            return AllSportsViewFragment().apply {
                 arguments = Bundle().apply {
                     putString(EXTRA_SPORT, extra)
                 }
