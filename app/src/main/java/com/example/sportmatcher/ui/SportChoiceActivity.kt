@@ -13,6 +13,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import android.widget.Toolbar
 import com.example.sportmatcher.R
+import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import kotlinx.android.synthetic.main.toolbar.*
 import java.nio.file.Files.delete
@@ -38,7 +39,7 @@ class SportChoiceActivity : AppCompatActivity(){//, PopupMenu.OnMenuItemClickLis
         }
 
         R.id.friends -> {
-            startActivity(Intent(this, FriendsActivity::class.java))
+            startActivity(Intent(this, PreferencesActivity::class.java))
             true
         }
 
