@@ -1,12 +1,18 @@
 package com.example.sportmatcher.ui.sports
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.example.sportmatcher.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.sportmatcher.ui.LoginActivity
+import com.example.sportmatcher.ui.SportChoiceActivity
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 
 class SportHomePageActivity : AppCompatActivity() {
@@ -26,10 +32,43 @@ class SportHomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sport_homepage)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         sportName = intent.getStringExtra("SPORT_NAME")
 
         initLiveDatas()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.sport ->{
+            //startActivity(Intent(this, SportChoiceActivity::class.java))
+            true
+        }
+
+        R.id.friends -> {
+            //Toast.makeText(this, "T'es déjà dans les amis", Toast.LENGTH_LONG).show()
+            true
+        }
+
+        R.id.log_out ->{
+            //startActivity(Intent(this, LoginActivity::class.java))
+            true
+        }
+
+        /*android.R.id.home ->{
+            Toast.makeText(this,"Home action",Toast.LENGTH_LONG).show()
+            true
+        }*/
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
 

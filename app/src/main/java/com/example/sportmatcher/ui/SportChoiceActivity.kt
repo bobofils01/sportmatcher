@@ -17,7 +17,7 @@ import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import kotlinx.android.synthetic.main.toolbar.*
 import java.nio.file.Files.delete
 
-class SportChoiceActivity : AppCompatActivity(){//, PopupMenu.OnMenuItemClickListener{
+class SportChoiceActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

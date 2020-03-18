@@ -34,8 +34,7 @@ class FriendsActivity : AppCompatActivity() {
         }
 
         R.id.log_out ->{
-            /*Toast.makeText(this,"Logged out", Toast.LENGTH_LONG).show()
-            finish()*/
+            startActivity(Intent(this, LoginActivity::class.java))
             true
         }
 
