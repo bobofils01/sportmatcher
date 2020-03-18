@@ -59,10 +59,32 @@ class FirebasePitchesRepository : IPitchesRepository {
     override fun getPitch(uid: String): Single<Pitch> {
         return Single.create { emitter ->
             pitchesTableRef.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     dataSnapshot.getValue(Pitch::class.java)?.let {
                         emitter.onSuccess(it)
                     } ?: emitter.onError(IllegalStateException("Value shouldn't be null"))
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received")
+                    )
+                }
+            })
+        }
+    }
+
+    override fun getPitchesFor(sportID: String): Observable<List<Pitch>> {
+        return Observable.create { emitter ->
+            pitchesTableRef.child(sportID).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    val list = dataSnapshot.children.mapNotNull {pitch ->
+                        pitch.getValue(Pitch::class.java)
+                    }
+                    emitter.onNext(list)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

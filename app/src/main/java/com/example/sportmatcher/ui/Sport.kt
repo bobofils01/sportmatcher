@@ -2,16 +2,14 @@ package com.example.sportmatcher.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.widget.TextView
 import com.example.sportmatcher.R
-import kotlinx.android.synthetic.main.sport_layout.*
 
 class Sport : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.sport_layout)
+        setContentView(R.layout.all_sports_empty_view_layout)
 
         val name = intent.getStringExtra("SPORT_NAME")
 
