@@ -1,5 +1,6 @@
 package com.example.sportmatcher.domain.notifications
 
+import android.util.Log
 import com.example.sportmatcher.domain.NoInputUseCase
 import com.example.sportmatcher.domain.UseCase
 import com.example.sportmatcher.repository.INotificationsRepository
@@ -11,6 +12,7 @@ class RegisterToNotificationsUseCase(val notificationRepo : INotificationsReposi
 
        val subscribe = deviceToken.subscribe{
            token ->
+           Log.i(" real token", "$token")
            notificationRepo.addNotifiableDevice(token)
        }
         //TODO kill the subscription
