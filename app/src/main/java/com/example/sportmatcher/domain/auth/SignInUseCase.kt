@@ -34,7 +34,7 @@ class SignInUseCase(private val iAuthService: IAuthService) :
         }
         return iAuthService.signIn(payload.email!!, payload.userPassWord!!).map{
             //TODO for test Send notification
-            ServiceProvider.sendPushNotificationUseCase.execute(NotificationType.SIGNIN)
+            ServiceProvider.getAuthenticatedState.execute()
             it
         }.onErrorResumeNext(Single.just(NotAuthenticated))
     }
