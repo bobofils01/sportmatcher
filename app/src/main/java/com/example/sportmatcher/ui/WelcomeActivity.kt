@@ -9,7 +9,7 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.ui.authentication.LoginViewState
 
 
-class WelcomeActivity : AppCompatActivity() {
+class WelcomeActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

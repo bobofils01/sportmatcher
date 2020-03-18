@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.FriendsActivity"></activity>
+        <activity android:name=".ui.WelcomeActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -21,10 +21,10 @@
 
         <activity android:name=".ui.authentication.ForgotPasswordActivity" />
         <activity android:name=".ui.sports.SportHomePageActivity" />
-        <activity android:name=".ui.Sport" />
+        <activity android:name=".ui.SportActivity" />
         <activity android:name=".ui.SportChoiceActivity" />
         <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.WelcomeActivity">
+        <activity android:name=".ui.FriendsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
                     }
                     else -> {
-                        //Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
                 }
             }

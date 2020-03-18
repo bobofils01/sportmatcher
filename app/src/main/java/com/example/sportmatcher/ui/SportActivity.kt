@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import com.example.sportmatcher.R
 
-class Sport : AppCompatActivity() {
+class SportActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
