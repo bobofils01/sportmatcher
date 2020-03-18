@@ -9,5 +9,6 @@ interface IPitchesRepository {
     fun addPitch(pitch : Pitch): Single<Pitch>
     fun updatePitch(pitch : Pitch): Single<Pitch>
     fun getAllPitches(): Observable<List<Pitch>>
+    fun getPitch(uid: String): Single<Pitch>
 
 }
