@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import kotlinx.android.synthetic.main.all_sports_empty_view_layout.*
+import kotlinx.android.synthetic.main.customized_toast.*
 
 class AllPitchesEmptyViewFragment: Fragment(){
 

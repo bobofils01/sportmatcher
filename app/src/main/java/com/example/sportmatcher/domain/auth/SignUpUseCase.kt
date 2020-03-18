@@ -24,7 +24,6 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
         }
 
         return iAuthService.register(payload.email!!, payload.passWord!!).map{
-            ServiceProvider.registerToNotificationsUseCase.execute()
             it
         }.onErrorResumeNext(Single.just(NotAuthenticated))
     }
