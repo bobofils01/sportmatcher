@@ -1,6 +1,7 @@
 package com.example.sportmatcher.repository
 
 import com.example.sportmatcher.model.User
+import com.example.sportmatcher.model.sport.Pitch
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -12,6 +13,7 @@ class FirebaseUserRepository : IUserRepository {
 
     companion object {
         private const val USERS_PATH = "users"
+        private const val FAV_SPORTS_COL_NAME="favouriteSports"
     }
 
 
@@ -51,5 +53,34 @@ class FirebaseUserRepository : IUserRepository {
             })
 
         }
+    }
+
+    override fun getUserSportFavourite(uid: String): Single<ArrayList<String>> {
+        return Single.create { emitter ->
+            userTableRef.child(uid).child(FAV_SPORTS_COL_NAME).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val list = dataSnapshot.children.mapNotNull {pitch ->
+                        pitch.key
+                    }
+                    emitter.onSuccess(ArrayList(list))
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received getting favourite sports")
+                    )
+                }
+            })
+        }
+
+    }
+
+    override fun updateUserSportFavourite(uid: String, list: ArrayList<String>) {
+        userTableRef.child(uid).child(FAV_SPORTS_COL_NAME).setValue("")
+        for (sport in list){
+            userTableRef.child(uid).child(FAV_SPORTS_COL_NAME).child(sport).setValue(true)
+        }
+
     }
 }

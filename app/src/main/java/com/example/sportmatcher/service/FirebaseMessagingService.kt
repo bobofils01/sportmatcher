@@ -22,14 +22,16 @@ import io.reactivex.Single
 
 
 class FirebaseMessagingService : FirebaseMessagingService(), INotificationService{
-
+    companion object{
+        private const val SPORT_TOPIC_PREFIX = "TOPIC_SPORT_"
+    }
     override fun onNewToken(token: String?) {
         Log.d(TAG, "Refreshed token: $token")
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
-        //TODO store notif token in the userTable or link the two
+        //TODO resubscribe to topics
         //sendRegistrationToBackend(token)
     }
 
@@ -78,15 +80,6 @@ class FirebaseMessagingService : FirebaseMessagingService(), INotificationServic
 
     override fun getCurrentNotificationToken() :Single<String>{
 
-        //TODO this must be done once
-        FirebaseMessaging.getInstance().subscribeToTopic("sportmatcher")
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                   Log.i(TAG, "Invalid subscription to sportmatcher")
-                }
-                Log.i(TAG, "device well subscribed to sportmatcher")
-            }
-
         return Single.create<String> { emitter ->
             FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->
@@ -106,22 +99,31 @@ class FirebaseMessagingService : FirebaseMessagingService(), INotificationServic
         }
     }
 
+    override fun subscribeToSportTopic( sportTopics: ArrayList<String>){
+        //TODO this must be done once
+        for (sportTopic in sportTopics){
+            FirebaseMessaging.getInstance().subscribeToTopic(SPORT_TOPIC_PREFIX+sportTopic)
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.i(TAG, "Invalid subscription to $sportTopic")
+                    }
+                    Log.i(TAG, "device well subscribed to $sportTopic")
+                }
+        }
 
-    override fun sendNotification(notificationType: NotificationType, token :String){
-        // The topic name can be optionally prefixed with "/topics/".
-        // The topic name can be optionally prefixed with "/topics/".
-        val topic = "highScores"
+    }
 
-        Log.d(TAG, "sending notifications to Token : $token")
-        // See documentation on defining a message payload.
-        // See documentation on defining a message payload.
-
-
-
-        // Send a message to the devices subscribed to the provided topic.
-        // Send a message to the devices subscribed to the provided topic.
-       //FirebaseMessaging.getInstance().send(message)
-
+    override fun unsubscribeFromSportTopic( sportTopics: ArrayList<String>){
+        //TODO this must be done once
+        for (sportTopic in sportTopics){
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(SPORT_TOPIC_PREFIX+sportTopic)
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.i(TAG, "Invalid unsubscription to $sportTopic")
+                    }
+                    Log.i(TAG, "device well unsubscribed to $sportTopic")
+                }
+        }
 
     }
 
