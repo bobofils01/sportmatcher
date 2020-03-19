@@ -12,8 +12,8 @@ class GetPitchesForUseCase(private val iPitchesRepository: IPitchesRepository):
     UseCase<String, Observable<List<Pitch>>> {
 
     //GetAllPitches for the specific sport
-    override fun execute( sportID : String): Observable<List<Pitch>> {
-        return iPitchesRepository.getPitchesFor(sportID)
+    override fun execute(sportID : String): Observable<List<Pitch>> {
+        return iPitchesRepository.getPitchesFor(sportID.toLowerCase())
     }
 
 }

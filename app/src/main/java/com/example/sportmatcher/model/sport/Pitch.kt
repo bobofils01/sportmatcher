@@ -7,7 +7,8 @@ data class Pitch(var uid: String? = "",
                  val address: String? = "",
                  val sport: String? = "football",
                  val latitude: Double? = 0.0,
-                 val longitude: Double? = 0.0) {
+                 val longitude: Double? = 0.0,
+                 val sessions: HashMap<String, Boolean>? = null) {
     fun toMap(): Map<String, Any?> {
         return mapOf(
             "uid" to uid,
@@ -17,7 +18,8 @@ data class Pitch(var uid: String? = "",
             "address" to address?.toLowerCase(),
             "sport" to sport?.toLowerCase(),
             "latitude" to latitude,
-            "longitude" to longitude
+            "longitude" to longitude,
+            "sessions" to sessions
         )
     }
 }

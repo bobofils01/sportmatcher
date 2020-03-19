@@ -18,7 +18,7 @@ class FirebaseSessionRepository: ISessionRepository {
         FirebaseDatabase.getInstance().getReference("/$SESSION_PATH")
     }
     override fun addSession(session: Session): Single<Session> {
-        if (session.idPitch == null) {
+        if (session.pitch == null) {
             return Single.error(IllegalArgumentException("Session not related to a pitch"))
         }
         val key  = sessionTableRef.push().key
@@ -50,6 +50,26 @@ class FirebaseSessionRepository: ISessionRepository {
                         session.getValue(Session::class.java)
                     }
                     emitter.onNext(list)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received")
+                    )
+                }
+            })
+        }
+    }
+
+    override fun getSession(uid: String): Single<Session> {
+        return Single.create { emitter ->
+            sessionTableRef.child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    dataSnapshot.getValue(Session::class.java)?.let {
+                        emitter.onSuccess(it)
+                    } ?: emitter.onError(IllegalStateException("Value shouldn't be null"))
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

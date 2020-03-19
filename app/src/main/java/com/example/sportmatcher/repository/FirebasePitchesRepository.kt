@@ -1,7 +1,9 @@
 package com.example.sportmatcher.repository
 
 import android.util.Log
+import com.example.sportmatcher.dto.sport.AddSessionToPitchDTO
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.model.sport.Session
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -14,6 +16,7 @@ class FirebasePitchesRepository : IPitchesRepository {
 
     companion object {
         private const val PITCHES_PATH = "pitches"
+        private const val SESSIONS_IN_PITCH_PATH = "sessions"
     }
 
     private val pitchesTableRef by lazy {
@@ -78,7 +81,7 @@ class FirebasePitchesRepository : IPitchesRepository {
 
     override fun getPitchesFor(sportID: String): Observable<List<Pitch>> {
         return Observable.create { emitter ->
-            pitchesTableRef.child(sportID).addValueEventListener(object : ValueEventListener {
+            pitchesTableRef.orderByChild("sport").equalTo(sportID).addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                     val list = dataSnapshot.children.mapNotNull {pitch ->
@@ -97,5 +100,48 @@ class FirebasePitchesRepository : IPitchesRepository {
         }
     }
 
+    override fun addSessionToPitch(addSessionToPitchDTO: AddSessionToPitchDTO): Single<Pitch> {
+        return Single.create { emitter ->
+            pitchesTableRef.child(addSessionToPitchDTO.pitchId).child(SESSIONS_IN_PITCH_PATH).child(addSessionToPitchDTO.sessionId).setValue(true)
+            pitchesTableRef.child(addSessionToPitchDTO.pitchId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    dataSnapshot.getValue(Pitch::class.java)?.let {
+                        emitter.onSuccess(it)
+                    } ?: emitter.onError(IllegalStateException("Value shouldn't be null"))
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received")
+                    )
+                }
+            })
+        }
+    }
+
+
+    override fun getAllSessionsForAPitch(uid: String): Observable<List<String>> {
+        return Observable.create { emitter ->
+            pitchesTableRef.child(uid).child(SESSIONS_IN_PITCH_PATH).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val keys = dataSnapshot.children.mapNotNull { session ->
+                        session.key
+                    }
+                    Log.d("FIREBASEKEY", keys.toString())
+
+                    emitter.onNext(keys)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    emitter.onError(
+                        databaseError.toException()
+                            ?: IllegalStateException("Firebase error received")
+                    )
+                }
+            })
+        }
+    }
 
 }
