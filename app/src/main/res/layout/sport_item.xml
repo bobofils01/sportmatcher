@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pitchName" />
 
     <TextView
-        android:id="@+id/pitchAdress"
+        android:id="@+id/pitchAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -41,4 +41,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pitchDescription" />
 
+    <Button
+        android:id="@+id/addSessionBtn"
+        android:background="@drawable/button"
+        android:gravity="left|center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|center"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="Add Session"
+        app:layout_constraintLeft_toRightOf="@+id/pitchName"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

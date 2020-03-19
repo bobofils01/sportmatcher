@@ -1,6 +1,5 @@
 package com.example.sportmatcher.ui
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +16,6 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
-import kotlinx.android.synthetic.main.signup_layout.*
 
 class LoginActivity : AppCompatActivity() {
 
