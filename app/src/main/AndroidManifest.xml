@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,17 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.WelcomeActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.authentication.ForgotPasswordActivity"></activity>
-        <activity android:name=".ui.sports.SportHomePageActivity"></activity>
-        <activity android:name=".ui.Sport"></activity>
-        <activity android:name=".ui.SportChoiceActivity"/>
-        <activity android:name=".ui.LoginActivity"></activity>
-        <activity android:name=".ui.WelcomeActivity">
+        <activity android:name=".ui.authentication.ForgotPasswordActivity" />
+        <activity android:name=".ui.sports.SportHomePageActivity" />
+        <activity android:name=".ui.SportActivity" />
+        <activity android:name=".ui.FriendsActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.preferences.PreferencesActivity"/>
+        <activity android:name=".ui.SportChoiceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +33,13 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.FirebaseMessagingService"
+        <service
+            android:name=".service.FirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>
+
 </manifest>
