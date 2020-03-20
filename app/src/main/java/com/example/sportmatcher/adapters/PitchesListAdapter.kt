@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Pitch
-import com.example.sportmatcher.ui.authentication.ForgotPasswordActivity
 import com.example.sportmatcher.ui.sports.AddSessionToPitchActivity
 import kotlinx.android.synthetic.main.sport_item.view.*
 
@@ -20,7 +19,7 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         internal var name: TextView? = null
         internal var address: TextView? = null
         internal var description: TextView? = null
-        internal var addSessionBtn: Button? = null
+        internal var addSessionToChangeActivityBtn: Button? = null
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
@@ -36,7 +35,7 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
             viewHolder.description = view.findViewById<View>(R.id.pitchDescription) as TextView
             viewHolder.address = view.findViewById<View>(R.id.pitchAddress) as TextView
             viewHolder.pitchPicture = view.findViewById<View>(R.id.pitchPicture) as ImageView
-            viewHolder.addSessionBtn = view.addSessionBtn as Button
+            viewHolder.addSessionToChangeActivityBtn = view.addSessionToChangeActivityBtn as Button
         } else{
             viewHolder = view.tag as SportItemViewHolder
         }
@@ -48,9 +47,9 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         viewHolder.pitchPicture!!.setImageResource(R.mipmap.ic_launcher_round)
         view.tag = viewHolder
 
-        viewHolder.addSessionBtn!!.setOnClickListener {
+        viewHolder.addSessionToChangeActivityBtn!!.setOnClickListener {
             Toast.makeText(context,"On add session"+sportItem.toMap().toString(), Toast.LENGTH_LONG).show()
-            context.startActivity(Intent(view.context, AddSessionToPitchActivity::class.java))
+            context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
         }
         return view
     }
