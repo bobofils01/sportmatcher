@@ -1,16 +1,15 @@
 package com.example.sportmatcher.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.*
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.ui.sports.AddSessionToPitchActivity
+import kotlinx.android.synthetic.main.sport_item.view.*
 
 class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
     : ArrayAdapter<Pitch>(ctx, R.layout.sport_item, sportsList){
@@ -18,8 +17,9 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
     private class SportItemViewHolder {
         internal var pitchPicture: ImageView? = null
         internal var name: TextView? = null
-        internal var adress: TextView? = null
+        internal var address: TextView? = null
         internal var description: TextView? = null
+        internal var addSessionToChangeActivityBtn: Button? = null
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
@@ -33,8 +33,9 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
             viewHolder = SportItemViewHolder()
             viewHolder.name = view!!.findViewById<View>(R.id.pitchName) as TextView
             viewHolder.description = view.findViewById<View>(R.id.pitchDescription) as TextView
-            viewHolder.adress = view.findViewById<View>(R.id.pitchAdress) as TextView
+            viewHolder.address = view.findViewById<View>(R.id.pitchAddress) as TextView
             viewHolder.pitchPicture = view.findViewById<View>(R.id.pitchPicture) as ImageView
+            viewHolder.addSessionToChangeActivityBtn = view.addSessionToChangeActivityBtn as Button
         } else{
             viewHolder = view.tag as SportItemViewHolder
         }
@@ -42,9 +43,14 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         val sportItem = getItem(i)
         viewHolder.name!!.text = sportItem!!.name
         viewHolder.description!!.text = sportItem!!.description
-        viewHolder.adress!!.text = sportItem!!.address
+        viewHolder.address!!.text = sportItem!!.address
         viewHolder.pitchPicture!!.setImageResource(R.mipmap.ic_launcher_round)
         view.tag = viewHolder
+
+        viewHolder.addSessionToChangeActivityBtn!!.setOnClickListener {
+            Toast.makeText(context,"On add session"+sportItem.toMap().toString(), Toast.LENGTH_LONG).show()
+            context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
+        }
         return view
     }
 

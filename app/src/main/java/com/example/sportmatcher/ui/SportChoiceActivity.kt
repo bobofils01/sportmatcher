@@ -40,7 +40,7 @@ class SportChoiceActivity : AppCompatActivity(){
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.sport ->{
-            Toast.makeText(this,"T'es déjà dans les sports fdp",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"T'es déjà dans les sports",Toast.LENGTH_LONG).show()
             true
         }
 

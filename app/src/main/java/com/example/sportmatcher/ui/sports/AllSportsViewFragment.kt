@@ -102,11 +102,11 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
             if (address==null) {
                 return null
             }
-            var location : Address =address.get(0);
-            location.getLatitude();
-            location.getLongitude();
+            var location : Address = address[0];
+            location.latitude;
+            location.longitude;
 
-            p1 = LatLng((location.getLatitude()), (location.getLongitude()));
+            p1 = LatLng((location.latitude), (location.longitude));
         }catch (e: IOException){
             e.stackTrace
         }

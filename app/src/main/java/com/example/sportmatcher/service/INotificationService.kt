@@ -6,5 +6,6 @@ import io.reactivex.Single
 interface INotificationService {
     fun getCurrentNotificationToken():Single<String>
     fun onNewToken(token: String?)
-    fun sendNotification(notificationType: NotificationType, token :String)
+    fun subscribeToSportTopic( sportTopics: ArrayList<String>)
+    fun unsubscribeFromSportTopic( sportTopics: ArrayList<String>)
 }

@@ -20,7 +20,7 @@ class SportHomePageActivity : AppCompatActivity() {
     companion object {
         private const val ADD_PITCH_FRAG_TAG = "AddPitchFragmentTag"
         private const val ALL_PITCHES_FRAG_TAG = "AllSportsFragmentTag"
-        private const val ALL_PITCHES_EMMPTY_FRAG_TAG = "AllSportsEmptyFragmentTag"
+        private const val ALL_PITCHES_EMPTY_FRAG_TAG = "AllSportsEmptyFragmentTag"
     }
 
     private lateinit var sportName: String
@@ -80,12 +80,13 @@ class SportHomePageActivity : AppCompatActivity() {
                         setFragment(getFragment(ADD_PITCH_FRAG_TAG), ADD_PITCH_FRAG_TAG)
                     }
                     false ->{
-                        allSportsViewModel.getAllSports(sportName).observe(this, Observer {
+                        allSportsViewModel.getAllSports(sportName.toLowerCase()).observe(this, Observer {
                                 pitches ->
-                            if(!pitches.isEmpty()) {
-                                setFragment(getFragment(ALL_PITCHES_FRAG_TAG), ALL_PITCHES_FRAG_TAG)
+                            if(pitches.isEmpty()) {
+                                Log.d("SPORTHOMEACTIVITY", pitches.size.toString())
+                                setFragment(getFragment(ALL_PITCHES_EMPTY_FRAG_TAG), ALL_PITCHES_EMPTY_FRAG_TAG)
                             }else{
-                                setFragment(getFragment(ALL_PITCHES_EMMPTY_FRAG_TAG), ALL_PITCHES_EMMPTY_FRAG_TAG)
+                                setFragment(getFragment(ALL_PITCHES_FRAG_TAG), ALL_PITCHES_FRAG_TAG)
                             }
                         }
                         )
@@ -99,7 +100,7 @@ class SportHomePageActivity : AppCompatActivity() {
         return when (tag) {
             ADD_PITCH_FRAG_TAG -> AddPitchViewFragment.newInstance(sportName)
             ALL_PITCHES_FRAG_TAG -> AllSportsViewFragment.newInstance(sportName)
-            ALL_PITCHES_EMMPTY_FRAG_TAG -> AllPitchesEmptyViewFragment.newInstance(sportName)
+            ALL_PITCHES_EMPTY_FRAG_TAG -> AllPitchesEmptyViewFragment.newInstance(sportName)
             else -> throw IllegalArgumentException("Key doesn't exist")
         }
     }

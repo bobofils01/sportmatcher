@@ -17,5 +17,6 @@
     <string name="voleyball">Voleyball</string>
     <string name="soccer">Soccer</string>
     <string name="log_in">Log In</string>
-    />
+    <string-array name="pref_sport_list_default">
+    </string-array>
 </resources>

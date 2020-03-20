@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+    <data class = "AddSessionViewBinding">
+
+        <variable
+            name="addSessionViewModel"
+            type="com.example.sportmatcher.viewModels.sports.AddSessionViewModel" />
+    </data>
+    -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextTotalNbPlayersID"
+            style="@style/Widget.AppCompat.EditText"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:hint="Total number of players for this session"/>
+            <!--android:text="@={addSessionViewModel.totalNbPlayers}"-->
+
+
+        <EditText
+            android:id="@+id/editTextNbPlayersSignedID"
+            style="@style/Widget.AppCompat.EditText"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:hint="Number of players already in session"/>
+            <!--android:text="@={addSessionViewModel.nbPlayersSigned}"-->
+
+
+        <EditText
+            android:id="@+id/editTextPriceSessionID"
+            style="@style/Widget.AppCompat.EditText"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:hint="Total price of session"/>
+            <!--android:text="@={addSessionViewModel.price}"-->
+
+
+        <Button
+            android:id="@+id/addSessionBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Add Session"
+            android:background="@drawable/button"/>
+
+    </LinearLayout>
+</layout>

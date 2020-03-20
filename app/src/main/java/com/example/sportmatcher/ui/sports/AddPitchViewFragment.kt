@@ -97,23 +97,13 @@ class AddPitchViewFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*  val fields: List<Place.Field> =
-              Arrays.asList(Place.Field.ID, Place.Field.NAME)
-
-          val intent = Autocomplete.IntentBuilder(
-              AutocompleteActivityMode.FULLSCREEN, fields
-          ).build(requireContext())
-
-          startActivityForResult(intent, 1)
-
-         */
-
         addPitchBtn.setOnClickListener {
             viewmodel.onAddPitchClicked()
             allSportsViewModel.goBackSportHomepage()
         }
 
         /*
+        //CODE FOR RETRIEVING PHOTO
         addImageBtn.setOnClickListener {
             //Create an Intent with action as ACTION_PICK
             val intent= Intent(Intent.ACTION_PICK);
