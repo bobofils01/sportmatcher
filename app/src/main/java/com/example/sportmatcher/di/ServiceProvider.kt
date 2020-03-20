@@ -3,6 +3,7 @@ package com.example.sportmatcher.di
 import com.example.sportmatcher.domain.auth.GetAuthenticationStateUseCase
 import com.example.sportmatcher.domain.notifications.SendPushNotificationsUseCase
 import com.example.sportmatcher.domain.auth.SignInUseCase
+import com.example.sportmatcher.domain.auth.SignOutUseCase
 import com.example.sportmatcher.domain.auth.SignUpUseCase
 import com.example.sportmatcher.domain.notifications.RegisterToNotificationsUseCase
 import com.example.sportmatcher.domain.sport.AddPitchUseCase
@@ -36,6 +37,7 @@ object ServiceProvider {
     //auth
     val signInUseCase = SignInUseCase(authService)
     val signUpUseCase = SignUpUseCase(authService)
+    val signOutUseCase = SignOutUseCase(authService)
 
     //notifications
     val sendPushNotificationUseCase = SendPushNotificationsUseCase(firebaseMessagingService, notificationRepo)

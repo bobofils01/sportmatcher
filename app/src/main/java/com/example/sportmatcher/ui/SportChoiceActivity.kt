@@ -12,13 +12,19 @@ import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.ui.sports.SportHomePageActivity
+import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 import kotlinx.android.synthetic.main.toolbar.*
 import java.nio.file.Files.delete
 
 class SportChoiceActivity : AppCompatActivity(){
+
+    private val viewModel: LogOutViewModel by lazy {
+        ViewModelProvider(this).get(LogOutViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +45,12 @@ class SportChoiceActivity : AppCompatActivity(){
         }
 
         R.id.friends -> {
-            startActivity(Intent(this, PreferencesActivity::class.java))
+            startActivity(Intent(this, FriendsActivity::class.java))
             true
         }
 
         R.id.log_out ->{
+            viewModel.onLogoutClicked()
             Toast.makeText(this,"Logged out",Toast.LENGTH_LONG).show()
             finish()
             true
@@ -67,29 +74,6 @@ class SportChoiceActivity : AppCompatActivity(){
         }
         startActivity(intent)
     }
-
-    /*fun showPopup(v: View){
-        val popup = PopupMenu(this, v)
-        val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.toolbar_menu, popup.menu)
-        popup.show()
-        PopupMenu(this, v).apply {
-            setOnMenuItemClickListener(this@SportChoiceActivity)
-            inflate(R.menu.toolbar_menu)
-            show()
-        }
-    }
-
-    override fun onMenuItemClick(item: MenuItem): Boolean{
-        return when(item.itemId){
-            R.id.log_out ->{
-                finish()
-                Toast.makeText(this, "Logged out", Toast.LENGTH_LONG).show()
-                true
-            }
-            else -> false
-        }
-    }*/
 
     override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter
     }

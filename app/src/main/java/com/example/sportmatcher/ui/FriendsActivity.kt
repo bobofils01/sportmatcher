@@ -6,9 +6,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
+import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class FriendsActivity : AppCompatActivity() {
+
+    private val viewModel: LogOutViewModel by lazy {
+        ViewModelProvider(this).get(LogOutViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,17 +41,19 @@ class FriendsActivity : AppCompatActivity() {
         }
 
         R.id.log_out ->{
+            viewModel.onLogoutClicked()
+            Toast.makeText(this,"Logged out",Toast.LENGTH_LONG).show()
             startActivity(Intent(this, LoginActivity::class.java))
             true
         }
 
-        /*android.R.id.home ->{
-            Toast.makeText(this,"Home action",Toast.LENGTH_LONG).show()
-            true
-        }*/
-
         else -> {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }
