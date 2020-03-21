@@ -9,9 +9,9 @@
     <TextView
         android:id="@+id/sport"
         android:layout_width="match_parent"
-        android:layout_height="509dp"
+        android:layout_height="50dp"
         android:text="There is no pitch available in this sport. Please add a pitch of your choice."
-        android:textSize="80dp" />
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/addPitchBtn_1"

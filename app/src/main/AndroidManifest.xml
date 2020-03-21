@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SportChoiceActivity"></activity>
+        <activity android:name=".ui.SportChoiceActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -26,6 +26,7 @@
         <activity android:name=".ui.FriendsActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.preferences.PreferencesActivity"/>
+        <activity android:name=".ui.sports.AllSessionOfAPtichActivity"/>
         <activity android:name=".ui.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,6 +2,7 @@ package com.example.sportmatcher.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.*
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Pitch
 import com.example.sportmatcher.ui.sports.AddSessionToPitchActivity
+import com.example.sportmatcher.ui.sports.AllSessionOfAPtichActivity
 import kotlinx.android.synthetic.main.sport_item.view.*
 
 class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
@@ -51,7 +53,14 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
             Toast.makeText(context,"On add session"+sportItem.toMap().toString(), Toast.LENGTH_LONG).show()
             context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
         }
+
+        view.setOnClickListener(object: View.OnClickListener {
+
+            override fun onClick(p0: View?) {
+                Log.d("SetOnClickList", sportItem.toMap().toString())
+                context.startActivity(AllSessionOfAPtichActivity.getIntent(view.context, sportItem))
+            }
+        })
         return view
     }
-
 }
