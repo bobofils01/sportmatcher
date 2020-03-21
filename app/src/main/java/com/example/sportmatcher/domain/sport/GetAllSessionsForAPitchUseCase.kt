@@ -23,6 +23,10 @@ class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRep
 
             iPitchesRepository.getAllSessionsForAPitch(payload.uid!!).subscribe {
                 val sessions = ArrayList<Session>()
+
+                if(it.isEmpty())
+                    emitter.onNext(sessions)
+
                 for(i in it.indices){
                     iSessionRepository.getSession(it[i]).subscribe{ session->
                         sessions.add(session)

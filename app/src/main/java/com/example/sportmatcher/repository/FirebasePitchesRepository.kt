@@ -79,27 +79,6 @@ class FirebasePitchesRepository : IPitchesRepository {
         }
     }
 
-    override fun getPitchesFor(sportID: String): Observable<List<Pitch>> {
-        return Observable.create { emitter ->
-            pitchesTableRef.orderByChild("sport").equalTo(sportID).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                    val list = dataSnapshot.children.mapNotNull {pitch ->
-                        pitch.getValue(Pitch::class.java)
-                    }
-                    emitter.onNext(list)
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    emitter.onError(
-                        databaseError.toException()
-                            ?: IllegalStateException("Firebase error received")
-                    )
-                }
-            })
-        }
-    }
-
     override fun addSessionToPitch(addSessionToPitchDTO: AddSessionToPitchDTO): Single<Pitch> {
         return Single.create { emitter ->
             pitchesTableRef.child(addSessionToPitchDTO.pitchId).child(SESSIONS_IN_PITCH_PATH).child(addSessionToPitchDTO.sessionId).setValue(true)
