@@ -1,24 +1,24 @@
 package com.example.sportmatcher.ui
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import android.widget.PopupMenu
 import android.widget.Toast
-import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.di.ServiceProvider.getAllSportsUseCase
 import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
-import kotlinx.android.synthetic.main.toolbar.*
-import java.nio.file.Files.delete
+import kotlinx.android.synthetic.main.sport_choice_layout.*
+
 
 class SportChoiceActivity : AppCompatActivity(){
 
@@ -31,6 +31,29 @@ class SportChoiceActivity : AppCompatActivity(){
         setContentView(R.layout.sport_choice_layout)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+        getAllSportsUseCase.execute().subscribe{ sports ->
+            sports_choice_list.removeAllViews()
+
+            for(sport in sports){
+
+                val btn_sport = Button(this)
+                btn_sport.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(82))
+                btn_sport.text = sport.toUpperCase()
+                btn_sport.setOnClickListener{
+                    it -> onSportClick(it)
+                }
+
+                sports_choice_list.addView(btn_sport)
+            }
+        }
+
+    }
+
+    fun dpToPx(dp: Int): Int {
+        val density: Float = resources
+            .getDisplayMetrics().density
+        return Math.round(dp.toFloat() * density)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -45,7 +68,7 @@ class SportChoiceActivity : AppCompatActivity(){
         }
 
         R.id.friends -> {
-            startActivity(Intent(this, FriendsActivity::class.java))
+            startActivity(Intent(this, PreferencesActivity::class.java))
             true
         }
 
