@@ -23,10 +23,10 @@ class UpdateSportsFavouriteUsecase(private val iUserRepository: IUserRepository,
                     iUserRepository.getUserSportFavourite(authUser.uid!!).subscribe{
                         listBefore ->
                             //Sync the subscription to topics for notificaition
-                            val topicsToUnsubscribeTo = ArrayList(listBefore.filter { it ->  !listAfter.contains(it)})
-                            iNotificationService.subscribeToSportTopic(topicsToUnsubscribeTo);
-                            val toicsToSubscribeFrom = ArrayList(listAfter.filter{ it -> !listBefore.contains(it)})
-                            iNotificationService.unsubscribeFromSportTopic(toicsToSubscribeFrom)
+                            val topicsToUnsubscribeFrom = ArrayList(listBefore.filter { it ->  !listAfter.contains(it)})
+                            iNotificationService.unsubscribeFromSportTopic(topicsToUnsubscribeFrom);
+                            val toicsToSubscribeTo = ArrayList(listAfter.filter{ it -> !listBefore.contains(it)})
+                            iNotificationService.subscribeToSportTopic(toicsToSubscribeTo)
 
                             //update the list in userPref
                             iUserRepository.updateUserSportFavourite(authUser.uid!!, listAfter)

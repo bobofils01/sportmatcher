@@ -107,7 +107,7 @@ class FirebaseMessagingService : FirebaseMessagingService(), INotificationServic
                     if (!task.isSuccessful) {
                         Log.i(TAG, "Invalid subscription to $sportTopic")
                     }
-                    Log.i(TAG, "device well subscribed to $sportTopic")
+                    Log.i(TAG, "device well subscribed to $SPORT_TOPIC_PREFIX$sportTopic")
                 }
         }
 
