@@ -59,14 +59,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/listViewAllSessions"
+                android:id="@+id/linearLayoutListViewAllSessions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarAllSession">
 
                 <ListView
-                    android:id="@+id/sportsListAllSessions"
+                    android:id="@+id/listViewAllSessions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
