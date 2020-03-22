@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider.getAllSportsUseCase
-import com.example.sportmatcher.ui.preferences.Naruto
 import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
