@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
 
     companion object {
@@ -39,23 +41,29 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }
 
     private fun initLiveDatas(){
+
+        val progress = ProgressDialog(this)
+        //mProgress.setTitle("Logging In")
+        progress.setMessage("Logging in")
+        progress.setCancelable(false)
+        progress.isIndeterminate = true
+
         viewModel.getAuthenticationStateLiveData().observe(this, Observer {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
-                        /*val progressBar: ProgressBar = findViewById(R.id.progress_bar)
-                        progressBar.visibility = View.VISIBLE*/
+                        progress.show()
                         val intent = Intent(this, SportChoiceActivity::class.java)
                         startActivity(intent)
                     }
                     is AuthenticationInProgress -> {
-                        //TODO show progress bar
-                        Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
+                        progress.show()
                     }
                     else -> {
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()

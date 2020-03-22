@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.ui.preferences.Naruto
+import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 
 class FriendsActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class FriendsActivity : AppCompatActivity() {
         }
 
         R.id.preferences -> {
-            startActivity(Intent(this, Naruto::class.java))
+            startActivity(Intent(this, PreferencesActivity::class.java))
             true
         }
 

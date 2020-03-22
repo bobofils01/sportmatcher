@@ -10,9 +10,9 @@
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -21,23 +21,23 @@
             android:gravity="center"
             android:text="Log in"
             android:textSize="25dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEmailID"
-            style="@style/Widget.AppCompat.EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:hint="Email"
-            android:text="@={loginViewModel.email}"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextEmailID"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:hint="Email"
+                android:text="@={loginViewModel.email}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,12 +52,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:inputType="textPassword"
                 android:layout_margin="10dp"
                 android:gravity="center_vertical"
                 android:hint="Password"
-                app:passwordToggleEnabled="true"
-                android:text="@={loginViewModel.password}" />
+                android:inputType="textPassword"
+                android:text="@={loginViewModel.password}"
+                app:passwordToggleEnabled="true" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
             android:text="Log in"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/forgot_password_btn"
@@ -85,7 +85,7 @@
             android:text="Forgot password ?"
             android:textColor="#1CA6BE"
             android:textSize="17dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -103,19 +103,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:background="@drawable/button"
             android:text="Sign up"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:background="@drawable/button"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="invisible"/>
-
+            android:visibility="invisible" />
 
 
     </LinearLayout>

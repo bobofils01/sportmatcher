@@ -18,6 +18,5 @@
     <string name="voleyball">voleyball</string>
     <string name="soccer">soccer</string>
     <string name="new_session_text">New Session</string>
-    <string-array name="pref_sport_list_default">
-    </string-array>
+    <string-array name="pref_sport_list_default"></string-array>
 </resources>

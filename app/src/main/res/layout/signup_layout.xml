@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="SignupViewBinding">
 
         <variable
@@ -12,8 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="Welcome"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,8 +37,16 @@
             android:layout_margin="10dp"
             android:hint="Email"
             android:text="@={signupViewModel.email}"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,8 +56,15 @@
             android:layout_margin="10dp"
             android:hint="Password"
             android:text="@={signupViewModel.password}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,6 +75,7 @@
             android:hint="Confirm password"
             android:autofillHints=""
             android:text="@={signupViewModel.confirmPassword}"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/confirm_register"

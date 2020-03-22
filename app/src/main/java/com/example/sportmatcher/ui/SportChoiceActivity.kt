@@ -64,7 +64,7 @@ class SportChoiceActivity : AppCompatActivity(){
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.sport ->{
-            Toast.makeText(this,"T'es déjà dans les sports",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Sports",Toast.LENGTH_LONG).show()
             true
         }
 
@@ -74,7 +74,7 @@ class SportChoiceActivity : AppCompatActivity(){
         }
 
         R.id.preferences -> {
-            startActivity(Intent(this, Naruto::class.java))
+            startActivity(Intent(this, PreferencesActivity::class.java))
             true
         }
 
