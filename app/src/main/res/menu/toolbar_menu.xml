@@ -7,6 +7,11 @@
         android:icon="@drawable/sport"
         app:showAsAction="always" />
 
+    <item android:id="@+id/preferences"
+        android:icon="@drawable/star"
+        app:showAsAction="always"
+        />
+
     <item android:id="@+id/friends"
         android:icon="@drawable/friends"
         app:showAsAction="always"/>

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider.getAllSportsUseCase
+import com.example.sportmatcher.ui.preferences.Naruto
 import com.example.sportmatcher.ui.preferences.PreferencesActivity
 import com.example.sportmatcher.ui.sports.SportHomePageActivity
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
@@ -68,14 +69,20 @@ class SportChoiceActivity : AppCompatActivity(){
         }
 
         R.id.friends -> {
-            startActivity(Intent(this, PreferencesActivity::class.java))
+            startActivity(Intent(this, FriendsActivity::class.java))
+            true
+        }
+
+        R.id.preferences -> {
+            startActivity(Intent(this, Naruto::class.java))
             true
         }
 
         R.id.log_out ->{
             viewModel.onLogoutClicked()
             Toast.makeText(this,"Logged out",Toast.LENGTH_LONG).show()
-            finish()
+            //finish()
+            startActivity(Intent(this, WelcomeActivity::class.java))
             true
         }
 
@@ -99,5 +106,9 @@ class SportChoiceActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 }

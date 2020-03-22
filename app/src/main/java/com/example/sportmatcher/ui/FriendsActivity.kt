@@ -8,8 +8,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.ui.preferences.Naruto
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
-import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 
 class FriendsActivity : AppCompatActivity() {
 
@@ -35,15 +35,20 @@ class FriendsActivity : AppCompatActivity() {
             true
         }
 
+        R.id.preferences -> {
+            startActivity(Intent(this, Naruto::class.java))
+            true
+        }
+
         R.id.friends -> {
             Toast.makeText(this, "T'es déjà dans les amis", Toast.LENGTH_LONG).show()
             true
         }
 
-        R.id.log_out ->{
+        R.id.log_out -> {
             viewModel.onLogoutClicked()
             Toast.makeText(this,"Logged out",Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, WelcomeActivity::class.java))
             true
         }
 

@@ -20,10 +20,10 @@ import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 class LoginActivity : AppCompatActivity() {
 
     companion object {
-        private const val LOGIN_FRAG_TAG = "LoginFragmentTag"
-        private const val SIGN_UP_FRAG_TAG = "signupFragmentTag"
+        const val LOGIN_FRAG_TAG = "LoginFragmentTag"
+        const val SIGN_UP_FRAG_TAG = "signupFragmentTag"
 
-        private const val SCREEN_STATE_KEY = "state"
+        const val SCREEN_STATE_KEY = "state"
 
         fun getIntent(context: Context, state : LoginViewState): Intent {
             return Intent(context, LoginActivity::class.java).apply {
