@@ -36,6 +36,10 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         allSessionsOfAPitchViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
         val listView : ListView = listViewAllSessions as ListView
 
+        pitchAddressAllSessions.text = "All sessions of the pitch "+
+                allSessionsOfAPitchViewModel.pitch.name + " located at " +
+                allSessionsOfAPitchViewModel.pitch.address
+
         allSessionsOfAPitchViewModel.getAllSessions().observe(this, Observer { sessions ->
             val adapter = SessionListAdapter(sessions, this)
             listView.adapter = adapter

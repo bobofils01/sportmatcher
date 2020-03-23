@@ -49,7 +49,6 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         view.tag = viewHolder
 
         viewHolder.addSessionToChangeActivityBtn!!.setOnClickListener {
-            Toast.makeText(context,"On add session"+sportItem.toMap().toString(), Toast.LENGTH_LONG).show()
             context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
         }
 

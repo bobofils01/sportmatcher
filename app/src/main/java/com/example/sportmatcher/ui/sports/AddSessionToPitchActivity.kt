@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Pitch
@@ -93,6 +94,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
 
         addSessionBtn.setOnClickListener {
             addSessionViewModel.onAddSessionClicked()
+            Toast.makeText(this, "Session added", Toast.LENGTH_LONG).show()
         }
 
     }
