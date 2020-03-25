@@ -1,65 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class="SignupViewBinding">
 
-    <EditText
-        android:id="@+id/email"
+        <variable
+            name="signupViewModel"
+            type="com.example.sportmatcher.viewModels.authentication.SignupViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:hint="Email" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:hint="First name" />
-
-    <EditText
-        android:id="@+id/last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:hint="Last name" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:inputType="textPassword"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:hint="Password"/>
-
-    <EditText
-        android:id="@+id/confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:inputType="textPassword"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:hint="Confirm password"
-        android:autofillHints="" />
-
-    <!--<Button
-        android:id="@+id/confirm"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/confirm"/>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="Welcome"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
 
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:hint="Email"
+            android:text="@={signupViewModel.email}"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:inputType="textPassword"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:hint="Password"
+            android:text="@={signupViewModel.password}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:inputType="textPassword"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:hint="Confirm password"
+            android:autofillHints=""
+            android:text="@={signupViewModel.confirmPassword}"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/confirm_register"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="register"
+            android:background="@drawable/button"
+            android:textColor="#fff"/>
+
+
+    </LinearLayout>
+</layout>

@@ -1,72 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/basketball"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Basketball" />
+        <include
+            layout="@layout/toolbar"/>
 
-        <Button
-            android:id="@+id/hockey"
+        <LinearLayout
+            android:id="@+id/sports_choice_list"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Hockey" />
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/soccer"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Soccer" />
-
-        <Button
-            android:id="@+id/futsal"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Futsal" />
-
-        <Button
-            android:id="@+id/handball"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Handball" />
-
-        <Button
-            android:id="@+id/voleyball"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Voleyball" />
-
-        <Button
-            android:id="@+id/tennis"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Tennis" />
-
-        <Button
-            android:id="@+id/badminton"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Badminton" />
-
-        <Button
-            android:id="@+id/squash"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Squash" />
-
-        <Button
-            android:id="@+id/ping_pong"
-            android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="Ping-Pong" />
-
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

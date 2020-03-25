@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Favourite sports"
+        android:summary="You will get notified whenever a new pitch is added on these sports">
+
+        <MultiSelectListPreference
+            android:id='@+id/multi_select_sports'
+            android:defaultValue="@array/pref_sport_list_default"
+            android:entries="@array/pref_sport_list_default"
+            android:entryValues="@array/pref_sport_list_default"
+            android:key="favourite_sports_pref_key"
+            android:title="sports" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Favourite pitches"
+        android:summary="You are notified whenever a new session is added on these pitches">
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

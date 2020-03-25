@@ -5,5 +5,18 @@
     <string name="confirm">confirm</string>
     <string name="forgot_password">forgot password</string>
     <string name="new_password">new password</string>
-    />
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAY5sxkGP_lQ9cyJ-9zHAIGeXu0LfDCiAQ</string>
+    <string name="log_in">Log In</string>
+    <string name="basketball">basketball</string>
+    <string name="hockey">hockey</string>
+    <string name="futsal">futsal</string>
+    <string name="badminton">badminton</string>
+    <string name="tennis">tennis</string>
+    <string name="squash">squash</string>
+    <string name="handball">handball</string>
+    <string name="ping_pong">ping-pong</string>
+    <string name="voleyball">voleyball</string>
+    <string name="soccer">soccer</string>
+    <string name="new_session_text">New Session</string>
+    <string-array name="pref_sport_list_default"></string-array>
 </resources>
