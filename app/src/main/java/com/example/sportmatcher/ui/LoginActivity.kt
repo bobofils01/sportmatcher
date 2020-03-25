@@ -18,12 +18,10 @@ import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
-    //test pour commit
 
     companion object {
         const val LOGIN_FRAG_TAG = "LoginFragmentTag"
@@ -111,16 +109,5 @@ class LoginActivity : AppCompatActivity() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         MultiDex.install(this)
-    }
-
-    fun closeKeyboard(){
-        Toast.makeText(this, "Oh I believe in yesterday", Toast.LENGTH_LONG).show()
-
-        val view: View? = this.currentFocus
-        if(view != null)
-        {
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
     }
 }

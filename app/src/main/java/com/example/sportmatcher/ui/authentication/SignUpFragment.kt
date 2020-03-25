@@ -1,9 +1,11 @@
 package com.example.sportmatcher.ui.authentication
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +47,12 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        confirm_register.setOnClickListener { viewmodel.onRegisterClicked() }
+        confirm_register.setOnClickListener {
+            //Retire le clavier
+            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+
+            viewmodel.onRegisterClicked() }
 /*
         //set Listener of authenticated user and show the right
         FirebaseAuthService.currentAuthenticatedUser.observe(this, Observer { user ->

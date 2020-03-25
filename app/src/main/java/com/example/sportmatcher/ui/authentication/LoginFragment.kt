@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.LoginViewBinding
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.R
+import android.view.inputmethod.InputMethodManager
+
 
 class LoginFragment : Fragment() {
 
@@ -39,7 +43,7 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.login_layout, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.example.sportmatcher.R.layout.login_layout, container, false)
         binding.loginViewModel = viewmodel
 
         return binding.root
@@ -48,8 +52,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val ville = arguments?.getString(EXTRA_VILLE)
+
         // listen to buttons
         btn_login.setOnClickListener {
+            
+            //Retire le clavier
+            val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+
             viewmodel.onLoginClicked()
         }
 
