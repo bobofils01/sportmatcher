@@ -23,7 +23,7 @@ import android.widget.Button
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
-    /*test*/
+    //test pour commit
 
     companion object {
         const val LOGIN_FRAG_TAG = "LoginFragmentTag"
