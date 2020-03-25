@@ -36,7 +36,9 @@
             android:gravity="center_vertical"
             android:layout_margin="10dp"
             android:hint="Email"
-            android:text="@={signupViewModel.email}"/>
+            android:text="@={signupViewModel.email}"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@."
+            android:inputType="textFilter"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 

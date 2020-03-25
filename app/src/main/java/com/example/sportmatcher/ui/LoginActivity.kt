@@ -10,13 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.multidex.MultiDex
-import com.example.sportmatcher.R
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+
 
 @Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity() {
@@ -40,8 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
+        setContentView(com.example.sportmatcher.R.layout.activity_login)
         viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }
@@ -59,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 when (state) {
                     is AuthenticatedState -> {
                         progress.show()
+
                         val intent = Intent(this, SportChoiceActivity::class.java)
                         startActivity(intent)
                     }
@@ -98,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
     private fun setFragment(fragment: Fragment, tag: String? = null) {
         supportFragmentManager.beginTransaction()
             .replace(
-                R.id.loginContainer,
+                com.example.sportmatcher.R.id.loginContainer,
                 fragment,
                 tag
             ).commit()
@@ -107,5 +110,16 @@ class LoginActivity : AppCompatActivity() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         MultiDex.install(this)
+    }
+
+    fun closeKeyboard(){
+        Toast.makeText(this, "Oh I believe in yesterday", Toast.LENGTH_LONG).show()
+
+        val view: View? = this.currentFocus
+        if(view != null)
+        {
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }
