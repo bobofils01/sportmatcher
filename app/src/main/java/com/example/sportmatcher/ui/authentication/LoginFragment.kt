@@ -14,7 +14,11 @@ import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.R
+import android.app.ProgressDialog
 import android.view.inputmethod.InputMethodManager
+import android.app.Activity
+
+
 
 
 class LoginFragment : Fragment() {
@@ -55,10 +59,17 @@ class LoginFragment : Fragment() {
 
         // listen to buttons
         btn_login.setOnClickListener {
+            val progress = ProgressDialog(activity)
+            //mProgress.setTitle("Logging In")
+            progress.setMessage("Logging in")
+            progress.setCancelable(false)
+            progress.isIndeterminate = true
             
             //Retire le clavier
             val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+
+            progress.show()
 
             viewmodel.onLoginClicked()
         }
@@ -71,6 +82,4 @@ class LoginFragment : Fragment() {
         }
 
     }
-
-
 }
