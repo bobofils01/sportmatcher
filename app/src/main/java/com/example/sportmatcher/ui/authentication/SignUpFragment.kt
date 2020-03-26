@@ -65,10 +65,13 @@ class SignUpFragment : Fragment() {
 
             progress.show()
 
-            if(password != confirm_password) {
+            if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
                 //Retire la bar de progression
                 progress.hide()
 
+                //Erreur
+                confirm_password.setText("")
+                password.setText("")
                 confirm_password.error = "Please verify if you correctly confirmed your password"
             }
             else
