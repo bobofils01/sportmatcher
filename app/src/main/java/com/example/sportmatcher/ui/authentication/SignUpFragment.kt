@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.SignupViewBinding
 import com.example.sportmatcher.viewModels.authentication.SignupViewModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.signup_layout.*
 
 class SignUpFragment : Fragment() {
@@ -62,7 +65,14 @@ class SignUpFragment : Fragment() {
 
             progress.show()
 
-            viewmodel.onRegisterClicked() }
+            if(password != confirm_password) {
+                //Retire la bar de progression
+                progress.hide()
+
+                confirm_password.error = "Please verify if you correctly confirmed your password"
+            }
+            else
+                viewmodel.onRegisterClicked() }
 /*
         //set Listener of authenticated user and show the right
         FirebaseAuthService.currentAuthenticatedUser.observe(this, Observer { user ->

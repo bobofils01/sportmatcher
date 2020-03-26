@@ -18,6 +18,9 @@ import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.example.sportmatcher.R
+import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.signup_layout.view.*
 
 
 @Suppress("DEPRECATION")
