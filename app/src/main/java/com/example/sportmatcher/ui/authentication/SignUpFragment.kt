@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.authentication
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,9 +49,18 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         confirm_register.setOnClickListener {
+            //Bar de progression
+            val progress = ProgressDialog(activity)
+            //mProgress.setTitle("Logging In")
+            progress.setMessage("Signing up")
+            progress.setCancelable(false)
+            progress.isIndeterminate = true
+
             //Retire le clavier
             val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+
+            progress.show()
 
             viewmodel.onRegisterClicked() }
 /*
