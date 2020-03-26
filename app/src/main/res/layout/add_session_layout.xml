@@ -61,7 +61,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:text="Add Session"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button_enabled"/>
 
     </LinearLayout>
 </layout>

@@ -72,7 +72,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:text="Add Image"
-            android:background="@drawable/button"/>-->
+            android:background="@drawable/button_enabled"/>-->
 
         <!--<ImageView
             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:text="Add Pitch"
-            android:background="@drawable/button"/>
+            android:background="@drawable/button_enabled"/>
 
     </LinearLayout>
 </layout>

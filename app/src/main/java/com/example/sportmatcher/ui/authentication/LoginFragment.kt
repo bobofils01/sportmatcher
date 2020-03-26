@@ -17,6 +17,10 @@ import android.R
 import android.app.ProgressDialog
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
+import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.signup_layout.*
+import android.text.Editable
+import android.text.TextWatcher
 
 
 
@@ -57,6 +61,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val ville = arguments?.getString(EXTRA_VILLE)
 
+        editTextEmailID.addTextChangedListener(loginTextWatcher);
+        editTextPasswordID.addTextChangedListener(loginTextWatcher);
+
         // listen to buttons
         btn_login.setOnClickListener {
             val progress = ProgressDialog(activity)
@@ -64,7 +71,7 @@ class LoginFragment : Fragment() {
             progress.setMessage("Logging in")
             progress.setCancelable(false)
             progress.isIndeterminate = true
-            
+
             //Retire le clavier
             val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
@@ -81,5 +88,18 @@ class LoginFragment : Fragment() {
             startActivity(Intent(view.context, ForgotPasswordActivity::class.java))
         }
 
+    }
+
+    private val loginTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            val usernameInput = editTextEmailID.getText().toString().trim()
+            val passwordInput = editTextPasswordID.getText().toString().trim()
+
+            btn_login.isEnabled = usernameInput.isNotEmpty() && passwordInput.isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable) {}
     }
 }

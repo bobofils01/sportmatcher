@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.sportmatcher.R.layout.activity_login)
+        setContentView(R.layout.activity_login)
         viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }

@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.sportmatcher.R
-import com.example.sportmatcher.model.notifications.NotificationType
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
@@ -47,7 +46,7 @@ class FirebaseMessagingService : FirebaseMessagingService(), INotificationServic
         handler.post(Runnable {
 
             val layout = LinearLayout(applicationContext)
-            layout.setBackgroundResource(R.drawable.button)
+            layout.setBackgroundResource(R.drawable.button_enabled)
             layout.orientation= LinearLayout.HORIZONTAL
             layout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
