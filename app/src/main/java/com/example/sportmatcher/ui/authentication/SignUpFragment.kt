@@ -3,6 +3,7 @@ package com.example.sportmatcher.ui.authentication
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,29 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sportmatcher.R
 import com.example.sportmatcher.databinding.SignupViewBinding
 import com.example.sportmatcher.viewModels.authentication.SignupViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.signup_layout.*
+import java.util.regex.Pattern
+import android.R
+
+
+
 
 class SignUpFragment : Fragment() {
+
+    //Pattern permettant de vérifier si l'adresse attribuée est valide
+     val EMAIL_ADDRESS_PATTERN: Pattern = Pattern.compile(
+         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+         "\\@" +
+         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+         "(" +
+         "\\." +
+         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+         ")+"
+)
 
     companion object {
         private const val EXTRA_VILLE = "extraVille"
@@ -43,7 +59,7 @@ class SignUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.signup_layout, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.example.sportmatcher.R.layout.signup_layout, container, false)
         binding.signupViewModel = viewmodel
 
         return binding.root
@@ -52,7 +68,7 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         confirm_register.setOnClickListener {
-            //Bar de progression
+
             val progress = ProgressDialog(activity)
             //mProgress.setTitle("Logging In")
             progress.setMessage("Signing up")
@@ -60,19 +76,24 @@ class SignUpFragment : Fragment() {
             progress.isIndeterminate = true
 
             //Retire le clavier
-            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+            hideKeyboard()
 
+            //ProgressBar
             progress.show()
 
-            if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
+            if(!isValidEmail(email.text.toString())){
+                progress.hide()
+
+                email.error = "Please enter a valid mail address."
+            }
+            else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
                 //Retire la bar de progression
                 progress.hide()
 
                 //Erreur
                 confirm_password.setText("")
                 password.setText("")
-                confirm_password.error = "Please verify if you correctly confirmed your password"
+                confirm_password.error = "Please verify if you correctly confirmed your password."
             }
             else
                 viewmodel.onRegisterClicked() }
@@ -90,5 +111,14 @@ class SignUpFragment : Fragment() {
             }
 
         })*/
+    }
+
+    fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
+        return EMAIL_ADDRESS_PATTERN.matcher(email).matches()
+    }
+
+    fun hideKeyboard(){  //Retire le clavier
+        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
     }
 }
