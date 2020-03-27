@@ -23,10 +23,13 @@ import kotlinx.android.synthetic.main.signup_layout.*
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.res.ResourcesCompat
-import android.graphics.drawable.Drawable
 import android.R.attr.name
 import android.text.TextUtils
 import android.R.attr.name
+import android.graphics.drawable.Drawable
+import android.R.attr.name
+
+
 
 
 
@@ -106,6 +109,7 @@ class LoginFragment : Fragment() {
             val passwordInput = editTextPasswordID.getText().toString().trim()
 
             btn_login.isEnabled = usernameInput.isNotEmpty() && passwordInput.isNotEmpty()
+
             //btn_login.background = ResourcesCompat.getDrawable(resources, R.drawable.button_enabled, null)
         }
 

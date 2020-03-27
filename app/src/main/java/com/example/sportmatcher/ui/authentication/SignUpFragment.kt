@@ -82,12 +82,18 @@ class SignUpFragment : Fragment() {
             progress.show()
 
             if(!isValidEmail(email.text.toString())){
+                //Retire la bar de progression
                 progress.hide()
 
                 email.error = "Please enter a valid mail address."
             }
+            else if(password.text.toString().length < 6){ //Si le mot de passe n'est pas assez long
+                progress.hide()
+
+                password.error = "Your password must contain at least 6 characters"
+
+            }
             else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
-                //Retire la bar de progression
                 progress.hide()
 
                 //Erreur
