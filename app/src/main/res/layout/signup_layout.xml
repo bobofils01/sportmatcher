@@ -92,6 +92,26 @@
             android:background="@drawable/button_enabled"
             android:textColor="#fff"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="or"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="Already have an account?"
+            android:textSize="15dp"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textColor="#1CA6BE"/>
+
 
     </LinearLayout>
 </layout>

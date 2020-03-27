@@ -19,8 +19,8 @@ import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.signup_layout.*
 import java.util.regex.Pattern
 import android.R
-
-
+import android.content.Intent
+import com.example.sportmatcher.ui.LoginActivity
 
 
 class SignUpFragment : Fragment() {
@@ -117,6 +117,10 @@ class SignUpFragment : Fragment() {
             }
 
         })*/
+
+        login.setOnClickListener{ //Si l'utilisateur a déjà un compte
+            startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
+        }
     }
 
     fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
