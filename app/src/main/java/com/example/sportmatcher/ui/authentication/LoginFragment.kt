@@ -36,6 +36,7 @@ import android.R.attr.name
 
 
 
+@Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
 
     companion object {
