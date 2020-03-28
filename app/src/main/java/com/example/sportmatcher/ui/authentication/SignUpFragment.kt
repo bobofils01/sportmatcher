@@ -20,7 +20,10 @@ import kotlinx.android.synthetic.main.signup_layout.*
 import java.util.regex.Pattern
 import android.R
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import com.example.sportmatcher.ui.LoginActivity
+import kotlinx.android.synthetic.main.login_layout.*
 
 
 class SignUpFragment : Fragment() {
@@ -67,6 +70,12 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Débloque le boutton Register lorsque les champs sont remplis
+        email.addTextChangedListener(loginTextWatcher)
+        password.addTextChangedListener(loginTextWatcher)
+        confirm_password.addTextChangedListener(loginTextWatcher)
+
         confirm_register.setOnClickListener {
 
             val progress = ProgressDialog(activity)
@@ -123,12 +132,26 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
+    private val loginTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            val email = email.text.toString().trim()
+            val password = password.text.toString().trim()
+            val confirmPassword = confirm_password.text.toString().trim()
+
+            confirm_register.isEnabled = email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable) {}
+    }
+
+    private fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
         return EMAIL_ADDRESS_PATTERN.matcher(email).matches()
     }
 
-    fun hideKeyboard(){  //Retire le clavier
+    private fun hideKeyboard(){  //Retire le clavier
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+        imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
 }

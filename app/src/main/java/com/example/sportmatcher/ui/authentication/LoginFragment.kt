@@ -28,12 +28,7 @@ import android.text.TextUtils
 import android.R.attr.name
 import android.graphics.drawable.Drawable
 import android.R.attr.name
-
-
-
-
-
-
+import android.content.Context
 
 
 @Suppress("DEPRECATION")
@@ -73,8 +68,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val ville = arguments?.getString(EXTRA_VILLE)
 
-        editTextEmailID.addTextChangedListener(loginTextWatcher);
-        editTextPasswordID.addTextChangedListener(loginTextWatcher);
+        editTextEmailID.addTextChangedListener(loginTextWatcher)
+        editTextPasswordID.addTextChangedListener(loginTextWatcher)
 
         // listen to buttons
         btn_login.setOnClickListener {
@@ -85,8 +80,7 @@ class LoginFragment : Fragment() {
             progress.isIndeterminate = true
 
             //Retire le clavier
-            val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm!!.hideSoftInputFromWindow(getView()!!.windowToken, 0)
+            hideKeyboard()
 
             progress.show()
 
@@ -106,19 +100,18 @@ class LoginFragment : Fragment() {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            val usernameInput = editTextEmailID.getText().toString().trim()
-            val passwordInput = editTextPasswordID.getText().toString().trim()
+            val usernameInput = editTextEmailID.text.toString().trim()
+            val passwordInput = editTextPasswordID.text.toString().trim()
 
             btn_login.isEnabled = usernameInput.isNotEmpty() && passwordInput.isNotEmpty()
-
-            //btn_login.background = ResourcesCompat.getDrawable(resources, R.drawable.button_enabled, null)
         }
 
         override fun afterTextChanged(s: Editable) {}
     }
 
-    fun isValidEmail(target: CharSequence): Boolean {
-        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    private fun hideKeyboard(){  //Retire le clavier
+        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
 }
 
