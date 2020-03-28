@@ -20,6 +20,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.sportmatcher.R
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.signup_layout.view.*
 
 
@@ -51,24 +52,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initLiveDatas(){
-
-        val progress = ProgressDialog(this)
-        //mProgress.setTitle("Logging In")
-        progress.setMessage("Logging in")
-        progress.setCancelable(false)
-        progress.isIndeterminate = true
-
         viewModel.getAuthenticationStateLiveData().observe(this, Observer {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
-                        progress.show()
 
                         val intent = Intent(this, SportChoiceActivity::class.java)
                         startActivity(intent)
                     }
                     is AuthenticationInProgress -> {
-                        progress.show()
                     }
                     else -> {
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
