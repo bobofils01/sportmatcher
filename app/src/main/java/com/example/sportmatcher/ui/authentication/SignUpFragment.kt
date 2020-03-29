@@ -78,40 +78,28 @@ class SignUpFragment : Fragment() {
 
         confirm_register.setOnClickListener {
 
-            val progress = ProgressDialog(activity)
-            //mProgress.setTitle("Logging In")
-            progress.setMessage("Signing up")
-            progress.setCancelable(false)
-            progress.isIndeterminate = true
-
             //Retire le clavier
             hideKeyboard()
 
-            //ProgressBar
-            progress.show()
-
-            if(!isValidEmail(email.text.toString())){
-                //Retire la bar de progression
-                progress.hide()
-
+            if(!isValidEmail(email.text.toString()))
                 email.error = "Please enter a valid mail address."
-            }
-            else if(password.text.toString().length < 6){ //Si le mot de passe n'est pas assez long
-                progress.hide()
 
+            else if(password.text.toString().length < 6) //Si le mot de passe n'est pas assez long
                 password.error = "Your password must contain at least 6 characters"
 
-            }
-            else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
-                progress.hide()
 
+            else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
                 //Erreur
                 confirm_password.setText("")
                 password.setText("")
                 confirm_password.error = "Please verify if you correctly confirmed your password."
             }
-            else
-                viewmodel.onRegisterClicked() }
+            else{
+                //ProgressBar
+                progressBar.visibility = View.VISIBLE
+                viewmodel.onRegisterClicked()
+            }
+        }
 /*
         //set Listener of authenticated user and show the right
         FirebaseAuthService.currentAuthenticatedUser.observe(this, Observer { user ->
