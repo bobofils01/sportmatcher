@@ -1,6 +1,5 @@
 package com.example.sportmatcher.ui
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,7 +16,9 @@ import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import android.view.View
+import android.view.View.GONE
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
 import com.example.sportmatcher.R
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_layout.*
@@ -63,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     is AuthenticationInProgress -> {
                     }
                     else -> {
+                        //llProgressBar.visibility = GONE
                         Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
                 }

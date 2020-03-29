@@ -14,7 +14,6 @@ import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import kotlinx.android.synthetic.main.login_layout.*
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.R
-import android.app.ProgressDialog
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
 import android.graphics.Color
@@ -29,6 +28,12 @@ import android.R.attr.name
 import android.graphics.drawable.Drawable
 import android.R.attr.name
 import android.content.Context
+import androidx.lifecycle.Observer
+import com.example.sportmatcher.model.authentication.AuthenticatedState
+import com.example.sportmatcher.model.authentication.AuthenticationInProgress
+import com.example.sportmatcher.ui.LoginActivity
+import com.example.sportmatcher.ui.SportChoiceActivity
+import com.google.android.gms.common.api.internal.LifecycleCallback.getFragment
 import java.util.regex.Pattern
 
 
@@ -85,25 +90,29 @@ class LoginFragment : Fragment() {
 
         // listen to buttons
         btn_login.setOnClickListener {
-            val progress = ProgressDialog(activity)
-            //mProgress.setTitle("Logging In")
-            progress.setMessage("Logging in")
-            progress.setCancelable(false)
-            progress.isIndeterminate = true
 
             //Retire le clavier
             hideKeyboard()
 
-            progress.show()
-
-            if(!isValidEmail(editTextEmailID.text.toString())){
-                //Retire la bar de progression
-                progress.hide()
-
+            if(!isValidEmail(editTextEmailID.text.toString()))
                 editTextEmailID.error = "Please enter a valid mail address."
-            }
-            else
+
+            else{
+                //progress_bar.visibility = View.VISIBLE
+                llProgressBar.visibility = View.VISIBLE
                 viewmodel.onLoginClicked()
+                viewmodel.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
+                    it?.let { state ->
+                        when (state) {
+                            is AuthenticatedState -> {}
+                            is AuthenticationInProgress -> {}
+                            else -> {
+                                llProgressBar.visibility = View.GONE
+                            }
+                        }
+                    }
+                })
+            }
         }
 
         signup_btn.setOnClickListener {
