@@ -34,6 +34,7 @@ import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.LoginActivity
 import com.example.sportmatcher.ui.SportChoiceActivity
 import com.google.android.gms.common.api.internal.LifecycleCallback.getFragment
+import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import java.util.regex.Pattern
 
 
@@ -98,8 +99,9 @@ class LoginFragment : Fragment() {
                 editTextEmailID.error = "Please enter a valid mail address."
 
             else{
-                //progress_bar.visibility = View.VISIBLE
+                llProgressBar.pbText.text = "Logging in"
                 llProgressBar.visibility = View.VISIBLE
+
                 viewmodel.onLoginClicked()
                 viewmodel.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
                     it?.let { state ->

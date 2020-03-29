@@ -24,6 +24,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.example.sportmatcher.ui.LoginActivity
 import kotlinx.android.synthetic.main.login_layout.*
+import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
 
 class SignUpFragment : Fragment() {
@@ -96,7 +97,9 @@ class SignUpFragment : Fragment() {
             }
             else{
                 //ProgressBar
+                progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
+
                 viewmodel.onRegisterClicked()
             }
         }
