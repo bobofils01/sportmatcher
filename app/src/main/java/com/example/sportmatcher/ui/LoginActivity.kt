@@ -61,8 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, SportChoiceActivity::class.java)
                         startActivity(intent)
                     }
-                    is AuthenticationInProgress -> {
-                    }
+                    is AuthenticationInProgress -> {}
                     else -> {
                         //Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
