@@ -64,8 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     is AuthenticationInProgress -> {
                     }
                     else -> {
-                        //llProgressBar.visibility = GONE
-                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
                     }
                 }
             }

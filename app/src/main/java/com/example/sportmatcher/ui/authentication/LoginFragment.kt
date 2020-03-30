@@ -27,7 +27,10 @@ import android.text.TextUtils
 import android.R.attr.name
 import android.graphics.drawable.Drawable
 import android.R.attr.name
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import androidx.core.graphics.toColor
 import androidx.lifecycle.Observer
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
@@ -110,6 +113,14 @@ class LoginFragment : Fragment() {
                             is AuthenticationInProgress -> {}
                             else -> {
                                 llProgressBar.visibility = View.GONE
+                                AlertDialog.Builder(context)
+                                    .setTitle("Incorrect username or password")
+                                    .setMessage("The mail address or the password you entered is incorrect. Please try again.")
+                                    /*.setPositiveButton(R.string.yes, DialogInterface.OnClickListener() {
+                                        void onClick(DialogInterface dialog, int which){}})*/
+                                    .setNegativeButton(R.string.ok, null)
+                                    //.setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show()
                             }
                         }
                     }
