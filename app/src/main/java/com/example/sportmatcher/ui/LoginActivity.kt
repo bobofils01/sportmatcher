@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 when (state) {
                     is AuthenticatedState -> {
 
-                        val intent = Intent(this, SportChoiceActivity::class.java)
+                        val intent = Intent(this, NavigationActivity::class.java)
                         startActivity(intent)
                     }
                     is AuthenticationInProgress -> {}
