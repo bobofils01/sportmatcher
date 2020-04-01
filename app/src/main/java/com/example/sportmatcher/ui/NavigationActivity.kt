@@ -24,10 +24,14 @@ class NavigationActivity : AppCompatActivity() {
         tabs.getTabAt(2)?.setIcon(R.drawable.settings)
     }
 
-    override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
+    override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter et lui fait quitter l'application en cas de retour en arrière
+        if(tabs.selectedTabPosition != 0)
+            tabs.getTabAt(0)?.select()
+        else {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
     }
 }
