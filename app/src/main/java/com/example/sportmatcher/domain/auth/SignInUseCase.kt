@@ -1,5 +1,6 @@
 package com.example.sportmatcher.domain.auth
 
+import android.util.Log
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.domain.UseCase
 import com.example.sportmatcher.domain.utils.isEmailValid
@@ -14,21 +15,13 @@ import io.reactivex.Single
 class SignInUseCase(private val iAuthService: IAuthService) :
     UseCase<LoginInfo, Single<AuthenticationState>> {
 
-    private fun verifyLogin(loginInfo: LoginInfo): String? {
-        return if (loginInfo.email.isEmailValid()) {
-            if (!loginInfo.userPassWord.isPasswordValid() && loginInfo.userPassWord!!.length < 8) {
-                "Invalid Password"
-            } else {
-                null
-                "Successful Login"
-            }
-        } else {
-            "Invalid Email"
-        }
+    private fun verifyLogin(loginInfo: LoginInfo): Boolean {
+        return (loginInfo.email.isEmailValid())
     }
 
     override fun execute(payload: LoginInfo): Single<AuthenticationState> {
-        if (verifyLogin(payload).isNullOrBlank()) {
+        Log.d("SignInUseCaseTest", (!verifyLogin(payload)).toString()+ " "+ payload.toString())
+        if (!verifyLogin(payload)) {
             //TODO remplace par le state
             return Single.error(IllegalStateException("Invalid sign in payload"))
         }

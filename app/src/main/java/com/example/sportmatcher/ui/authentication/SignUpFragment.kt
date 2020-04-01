@@ -22,23 +22,14 @@ import android.R
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import com.example.sportmatcher.domain.utils.isEmailValid
+import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
 import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
 
 class SignUpFragment : Fragment() {
-
-    //Pattern permettant de vérifier si l'adresse attribuée est valide
-     val EMAIL_ADDRESS_PATTERN: Pattern = Pattern.compile(
-         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-         "\\@" +
-         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-         "(" +
-         "\\." +
-         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-         ")+"
-)
 
     companion object {
         private const val EXTRA_VILLE = "extraVille"
@@ -82,17 +73,17 @@ class SignUpFragment : Fragment() {
             //Retire le clavier
             hideKeyboard()
 
-            if(!isValidEmail(email.text.toString()))
+            if(!email.text.toString().isEmailValid())
                 email.error = "Please enter a valid mail address."
 
-            else if(password.text.toString().length < 6) //Si le mot de passe n'est pas assez long
-                password.error = "Your password must contain at least 6 characters"
-
+            else if(!password.text.toString().isPasswordValid()) //Si le mot de passe ne suit pas les conditions
+                password.error = "Your password must contain at least 6 characters composed with " +
+                        "at least one letter and one number"
 
             else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
                 //Erreur
-                confirm_password.setText("")
-                password.setText("")
+                //confirm_password.setText("")
+                //password.setText("")
                 confirm_password.error = "Please verify if you correctly confirmed your password."
             }
             else{
@@ -135,10 +126,6 @@ class SignUpFragment : Fragment() {
         }
 
         override fun afterTextChanged(s: Editable) {}
-    }
-
-    private fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
-        return EMAIL_ADDRESS_PATTERN.matcher(email).matches()
     }
 
     private fun hideKeyboard(){  //Retire le clavier

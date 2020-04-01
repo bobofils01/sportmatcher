@@ -34,6 +34,7 @@ import android.os.Handler
 import androidx.core.graphics.toColor
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.lifecycle.Observer
+import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.LoginActivity
@@ -45,17 +46,6 @@ import java.util.regex.Pattern
 
 @Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
-
-    //Pattern permettant de vérifier si l'adresse attribuée est valide
-    val EMAIL_ADDRESS_PATTERN: Pattern = Pattern.compile(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+"
-    )
 
     companion object {
         private const val EXTRA_VILLE = "extraVille"
@@ -100,7 +90,7 @@ class LoginFragment : Fragment() {
             //Retire le clavier
             hideKeyboard()
 
-            if(!isValidEmail(editTextEmailID.text.toString()))
+            if(!editTextEmailID.text.toString().isEmailValid())
                 editTextEmailID.error = "Please enter a valid mail address."
 
             else{
@@ -158,12 +148,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun hideKeyboard(){  //Retire le clavier
-        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
-    }
-
-    private fun isValidEmail(email: String): Boolean { //Vérifie si l'adresse mail est valide
-        return EMAIL_ADDRESS_PATTERN.matcher(email).matches()
     }
 }
 

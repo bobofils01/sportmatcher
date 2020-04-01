@@ -1,5 +1,6 @@
 package com.example.sportmatcher.domain.auth
 
+import android.util.Log
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.domain.UseCase
 import com.example.sportmatcher.domain.utils.isEmailValid
@@ -14,13 +15,14 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
     UseCase<SignupInfo, Single<AuthenticationState>> {
 
     override fun execute(payload: SignupInfo): Single<AuthenticationState> {
-        if (verifyPayload(
-                payload.email,
-                payload.passWord,
-                payload.confirmPassword
-            ).isNullOrBlank()
-        ) {
-            return Single.error(IllegalStateException("Invalid sign up payload"))
+        var verifPayload = verifyPayload(
+            payload.email,
+            payload.passWord,
+            payload.confirmPassword
+        )
+        Log.d("SignUpUseCaseTest", verifPayload+ " "+ (!verifPayload.isNullOrBlank()).toString())
+        if (!verifPayload.isNullOrBlank()) {
+            return Single.error(IllegalStateException(verifPayload))
         }
 
         return iAuthService.register(payload.email!!, payload.passWord!!).map{
@@ -31,13 +33,12 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
 
     private fun verifyPayload(email: String?, password: String?, confirmPassword: String?): String? {
         return if (email.isEmailValid()) {
-            if (!password.isPasswordValid() && password!!.length < 8 ) {
+            if (!password.isPasswordValid()) {
                 "Invalid Password"
             } else if (!password.equals(confirmPassword)) {
                 "unmatch password"
             } else {
                 null
-                "Successful register"
             }
         } else {
             "Invalid Email"

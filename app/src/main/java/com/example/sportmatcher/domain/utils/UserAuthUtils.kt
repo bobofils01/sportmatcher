@@ -15,9 +15,9 @@ fun String?.isEmailValid(): Boolean {
 }
 
 fun String?.isPasswordValid(): Boolean {
-    if(this == null)
+    if(this == null || this.length < 6)
         return false
-    val expression = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#\$%^&+=!])(?=\\\\S+\$).{4,}\$"
+    val expression = "^(?=.*[0-9])(?=.*[A-Z]).{6,}\$"
     val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
     val matcher = pattern.matcher(this)
     return matcher.matches()
