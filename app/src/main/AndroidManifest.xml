@@ -19,6 +19,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".ui.sports.session.SessionViewActivity" />
         <activity android:name=".ui.sports.AddSessionToPitchActivity" />
         <activity android:name=".ui.authentication.ForgotPasswordActivity" />
         <activity android:name=".ui.sports.SportHomePageActivity" />

@@ -1,6 +1,7 @@
 package com.example.sportmatcher.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Session
+import com.example.sportmatcher.ui.sports.AllSessionOfAPitchActivity
+import com.example.sportmatcher.ui.sports.session.SessionViewActivity
 
 class SessionListAdapter(sessions: ArrayList<Session>, ctx : Context) :
     ArrayAdapter<Session>(ctx, R.layout.session_item, sessions){
@@ -25,6 +28,7 @@ class SessionListAdapter(sessions: ArrayList<Session>, ctx : Context) :
 
         lateinit var viewNotNull:View
         if (view == null) {
+            //bind the view to the layout
             val inflater = LayoutInflater.from(context)
             view = inflater.inflate(R.layout.session_item, viewGroup, false)
             viewNotNull = view
@@ -39,11 +43,25 @@ class SessionListAdapter(sessions: ArrayList<Session>, ctx : Context) :
         }
 
         val sessionItem = getItem(i)
+        //changevalues
         viewHolder.totalNbPlayers!!.text = sessionItem!!.totalNbPlayers.toString() + " players"
         viewHolder.nbPlayersSigned!!.text = sessionItem!!.nbPlayersSigned.toString() + " players already signed"
         //viewHolder.address!!.text = sessionItem!!.address
         viewHolder.price!!.text = sessionItem!!.price.toString() + " €"
         viewNotNull.tag = viewHolder
+
+        viewNotNull.setOnClickListener( object: View.OnClickListener {
+
+            override fun onClick(p0: View?) {
+                Log.d("SetOnClickList", sessionItem.toMap().toString())
+                context.startActivity(
+                    SessionViewActivity.getIntent(
+                        viewNotNull.context,
+                        sessionItem
+                    )
+                )
+            }
+        })
 
         return viewNotNull
     }

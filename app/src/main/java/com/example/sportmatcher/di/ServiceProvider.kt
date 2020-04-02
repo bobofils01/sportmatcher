@@ -1,10 +1,7 @@
 package com.example.sportmatcher.di
 
+import com.example.sportmatcher.domain.auth.*
 import com.example.sportmatcher.domain.sport.GetAllSportsUseCase
-import com.example.sportmatcher.domain.auth.GetAuthenticationStateUseCase
-import com.example.sportmatcher.domain.auth.SignInUseCase
-import com.example.sportmatcher.domain.auth.SignOutUseCase
-import com.example.sportmatcher.domain.auth.SignUpUseCase
 import com.example.sportmatcher.domain.notifications.RegisterToNotificationsUseCase
 import com.example.sportmatcher.domain.preferences.UpdateSportsFavouriteUsecase
 import com.example.sportmatcher.domain.sport.*
@@ -30,6 +27,7 @@ object ServiceProvider {
 
     //state
     val getAuthenticatedState = GetAuthenticationStateUseCase(authService)
+    val getAuthenticatedUserUserCase = GetAuthenticatedUserUserCase(authService)
 
     //usecases
     //auth
@@ -56,10 +54,17 @@ object ServiceProvider {
     //sessions
     val addSessionUseCase = AddSessionUseCase(firebaseSessionRepo, addSessionToPitchUseCase)
     val getAllSessionsUseCase = GetAllSessionsUseCase(firebaseSessionRepo)
+    val joinSessionUseCase = JoinSessionUseCase(firebaseSessionRepo)
+    val getParticipantsForASessionUseCase = GetParticipantsForASessionUseCase(firebaseSessionRepo)
+    val quitSessionUseCase = QuitSessionUseCase(firebaseSessionRepo)
 
     //pitches and sessions
     val getAllSessionsForAPitchUseCase = GetAllSessionsForAPitchUseCase(firebasePitchesRepo,
         firebaseSessionRepo)
+
+    // chat
+    val sendMessageUseCase = SendMessageUseCase(firebaseSessionRepo)
+    val getChatMessagesForASession = GetChatMessagesForASessionUseCase(firebaseSessionRepo)
 
     //preferences
     val updateSportsFavouriteUsecase = UpdateSportsFavouriteUsecase(firebaseUserRepo, firebaseMessagingService)
