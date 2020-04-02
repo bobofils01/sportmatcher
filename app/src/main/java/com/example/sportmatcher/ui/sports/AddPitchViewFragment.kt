@@ -1,6 +1,8 @@
 package com.example.sportmatcher.ui.sports
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.add_pitch_layout.*
+import kotlinx.android.synthetic.main.all_sports_empty_view_layout.*
 
 
 class AddPitchViewFragment: Fragment(){
@@ -97,6 +100,9 @@ class AddPitchViewFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        editTextNamePitchID.addTextChangedListener(pitchTextWatcher)
+        editTextDescriptionPitchID.addTextChangedListener(pitchTextWatcher)
+
         addPitchBtn.setOnClickListener {
             viewmodel.onAddPitchClicked()
             allSportsViewModel.goBackSportHomepage()
@@ -119,5 +125,19 @@ class AddPitchViewFragment: Fragment(){
         }
         */
     }
+
+    private val pitchTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            val firstInput = editTextNamePitchID.text.toString().trim()
+            val secondInput = editTextDescriptionPitchID.text.toString().trim()
+
+            addPitchBtn.isEnabled = firstInput.isNotEmpty() && secondInput.isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable) {}
+    }
+
 
 }

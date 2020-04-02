@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/log_out"
-        android:text="Log Out"/>
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+    <LinearLayout android:id="@+id/log_out"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:layout_marginLeft="25px"
+        android:layout_marginBottom="50px"
+        android:layout_marginTop="50px">
+
+        <ImageView
+            android:id="@+id/open_door"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_marginRight="75px"
+            android:background="@drawable/logout" />
+
+        <TextView
+            android:id="@+id/log_out_text"
+            android:layout_width="188dp"
+            android:layout_height="51dp"
+            android:text="Log out"
+            android:textSize="100px"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="5px">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -34,6 +34,7 @@ class SportChoiceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Liste contenant les logos utilisés pour chaque sport
         val sportsLogo = ArrayList<Int>()
         sportsLogo.add(com.example.sportmatcher.R.drawable.basketball)
         sportsLogo.add(com.example.sportmatcher.R.drawable.soccer)
@@ -45,7 +46,9 @@ class SportChoiceFragment : Fragment() {
         ServiceProvider.getAllSportsUseCase.execute().subscribe{ sports ->
             sports_choice_list.removeAllViews()
 
+            //Indice pour la liste des logos
             var sportAt: Int = 0
+
             for(sport in sports){
 
                 val choice = LinearLayout(activity)
@@ -77,8 +80,8 @@ class SportChoiceFragment : Fragment() {
                 val split = LinearLayout(activity)
                 val splitParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 splitParams.setMargins(0, 0, 0, 0)
-                choice.layoutParams = params
-                choice.orientation = LinearLayout.HORIZONTAL
+                /*choice.layoutParams = params
+                choice.orientation = LinearLayout.HORIZONTAL*/
 
                 val line = View(activity)
                 line.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 5)
