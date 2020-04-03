@@ -2,8 +2,9 @@ package com.example.sportmatcher.di
 
 import com.example.sportmatcher.domain.auth.*
 import com.example.sportmatcher.domain.sport.GetAllSportsUseCase
+import com.example.sportmatcher.domain.friendship.*
 import com.example.sportmatcher.domain.notifications.RegisterToNotificationsUseCase
-import com.example.sportmatcher.domain.preferences.UpdateSportsFavouriteUsecase
+import com.example.sportmatcher.domain.preferences.UpdateSportsFavouriteUseCase
 import com.example.sportmatcher.domain.sport.*
 import com.example.sportmatcher.repository.*
 import com.example.sportmatcher.service.FirebaseAuthService
@@ -12,8 +13,6 @@ import com.example.sportmatcher.service.IAuthService
 import com.example.sportmatcher.service.INotificationService
 
 object ServiceProvider {
-
-
 
     //repo
     private val notificationRepo: INotificationsRepository = FirebaseNotifRepository()
@@ -39,20 +38,16 @@ object ServiceProvider {
     val registerToNotificationsUseCase = RegisterToNotificationsUseCase(notificationRepo, firebaseMessagingService)
 
     //sports
-    val getAllSportsUseCase =
-        GetAllSportsUseCase(
-            firebaseSportsRepository
-        )
+    val getAllSportsUseCase = GetAllSportsUseCase(firebaseSportsRepository)
 
     //pitches
     val addPitchUseCase = AddPitchUseCase(firebasePitchesRepo, firebaseSportsRepository)
     val getAllPitchesUseCase = GetAllPitchesUseCase(firebasePitchesRepo)
     val getPitchesForUseCase= GetPitchesForUseCase(firebasePitchesRepo, firebaseSportsRepository)
     val getPitchUseCase = GetPitchUseCase(firebasePitchesRepo)
-    val addSessionToPitchUseCase = AddSessionToPitchUseCase(firebasePitchesRepo)
 
     //sessions
-    val addSessionUseCase = AddSessionUseCase(firebaseSessionRepo, addSessionToPitchUseCase)
+    val addSessionUseCase = AddSessionUseCase(firebaseSessionRepo, firebasePitchesRepo)
     val getAllSessionsUseCase = GetAllSessionsUseCase(firebaseSessionRepo)
     val joinSessionUseCase = JoinSessionUseCase(firebaseSessionRepo)
     val getParticipantsForASessionUseCase = GetParticipantsForASessionUseCase(firebaseSessionRepo)
@@ -67,6 +62,12 @@ object ServiceProvider {
     val getChatMessagesForASession = GetChatMessagesForASessionUseCase(firebaseSessionRepo)
 
     //preferences
-    val updateSportsFavouriteUsecase = UpdateSportsFavouriteUsecase(firebaseUserRepo, firebaseMessagingService)
+    val updateSportsFavouriteUseCase = UpdateSportsFavouriteUseCase(firebaseUserRepo, firebaseMessagingService)
 
+    //friendship
+    val addFriendUseCase = AddFriendUseCase(firebaseUserRepo)
+    val getFriendsUseCase = GetFriendsUseCase(firebaseUserRepo)
+    val getAllUsersUseCase = GetAllUsersUseCase(firebaseUserRepo)
+    val getUserUseCase = GetUserUseCase(firebaseUserRepo)
+    val deleteFriendUseCase = DeleteFriendUseCase(firebaseUserRepo)
 }

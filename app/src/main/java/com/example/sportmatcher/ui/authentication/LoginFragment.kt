@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,33 +14,16 @@ import kotlinx.android.synthetic.main.login_layout.*
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.R
 import android.view.inputmethod.InputMethodManager
-import android.app.Activity
-import android.graphics.Color
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.signup_layout.*
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.content.res.ResourcesCompat
-import android.R.attr.name
-import android.text.TextUtils
-import android.R.attr.name
-import android.graphics.drawable.Drawable
-import android.R.attr.name
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Handler
-import androidx.core.graphics.toColor
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.lifecycle.Observer
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
-import com.example.sportmatcher.ui.LoginActivity
-import com.example.sportmatcher.ui.SportChoiceActivity
-import com.google.android.gms.common.api.internal.LifecycleCallback.getFragment
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
-import java.util.regex.Pattern
 
 
 @Suppress("DEPRECATION")

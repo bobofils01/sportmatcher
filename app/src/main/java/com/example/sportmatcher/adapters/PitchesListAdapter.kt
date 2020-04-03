@@ -52,12 +52,9 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
             context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
         }
 
-        view.setOnClickListener(object: View.OnClickListener {
-
-            override fun onClick(p0: View?) {
-                Log.d("SetOnClickList", sportItem.toMap().toString())
-                context.startActivity(AllSessionOfAPitchActivity.getIntent(view.context, sportItem))
-            }
+        view.setOnClickListener(View.OnClickListener {
+            Log.d("SetOnClickList", sportItem.toMap().toString())
+            context.startActivity(AllSessionOfAPitchActivity.getIntent(view.context, sportItem))
         })
         return view
     }

@@ -1,25 +1,17 @@
 package com.example.sportmatcher.ui.authentication
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.databinding.SignupViewBinding
 import com.example.sportmatcher.viewModels.authentication.SignupViewModel
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.signup_layout.*
-import java.util.regex.Pattern
-import android.R
-import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import com.example.sportmatcher.domain.utils.isEmailValid

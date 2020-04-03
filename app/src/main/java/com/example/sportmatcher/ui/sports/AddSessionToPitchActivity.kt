@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Pitch
-import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.viewModels.sports.AddSessionViewModel
 import kotlinx.android.synthetic.main.add_session_layout.*
 

@@ -13,13 +13,16 @@ import com.example.sportmatcher.service.INotificationService
 import io.reactivex.Single
 import java.lang.IllegalStateException
 
-class UpdateSportsFavouriteUsecase(private val iUserRepository: IUserRepository, private val iNotificationService: INotificationService) :
-    UseCase<ArrayList<String>, Boolean> {
+class UpdateSportsFavouriteUseCase(
+    private val iUserRepository: IUserRepository,
+    private val iNotificationService: INotificationService
+): UseCase<ArrayList<String>, Boolean> {
+
     override fun execute(listAfter: ArrayList<String>): Boolean {
         getAuthenticatedState.execute().subscribe{ authState ->
             when(authState){
                 is AuthenticatedState -> {
-                     val authUser = authState.user
+                    val authUser = authState.user
                     iUserRepository.getUserSportFavourite(authUser.uid!!).subscribe{
                         listBefore ->
                             //Sync the subscription to topics for notificaition

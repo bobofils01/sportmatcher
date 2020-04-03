@@ -14,11 +14,11 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#1CA6BE"
-        app:tabIndicatorColor="#fff">
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1CA6BE"
+            app:tabIndicatorColor="#fff">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/sports"
@@ -32,17 +32,18 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/star" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/settings" />
-
-        <!--<com.google.android.material.tabs.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/friends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/friends" />-->
+            android:icon="@drawable/friends" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/settings" />
+
 
     </com.google.android.material.tabs.TabLayout>
 

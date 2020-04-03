@@ -10,7 +10,7 @@ import com.example.sportmatcher.repository.ISessionRepository
 import io.reactivex.Single
 
 class AddSessionUseCase(private val iSessionRepository: ISessionRepository,
-                        private val addSessionToPitchUseCase: AddSessionToPitchUseCase):
+                        private val iPitchesRepository: IPitchesRepository):
     UseCase<Session, Single<Session>> {
 
     override fun execute(payload: Session): Single<Session> {
@@ -18,7 +18,7 @@ class AddSessionUseCase(private val iSessionRepository: ISessionRepository,
         return Single.create { emitter ->
             iSessionRepository.addSession(payload).subscribe { session ->
                 val dto = AddSessionToPitchDTO(session.uid!!, payload.pitch!!)
-                addSessionToPitchUseCase.execute(dto).subscribe { p ->
+                iPitchesRepository.addSessionToPitch(dto).subscribe { p ->
                     var pitch: Pitch = p
                     if (pitch.uid.isNullOrBlank()) {
                         emitter.onError(error(IllegalStateException("Invalid pitch id")))

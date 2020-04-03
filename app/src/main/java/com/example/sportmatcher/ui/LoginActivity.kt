@@ -3,7 +3,6 @@ package com.example.sportmatcher.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,12 +14,7 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
-import android.view.View
-import android.view.View.GONE
-import android.view.inputmethod.InputMethodManager
-import android.widget.ProgressBar
 import com.example.sportmatcher.R
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.signup_layout.view.*
 
@@ -57,7 +51,9 @@ class LoginActivity : AppCompatActivity() {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
-
+                        val editor = getSharedPreferences(R.string.SESSION_USER.toString(), Context.MODE_PRIVATE).edit()
+                        editor.putString("USER", state.user.uid.toString())
+                        editor.apply()
                         val intent = Intent(this, NavigationActivity::class.java)
                         startActivity(intent)
                     }
