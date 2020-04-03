@@ -1,13 +1,20 @@
 package com.example.sportmatcher.ui.sports
 
+import android.graphics.Color
+import android.graphics.Color.parseColor
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +32,9 @@ import java.io.IOException
 import java.util.*
 
 
+
+
+@Suppress("DEPRECATION")
 class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
 
     companion object {
@@ -65,7 +75,11 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         //TODO add also item touchhelper listener
 
         val listView : ListView = sports_list as ListView
+
         val goCreatePitchBtn = btn_add_pitch_view as Button
+        /*goCreatePitchBtn.setBackgroundResource(R.drawable.button_enabled)
+        goCreatePitchBtn.setTextColor(resources.getColor(R.color.colorWhite))
+        //goCreatePitchBtn.gravity = Gravity.CENTER*/
 
         goCreatePitchBtn.setOnClickListener{
             allSportsViewModel.onAddPitchClicked()

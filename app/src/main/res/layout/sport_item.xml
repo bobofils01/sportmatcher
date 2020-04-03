@@ -52,6 +52,7 @@
         android:layout_marginBottom="24dp"
         android:text="Add Session"
         app:layout_constraintLeft_toRightOf="@+id/pitchName"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="#fff"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
