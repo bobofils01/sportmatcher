@@ -1,12 +1,14 @@
 package com.example.sportmatcher.ui
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,9 +18,9 @@ import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
-import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
-import com.google.android.gms.common.api.internal.LifecycleCallback.getFragment
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.login_layout.*
 
 
 class WelcomeActivity : AppCompatActivity(){
@@ -41,8 +43,18 @@ class WelcomeActivity : AppCompatActivity(){
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+
+        //Permet d'être directement connecté à l'application 
+        val user = FirebaseAuth.getInstance().currentUser
+        if(user != null){
+            val intent = Intent(this, NavigationActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+        /*else
+            Log.d(FragmentActivity.TAG, "onAuthStateChanged:signed_out")*/
+
         setContentView(R.layout.welcome_layout)
 
         /*viewModel.loginViewStateLiveData.value = intent.extras?.get(LoginActivity.SCREEN_STATE_KEY) as LoginViewState
