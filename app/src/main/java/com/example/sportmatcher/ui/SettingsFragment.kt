@@ -62,7 +62,9 @@ class SettingsFragment : Fragment() {
             handler.postDelayed({run{
                 viewModel.onLogoutClicked()
 
-                startActivity(Intent(activity, WelcomeActivity::class.java))
+                startActivity(Intent(activity, WelcomeActivity::class.java).apply{
+                    putExtra("LOGGING_OUT", true)
+                })
             }}, 2000)
         }
     }

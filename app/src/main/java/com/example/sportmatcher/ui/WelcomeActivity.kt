@@ -23,6 +23,7 @@ import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.signup_layout.*
+import kotlinx.android.synthetic.main.welcome_layout.*
 
 
 class WelcomeActivity : AppCompatActivity(){
@@ -52,6 +53,14 @@ class WelcomeActivity : AppCompatActivity(){
 
         val login : Button = findViewById(R.id.btn_login)
         val signup : Button = findViewById(R.id.signup_btn)
+
+        val args = intent.extras
+        val isLoggedOut = args?.getBoolean("LOGGING_OUT", false)
+        if(isLoggedOut!!){
+            progress.visibility = View.GONE
+            login.visibility = View.VISIBLE
+            signup.visibility = View.VISIBLE
+        }
 
         val handler = Handler()
         handler.postDelayed({run{
