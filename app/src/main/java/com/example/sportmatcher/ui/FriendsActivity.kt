@@ -13,7 +13,7 @@ import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 
 class FriendsActivity : AppCompatActivity() {
 
-    private val viewModel: LogOutViewModel by lazy {
+    private val viewModel: LogOutViewModel by lazy{
         ViewModelProvider(this).get(LogOutViewModel::class.java)
     }
 

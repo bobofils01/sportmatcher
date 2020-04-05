@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login_layout.*
+import kotlinx.android.synthetic.main.signup_layout.*
 
 
 class WelcomeActivity : AppCompatActivity(){
@@ -44,24 +46,34 @@ class WelcomeActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //Permet d'être directement connecté à l'application 
-        val user = FirebaseAuth.getInstance().currentUser
-        if(user != null){
-            val intent = Intent(this, NavigationActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-        }
-        /*else
-            Log.d(FragmentActivity.TAG, "onAuthStateChanged:signed_out")*/
-
-        setContentView(R.layout.welcome_layout)
-
         /*viewModel.loginViewStateLiveData.value = intent.extras?.get(LoginActivity.SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()*/
+        setContentView(R.layout.welcome_layout)
 
         val login : Button = findViewById(R.id.btn_login)
         val signup : Button = findViewById(R.id.signup_btn)
+
+        val handler = Handler()
+        handler.postDelayed({run{
+
+            //Permet d'être directement connecté à l'application
+            val user = FirebaseAuth.getInstance().currentUser
+            if(user != null){
+                val intent = Intent(this, NavigationActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+            /*else
+                Log.d(FragmentActivity.TAG, "onAuthStateChanged:signed_out")*/
+            else{
+                val progress: ProgressBar = findViewById(R.id.progress)
+                progress.visibility = View.GONE
+
+                login.visibility = View.VISIBLE
+                signup.visibility = View.VISIBLE
+            }
+
+        }}, 2000)
 
         login.setOnClickListener {
             startActivity(LoginActivity.getIntent(this, LoginViewState.SIGNIN))
