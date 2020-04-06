@@ -1,9 +1,6 @@
 package com.example.sportmatcher.ui.sports.session
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.sportmatcher.R
-import com.example.sportmatcher.adapters.PitchesListAdapter
 import com.example.sportmatcher.adapters.SessionChatListAdapter
-import com.example.sportmatcher.di.ServiceProvider.getAuthenticatedState
+import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.di.ServiceProvider.sendMessageUseCase
 import com.example.sportmatcher.model.User
-import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.sport.ChatMessage
 import com.example.sportmatcher.model.sport.Session
-import kotlinx.android.synthetic.main.all_sports_empty_view_layout.*
 import kotlinx.android.synthetic.main.session_chat_fragment.*
 
 class SessionChatFragment : Fragment() {
@@ -46,6 +40,9 @@ class SessionChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         session = arguments?.getParcelable(SESSION_KEY)!!
+        val user = ServiceProvider.getAuthenticatedUserUseCase.execute()
+        viewModel.authenticatedUser = user
+
         val view = inflater.inflate(R.layout.session_chat_fragment, container, false)
 
         return view
@@ -61,8 +58,8 @@ class SessionChatFragment : Fragment() {
                 if(!msg.isNullOrBlank()) {
                     val chatMessage = ChatMessage(
                         uuid = null,
-                        senderUUID = viewModel.getAuthenticatedUser()?.uid!!,
-                        senderName = viewModel.getAuthenticatedUser()?.lastName!!,
+                        senderUUID = viewModel.authenticatedUser?.uid!!,
+                        senderName = viewModel.authenticatedUser?.lastName!!,
                         timestamp = System.currentTimeMillis()/1000,
                         message = msg.toString(),
                         sessionID = session.uid
@@ -79,7 +76,7 @@ class SessionChatFragment : Fragment() {
         //listen to chat messages
         viewModel.getChatMessages(session).observe(requireActivity(), Observer{ messages ->
             context?.let {
-                val adapter = SessionChatListAdapter(messages, requireContext())
+                val adapter = SessionChatListAdapter(messages, requireContext(), requireActivity())
                 recycleViewChat.adapter =  adapter
             }
         })

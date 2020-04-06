@@ -19,10 +19,9 @@ class ShowSessionViewModel : ViewModel() {
 
     lateinit var session:Session
 
-    private var authenticatedUser: User? = null
+    var authenticatedUser: User? = null
     val isAlreadyParticipantOfSession = MutableLiveData<Boolean>(false)
 
-    fun getAuthenticatedUser() = authenticatedUser
 
     private val getParticipantsForASessionUseCase by lazy {
         ServiceProvider.getParticipantsForASessionUseCase
@@ -54,14 +53,5 @@ class ShowSessionViewModel : ViewModel() {
 
         }
         return participants
-    }
-
-    init {
-        val authenticatedState = ServiceProvider.getAuthenticatedUserUserCase.execute()
-        when(authenticatedState){
-            is AuthenticatedState -> {
-                this.authenticatedUser = authenticatedState.user}
-            else -> {}
-        }
     }
 }

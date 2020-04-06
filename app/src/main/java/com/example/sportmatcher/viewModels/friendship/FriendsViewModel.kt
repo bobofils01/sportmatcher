@@ -68,10 +68,7 @@ class FriendsViewModel: ViewModel() {
         Log.d("DELETED", actualUser.value!!.email +" "+ user.email)
     }
 
-    fun setUser(uid: String?){
-        getUserUseCase.execute(uid).subscribe{ user->
-            Log.d("ViewModelFriends", user.friends.toString())
+    fun setUser(user: User){
             actualUser.value = user
-        }
     }
 }

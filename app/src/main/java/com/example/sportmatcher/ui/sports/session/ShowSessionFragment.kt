@@ -1,7 +1,5 @@
 package com.example.sportmatcher.ui.sports.session
 
-import android.graphics.Color
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,14 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.sportmatcher.R
-import com.example.sportmatcher.adapters.PitchesListAdapter
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.di.ServiceProvider.joinSessionUseCase
 import com.example.sportmatcher.dto.sport.ParticipantSessionDTO
 import com.example.sportmatcher.model.sport.Session
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.session_chat_fragment.*
 import kotlinx.android.synthetic.main.show_session_fragment.*
 
 class ShowSessionFragment : Fragment() {
@@ -44,6 +38,9 @@ class ShowSessionFragment : Fragment() {
     ): View? {
         session = arguments?.getParcelable(SESSION_KEY)!!
         viewModel.session = session
+        val user = ServiceProvider.getAuthenticatedUserUseCase.execute()
+        viewModel.authenticatedUser = user
+
 
         return inflater.inflate(R.layout.show_session_fragment, container, false)
     }
@@ -60,7 +57,7 @@ class ShowSessionFragment : Fragment() {
             joinSessionUseCase.execute(
                 ParticipantSessionDTO(
                     sessionID = session.uid!!,
-                    participantID = viewModel.getAuthenticatedUser()!!.uid!!
+                    participantID = viewModel.authenticatedUser!!.uid!!
                 )
             )
         }
@@ -74,7 +71,7 @@ class ShowSessionFragment : Fragment() {
                     ServiceProvider.quitSessionUseCase.execute(
                         ParticipantSessionDTO(
                             sessionID = session.uid!!,
-                            participantID = viewModel.getAuthenticatedUser()?.uid!!
+                            participantID = viewModel.authenticatedUser?.uid!!
                         )
                     ).subscribe()
                 }
@@ -84,7 +81,7 @@ class ShowSessionFragment : Fragment() {
                     joinSessionUseCase.execute(
                         ParticipantSessionDTO(
                             sessionID = session.uid!!,
-                            participantID = viewModel.getAuthenticatedUser()?.uid!!
+                            participantID = viewModel.authenticatedUser?.uid!!
                         )
                     ).subscribe()
                 }

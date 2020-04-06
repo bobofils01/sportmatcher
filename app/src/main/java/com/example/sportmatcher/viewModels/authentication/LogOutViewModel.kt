@@ -1,5 +1,6 @@
 package com.example.sportmatcher.viewModels.authentication
 
+import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider

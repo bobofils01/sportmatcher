@@ -2,15 +2,17 @@ package com.example.sportmatcher.ui.sports
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.ui.utils.UIUtils
 import com.example.sportmatcher.viewModels.sports.AddSessionViewModel
 import kotlinx.android.synthetic.main.add_session_layout.*
 
@@ -42,59 +44,62 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         //setContentView(binding.root);
         //binding.lifecycleOwner = this
         addSessionViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
+        val user = ServiceProvider.getAuthenticatedUserUseCase.execute()
+        addSessionViewModel.currentUser = user
 
-        editTextTotalNbPlayersID.addTextChangedListener (object :TextWatcher{
+        initTextViewChangeListeners()
+        initSaveBtn()
+        initPlayersSuggestionAdaptater()
+        initAddPlayerBtn()
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("ASTPAbeforeTextChanged", editTextTotalNbPlayersID.text.toString())
-            }
 
-            override fun afterTextChanged(p0: Editable?) {
-                if(!p0.isNullOrBlank()) {
-                    val intRead = p0.toString().toInt()
-                    addSessionViewModel.totalNbPlayers.value = intRead
+    }
 
-                }
-                Log.d("ASTPAafterTextChanged", p0.toString() + addSessionViewModel.totalNbPlayers.value.toString())
-            }
+    fun initAddPlayerBtn(){
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.d("ASTPAonTextChanged", editTextTotalNbPlayersID.text.toString()+" "+ p0.toString()+" "+ p1.toString()+" "+ p2.toString()+" "+ p3.toString())
-            }
+    }
+    fun initPlayersSuggestionAdaptater(){
+        addSessionViewModel.getAllFriends().observe (this, Observer { playersList ->
+            val emails = playersList.map { t -> t.email }
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, emails)
+            friends_autoCompleteTextView.setAdapter(adapter)
+
         })
 
-        editTextNbPlayersSignedID.addTextChangedListener (object :TextWatcher{
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    }
 
-            override fun afterTextChanged(p0: Editable?) {
-                if(!p0.isNullOrBlank()) {
-                    val intRead = p0.toString().toInt()
-                    addSessionViewModel.nbPlayersSigned.value = intRead
-                }
+    fun initSaveBtn(){
+        //when we click to save the new session
+        add_session_toolbar_save.isClickable = true
+        add_session_toolbar_save.paintFlags = add_session_toolbar_save.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        add_session_toolbar_save.setOnClickListener {
+            val session = addSessionViewModel.getSession()
+            //TODO handle error in isSession valid (empty mandatory stuffs) )by checking
+            if(isSessionValid()) {
+                addSessionViewModel.onAddSessionClicked(session)
+                Toast.makeText(this, "Session added", Toast.LENGTH_LONG).show()
+                startActivity(AllSessionOfAPitchActivity.getIntent(this, addSessionViewModel.pitch))
+
             }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
-        editTextPriceSessionID.addTextChangedListener (object :TextWatcher{
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun afterTextChanged(p0: Editable?) {
-                if(!p0.isNullOrBlank()) {
-                    val doubleRead = p0.toString().toDouble()
-                    addSessionViewModel.price.value = doubleRead
-                }
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
-        addSessionBtn.setOnClickListener {
-            addSessionViewModel.onAddSessionClicked()
-            Toast.makeText(this, "Session added", Toast.LENGTH_LONG).show()
         }
+    }
+    fun  isSessionValid(): Boolean{
+        return true
+    }
+    fun initTextViewChangeListeners(){
+        //title
+        UIUtils.addOnTextViewChange(session_title, addSessionViewModel.title_input)
+        //description
+        UIUtils.addOnTextViewChange(session_description, addSessionViewModel.description_input)
+        //date
+        UIUtils.addOnTextViewChange(session_date, addSessionViewModel.date_input)
+        //time
+        UIUtils.addOnTextViewChange(session_time, addSessionViewModel.time_input)
+        //maxPlayers
+        UIUtils.addOnTextViewChange(session_max_players, addSessionViewModel.maxNbPlayers_input)
+        //price per player
+        UIUtils.addOnTextViewChange(session_price_player, addSessionViewModel.price_player_input)
 
     }
 

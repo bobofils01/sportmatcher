@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.sport.Session
-import com.example.sportmatcher.ui.sports.AllSessionOfAPitchActivity
 import com.example.sportmatcher.ui.sports.session.SessionViewActivity
 
 class SessionListAdapter(sessions: ArrayList<Session>, ctx : Context) :
@@ -44,16 +43,15 @@ class SessionListAdapter(sessions: ArrayList<Session>, ctx : Context) :
 
         val sessionItem = getItem(i)
         //changevalues
-        viewHolder.totalNbPlayers!!.text = sessionItem!!.totalNbPlayers.toString() + " players"
+        viewHolder.totalNbPlayers!!.text = sessionItem!!.maxNbPlayers.toString() + " players"
         viewHolder.nbPlayersSigned!!.text = sessionItem!!.nbPlayersSigned.toString() + " players already signed"
         //viewHolder.address!!.text = sessionItem!!.address
-        viewHolder.price!!.text = sessionItem!!.price.toString() + " €"
+        viewHolder.price!!.text = sessionItem!!.pricePlayer.toString() + " €"
         viewNotNull.tag = viewHolder
 
         viewNotNull.setOnClickListener( object: View.OnClickListener {
 
             override fun onClick(p0: View?) {
-                Log.d("SetOnClickList", sessionItem.toMap().toString())
                 context.startActivity(
                     SessionViewActivity.getIntent(
                         viewNotNull.context,

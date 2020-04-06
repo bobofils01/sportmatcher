@@ -56,7 +56,7 @@ class WelcomeActivity : AppCompatActivity(){
 
         val args = intent.extras
         val isLoggedOut = args?.getBoolean("LOGGING_OUT", false)
-        if(isLoggedOut!!){
+        if(args != null && isLoggedOut!!){
             progress.visibility = View.GONE
             login.visibility = View.VISIBLE
             signup.visibility = View.VISIBLE
@@ -82,7 +82,7 @@ class WelcomeActivity : AppCompatActivity(){
                 signup.visibility = View.VISIBLE
             }
 
-        }}, 2000)
+        }}, 3000)
 
         login.setOnClickListener {
             startActivity(LoginActivity.getIntent(this, LoginViewState.SIGNIN))

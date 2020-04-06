@@ -1,5 +1,6 @@
 package com.example.sportmatcher.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider
-import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.sport.ChatMessage
-import kotlinx.android.synthetic.main.session_chat_fragment.view.*
 
-class SessionChatListAdapter(sessions: ArrayList<ChatMessage>, ctx : Context)
+class SessionChatListAdapter constructor(sessions: ArrayList<ChatMessage>, ctx : Context, activity: Activity)
     : ArrayAdapter<ChatMessage>(ctx, R.layout.chat_to_item, sessions){
 
     private class ChatItemViewHolder {
@@ -60,13 +59,8 @@ class SessionChatListAdapter(sessions: ArrayList<ChatMessage>, ctx : Context)
 
 
     init {
-        val authenticatedState = ServiceProvider.getAuthenticatedUserUserCase.execute()
-        when(authenticatedState){
-            is AuthenticatedState -> {
-                this.currentUserUUID = authenticatedState.user.uid
-            }
-            else -> {}
-        }
+        val user = ServiceProvider.getAuthenticatedUserUseCase.execute()
+        this.currentUserUUID = user?.uid
     }
 
 

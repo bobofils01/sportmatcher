@@ -28,7 +28,7 @@ class FirebaseSessionRepository: ISessionRepository {
         val key  = sessionTableRef.push().key
         session.uid = key
         return Single.create { emitter ->
-            sessionTableRef.child(key!!).setValue(session.toMap())
+            sessionTableRef.child(key!!).setValue(session)
             emitter.onSuccess(session)
         }
     }

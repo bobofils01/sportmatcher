@@ -43,9 +43,6 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         allSessionsOfAPitchViewModel.getAllSessions().observe(this, Observer { sessions ->
             val adapter = SessionListAdapter(sessions, this)
             listView.adapter = adapter
-            sessions.forEach{
-                Log.d("Sessions", it.toMap().toString())
-            }
         })
     }
 }

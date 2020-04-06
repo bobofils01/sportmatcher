@@ -23,16 +23,17 @@ object ServiceProvider {
     //services
     val authService:IAuthService = FirebaseAuthService()
     val firebaseMessagingService:INotificationService =FirebaseMessagingService()
-
-    //state
-    val getAuthenticatedState = GetAuthenticationStateUseCase(authService)
-    val getAuthenticatedUserUserCase = GetAuthenticatedUserUserCase(authService)
-
     //usecases
     //auth
+    val getUserUseCase = GetUserUseCase(firebaseUserRepo)
     val signInUseCase = SignInUseCase(authService)
     val signUpUseCase = SignUpUseCase(authService)
     val signOutUseCase = SignOutUseCase(authService)
+
+
+    //state
+    val getAuthenticatedState = GetAuthenticationStateUseCase(authService)
+    val getAuthenticatedUserUseCase = GetAuthenticatedUserUserCase(authService)
 
     //notifications
     val registerToNotificationsUseCase = RegisterToNotificationsUseCase(notificationRepo, firebaseMessagingService)
@@ -68,6 +69,5 @@ object ServiceProvider {
     val addFriendUseCase = AddFriendUseCase(firebaseUserRepo)
     val getFriendsUseCase = GetFriendsUseCase(firebaseUserRepo)
     val getAllUsersUseCase = GetAllUsersUseCase(firebaseUserRepo)
-    val getUserUseCase = GetUserUseCase(firebaseUserRepo)
     val deleteFriendUseCase = DeleteFriendUseCase(firebaseUserRepo)
 }

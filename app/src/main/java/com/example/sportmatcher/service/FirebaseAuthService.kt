@@ -20,7 +20,18 @@ class FirebaseAuthService : IAuthService {
         BehaviorSubject.create<AuthenticationState>()
     }
 
+    override fun getCurrentUser() :Observable<String>{
 
+        return Observable.create{
+                emitter ->
+                firebaseAuth.addAuthStateListener { firebaseAuth ->
+                    if(firebaseAuth.currentUser != null){
+                        emitter.onNext(firebaseAuth.currentUser!!.uid)
+                    }
+            }
+
+        }
+    }
 
     override fun signIn(email: String, password: String): Single<AuthenticationState> {
         return Single.create { emitter ->

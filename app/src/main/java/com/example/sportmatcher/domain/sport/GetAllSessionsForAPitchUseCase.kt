@@ -30,8 +30,6 @@ class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRep
                 for(i in it.indices){
                     iSessionRepository.getSession(it[i]).subscribe{ session->
                         sessions.add(session)
-                        Log.d("ZZZAllSessionsForAPitch", session.toMap().toString())
-
                         if(i == it.size - 1)
                             emitter.onNext(sessions)
                     }

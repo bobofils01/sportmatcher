@@ -11,4 +11,5 @@ interface IAuthService {
     fun logout(): Single<AuthenticationState>
     fun forgotPassword(email: String)
     fun getAuthenticationState(): Observable<AuthenticationState>
+    fun getCurrentUser() :Observable<String>
 }
