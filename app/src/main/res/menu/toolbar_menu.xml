@@ -4,17 +4,21 @@
 
     <item
         android:id="@+id/sport"
+        android:title=""
         android:icon="@drawable/sport"
         app:showAsAction="always" />
 
     <item android:id="@+id/preferences"
+        android:title=""
         android:icon="@drawable/star"
         app:showAsAction="always"
         />
 
     <item android:id="@+id/friends"
+        android:title=""
         android:icon="@drawable/friends"
         app:showAsAction="always"/>
+
 
     <item android:id="@+id/log_out"
         android:title="Log out"

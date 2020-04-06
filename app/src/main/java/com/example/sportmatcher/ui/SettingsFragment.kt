@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.login_layout.*
@@ -44,6 +45,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val user = ServiceProvider.getAuthenticatedUserUseCase.execute()
+        logoutMail.text = user!!.email
         val progress = ProgressDialog(activity)
         progress.setMessage("Logging out")
         progress.setCancelable(false)
