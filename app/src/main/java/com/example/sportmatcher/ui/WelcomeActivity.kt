@@ -82,7 +82,7 @@ class WelcomeActivity : AppCompatActivity(){
                 signup.visibility = View.VISIBLE
             }
 
-        }}, 3000)
+        }}, 2000)
 
         login.setOnClickListener {
             startActivity(LoginActivity.getIntent(this, LoginViewState.SIGNIN))
