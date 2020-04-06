@@ -46,13 +46,15 @@ class FriendsViewModel: ViewModel() {
     fun getAllUsers(): MutableLiveData<ArrayList<User>> {
         val usersMutableData = MutableLiveData<ArrayList<User>>()
         getAllUsersUseCase.execute().subscribe{
-            usersMutableData.value = it.filter { user -> !friendsMutableData.value!!.map { u-> u.uid }.contains(user.uid) } as ArrayList<User>
+            usersMutableData.value = it.filter { user ->
+                user.uid!=actualUser.value!!.uid && !friendsMutableData.value!!.map { u-> u.uid }.contains(user.uid)
+            } as ArrayList<User>
         }
         return usersMutableData
     }
 
-    fun getAllFriends(uid: String): MutableLiveData<ArrayList<User>> {
-        getFriendsUseCase.execute(uid).subscribe{
+    fun getAllFriends(): MutableLiveData<ArrayList<User>> {
+        getFriendsUseCase.execute(actualUser.value!!.uid!!).subscribe{
             friendsMutableData.value = it as ArrayList<User>
         }
         return friendsMutableData

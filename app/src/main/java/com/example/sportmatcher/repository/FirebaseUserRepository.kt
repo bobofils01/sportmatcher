@@ -90,7 +90,7 @@ class FirebaseUserRepository : IUserRepository {
 
     override fun getAllUser(): Observable<List<User>> {
         return Observable.create { emitter ->
-            userTableRef.addValueEventListener(object : ValueEventListener {
+            userTableRef.orderByChild("email").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val list = dataSnapshot.children.mapNotNull { user ->
                         user.getValue(User::class.java)

@@ -51,9 +51,6 @@ class LoginActivity : AppCompatActivity() {
             it?.let { state ->
                 when (state) {
                     is AuthenticatedState -> {
-                        val editor = getSharedPreferences(R.string.SESSION_USER.toString(), Context.MODE_PRIVATE).edit()
-                        editor.putString("USER", state.user.uid.toString())
-                        editor.apply()
                         val intent = Intent(this, NavigationActivity::class.java)
                         startActivity(intent)
                     }
