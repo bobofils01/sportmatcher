@@ -196,6 +196,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/added_players_recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="false" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
@@ -219,11 +224,7 @@
                     android:background="@android:drawable/ic_input_add" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/added_players_recycle_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:isScrollContainer="false" />
+
 
         </LinearLayout>
 
