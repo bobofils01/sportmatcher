@@ -9,6 +9,8 @@ import io.reactivex.disposables.CompositeDisposable
 
 class SignupViewModel: ViewModel() {
 
+    var firstName = MutableLiveData<String>()
+    var lastName = MutableLiveData<String>()
     var email = MutableLiveData<String>()
     var password = MutableLiveData<String>()
     var confirmPassword = MutableLiveData<String>()
@@ -25,6 +27,8 @@ class SignupViewModel: ViewModel() {
         compositeDisposable.add(
             signupUseCase.execute(
                 SignupInfo(
+                    firstName.value,
+                    lastName.value,
                     email.value,
                     password.value,
                     confirmPassword.value
