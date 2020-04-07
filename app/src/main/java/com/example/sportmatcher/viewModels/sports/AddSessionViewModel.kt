@@ -19,7 +19,9 @@ class AddSessionViewModel: ViewModel() {
     val description_input by lazy {MutableLiveData<String>("")}
     val maxNbPlayers_input by lazy {MutableLiveData<String>("")}
     val price_player_input by lazy {MutableLiveData<String>("")}
-    val players = ArrayList<User>()
+    val players  by lazy {
+        MutableLiveData<ArrayList<User>>(ArrayList())
+    }
     fun getSession() : Session{
         val title = title_input.value
         val date = date_input.value
@@ -55,7 +57,7 @@ class AddSessionViewModel: ViewModel() {
     fun onAddSessionClicked(session: Session) {
         addSessionUseCase.execute(session).subscribe{ addedSession ->
             //TODO add in players the current useruuid and the listof players ids
-            for(player in players){
+            for(player in players.value!!){
                 joinSessionUseCase.execute(
                     ParticipantSessionDTO(sessionID = addedSession.uid!!, participantID = player.uid!!)
                 ).subscribe()
@@ -64,6 +66,15 @@ class AddSessionViewModel: ViewModel() {
 
     }
 
+    fun addPlayer( user : User){
+        players.value!!.add(user)
+        players.value = players.value
+    }
+
+    fun deletePlayer( user : User){
+        players.value!!.remove(user)
+        players.value = players.value
+    }
     fun getAllFriends(): MutableLiveData<ArrayList<User>> {
 
         val userUuid = currentUser!!.uid!!

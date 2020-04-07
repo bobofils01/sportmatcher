@@ -80,6 +80,8 @@
                     android:id="@+id/session_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:duplicateParentState="false"
+                    android:editable="false"
                     android:hint="Date" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +95,7 @@
                     android:id="@+id/session_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:editable="false"
                     android:hint="Time" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -191,13 +194,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/added_players_recycle_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
@@ -207,7 +203,11 @@
                     android:id="@+id/friends_autoCompleteTextView"
                     android:layout_width="357dp"
                     android:layout_height="match_parent"
-                    android:text="name" />
+                    android:layout_alignParentLeft="true"
+                    android:completionThreshold="1"
+                    android:cursorVisible="true"
+                    android:dropDownAnchor="@+id/friends_autoCompleteTextView"
+                    android:dropDownVerticalOffset="0dp" />
 
                 <Button
                     android:id="@+id/add_player_btn"
@@ -216,6 +216,12 @@
                     android:layout_weight="1"
                     android:background="@android:drawable/ic_input_add" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/added_players_recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="false" />
 
         </LinearLayout>
 

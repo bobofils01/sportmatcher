@@ -1,5 +1,6 @@
 package com.example.sportmatcher.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.model.User
 import kotlinx.android.synthetic.main.friend_item.view.*
 
-class PlayersListAdapter(private val players: ArrayList<User>, private val callbackDeletion : (User)->Unit) : RecyclerView.Adapter<PlayersListAdapter.PlayerItemViewHolder>()  {
+class PlayersListAdapter(private val players: ArrayList<User>,private val currentUser: User, private val callbackDeletion : (User)->Unit) : RecyclerView.Adapter<PlayersListAdapter.PlayerItemViewHolder>()  {
 
     class PlayerItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
         internal var idFriend: TextView? = null
@@ -19,9 +20,17 @@ class PlayersListAdapter(private val players: ArrayList<User>, private val callb
         internal var lastNameFriend: TextView? = null
         internal var deletionBtn: Button? = null
 
-        fun bind(user: User, callbackDeletion : (User)->Unit) {
+        fun bind(user: User, currentUser: User,callbackDeletion : (User)->Unit) {
             emailFriend!!.text = user.email
-            deletionBtn!!.setOnClickListener{callbackDeletion(user)}
+            if(currentUser == user) {
+                deletionBtn!!.isClickable = false
+                deletionBtn!!.text = "Me"
+
+            }else {
+                deletionBtn!!.setBackgroundColor(Color.RED)
+                deletionBtn!!.text ="X"
+                deletionBtn!!.setOnClickListener { callbackDeletion(user) }
+            }
         }
 
         init {
@@ -43,6 +52,7 @@ class PlayersListAdapter(private val players: ArrayList<User>, private val callb
     }
 
     override fun onBindViewHolder(holder: PlayerItemViewHolder, position: Int) {
-
+        val user = players.get(position)
+        holder.bind(user, currentUser, callbackDeletion)
     }
 }
