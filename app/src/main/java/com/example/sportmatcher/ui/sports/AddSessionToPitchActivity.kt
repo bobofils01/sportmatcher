@@ -21,6 +21,7 @@ import com.example.sportmatcher.adapters.PlayersListAdapter
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.User
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.model.sport.Session
 import com.example.sportmatcher.ui.utils.UIUtils
 import com.example.sportmatcher.viewModels.sports.AddSessionViewModel
 import kotlinx.android.synthetic.main.add_session_layout.*
@@ -156,13 +157,19 @@ class AddSessionToPitchActivity : AppCompatActivity() {
     }
 
     fun initSaveBtn(){
+
+        //when black is pressed
+        add_session_toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         //when we click to save the new session
         add_session_toolbar_save.isClickable = true
         add_session_toolbar_save.paintFlags = add_session_toolbar_save.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         add_session_toolbar_save.setOnClickListener {
             val session = addSessionViewModel.getSession()
             //TODO handle error in isSession valid (empty mandatory stuffs) )by checking
-            if(isSessionValid()) {
+            if(isSessionValid(session)) {
                 addSessionViewModel.onAddSessionClicked(session)
                 Toast.makeText(this, "Session added", Toast.LENGTH_LONG).show()
                 startActivity(AllSessionOfAPitchActivity.getIntent(this, addSessionViewModel.pitch))
@@ -170,7 +177,8 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             }
         }
     }
-    fun  isSessionValid(): Boolean{
+    fun  isSessionValid(session: Session): Boolean{
+        //TODO belami
         return true
     }
     fun initTextViewChangeListeners(){
