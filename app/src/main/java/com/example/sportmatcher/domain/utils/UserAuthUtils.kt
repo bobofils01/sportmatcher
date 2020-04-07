@@ -22,3 +22,10 @@ fun String?.isPasswordValid(): Boolean {
     val matcher = pattern.matcher(this)
     return matcher.matches()
 }
+
+fun String?.isNameValid(): Boolean{
+    if(this == null || Pattern.compile( "[0-9]" ).matcher(this).find())
+        return false
+
+    return true
+}

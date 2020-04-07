@@ -41,7 +41,7 @@
                 android:layout_margin="10dp"
                 android:hint="First Name"
                 android:text="@={signupViewModel.firstName}"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789 "
                 android:inputType="textFilter"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_margin="10dp"
                 android:hint="Last Name"
                 android:text="@={signupViewModel.lastName}"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789 "
                 android:inputType="textFilter"/>
         </com.google.android.material.textfield.TextInputLayout>
 
