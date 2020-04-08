@@ -11,7 +11,7 @@ class SignupViewModel: ViewModel() {
 
     lateinit var firstName: String // = MutableLiveData<String>()
     lateinit var lastName: String //= MutableLiveData<String>()
-    var email = MutableLiveData<String>()
+    lateinit var email: String //= MutableLiveData<String>()
     var password = MutableLiveData<String>()
     var confirmPassword = MutableLiveData<String>()
 
@@ -29,7 +29,7 @@ class SignupViewModel: ViewModel() {
                 SignupInfo(
                     firstName,
                     lastName,
-                    email.value,
+                    email,
                     password.value,
                     confirmPassword.value
                 )

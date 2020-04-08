@@ -22,6 +22,11 @@
             android:id="@+id/name"
             layout="@layout/name_layout"/>
 
+        <include
+            android:id="@+id/enter_email"
+            android:visibility="gone"
+            layout="@layout/email_layout"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="106dp"
@@ -30,27 +35,6 @@
             android:text="Welcome"
             android:textSize="25dp"
             android:textStyle="bold"/>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:hint="Email"
-            android:text="@={signupViewModel.email}"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@."
-            android:inputType="textFilter"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

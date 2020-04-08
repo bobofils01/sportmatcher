@@ -14,9 +14,9 @@ import com.example.sportmatcher.viewModels.authentication.SignupViewModel
 import kotlinx.android.synthetic.main.signup_layout.*
 import android.text.Editable
 import android.text.TextWatcher
-import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
+import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
@@ -55,20 +55,31 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        first_name.addTextChangedListener(nameTextWatcher)
-        last_name.addTextChangedListener(nameTextWatcher)
+        first_name.addTextChangedListener(signUpTextWatcher)
+        last_name.addTextChangedListener(signUpTextWatcher)
 
-        next.setOnClickListener{
+        next1.setOnClickListener{
             hideKeyboard()
 
             viewmodel.firstName = first_name.text.toString()
             viewmodel.lastName = last_name.text.toString()
 
             name.visibility = View.GONE
+            enter_email.visibility = View.VISIBLE
         }
 
         //Débloque le boutton Register lorsque les champs sont remplis
         email.addTextChangedListener(signUpTextWatcher)
+
+        next2.setOnClickListener{
+            hideKeyboard()
+
+            viewmodel.email = email.text.toString()
+
+            enter_email.visibility = View.GONE
+        }
+
+
         password.addTextChangedListener(signUpTextWatcher)
         confirm_password.addTextChangedListener(signUpTextWatcher)
 
@@ -77,10 +88,10 @@ class SignUpFragment : Fragment() {
             //Retire le clavier
             hideKeyboard()
 
-            if(!email.text.toString().isEmailValid())
-                email.error = "Please enter a valid mail address."
+            /*if(!email.text.toString().isEmailValid())
+                email.error = "Please enter a valid mail address."*/
 
-            else if(!password.text.toString().isPasswordValid()) //Si le mot de passe ne suit pas les conditions
+            if(!password.text.toString().isPasswordValid()) //Si le mot de passe ne suit pas les conditions
                 password.error = "Your password must contain at least 6 characters composed with " +
                         "at least one letter and one number"
 
@@ -118,28 +129,23 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private val nameTextWatcher = object : TextWatcher {
+    private val signUpTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             val firstName = first_name.text.toString().trim()
             val lastName = last_name.text.toString().trim()
 
-            next.isEnabled = firstName.isNotEmpty() && lastName.isNotEmpty()
-        }
+            next1.isEnabled = firstName.isNotEmpty() && lastName.isNotEmpty()
 
-        override fun afterTextChanged(s: Editable) {}
-    }
+            val  email = first_name.text.toString().trim()
 
-    private val signUpTextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            next2.isEnabled = email.isNotEmpty()
 
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            val email = email.text.toString().trim()
             val password = password.text.toString().trim()
             val confirmPassword = confirm_password.text.toString().trim()
 
-            confirm_register.isEnabled = email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()
+            confirm_register.isEnabled = password.isNotEmpty() && confirmPassword.isNotEmpty()
         }
 
         override fun afterTextChanged(s: Editable) {}
