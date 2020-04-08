@@ -47,7 +47,7 @@
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="35sp"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/icon"

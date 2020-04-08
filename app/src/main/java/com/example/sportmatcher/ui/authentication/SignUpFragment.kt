@@ -17,7 +17,7 @@ import android.text.TextWatcher
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
-import kotlinx.android.synthetic.main.login_layout.*
+import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
 
@@ -55,10 +55,22 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        first_name.addTextChangedListener(nameTextWatcher)
+        last_name.addTextChangedListener(nameTextWatcher)
+
+        next.setOnClickListener{
+            hideKeyboard()
+
+            viewmodel.firstName = first_name.text.toString()
+            viewmodel.lastName = last_name.text.toString()
+
+            name.visibility = View.GONE
+        }
+
         //Débloque le boutton Register lorsque les champs sont remplis
-        email.addTextChangedListener(loginTextWatcher)
-        password.addTextChangedListener(loginTextWatcher)
-        confirm_password.addTextChangedListener(loginTextWatcher)
+        email.addTextChangedListener(signUpTextWatcher)
+        password.addTextChangedListener(signUpTextWatcher)
+        confirm_password.addTextChangedListener(signUpTextWatcher)
 
         confirm_register.setOnClickListener {
 
@@ -106,7 +118,20 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private val loginTextWatcher = object : TextWatcher {
+    private val nameTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            val firstName = first_name.text.toString().trim()
+            val lastName = last_name.text.toString().trim()
+
+            next.isEnabled = firstName.isNotEmpty() && lastName.isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable) {}
+    }
+
+    private val signUpTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {

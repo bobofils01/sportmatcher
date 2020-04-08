@@ -18,6 +18,10 @@
             android:visibility="gone"
             layout="@layout/progress_bar_layout"/>
 
+        <include
+            android:id="@+id/name"
+            layout="@layout/name_layout"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="106dp"
@@ -26,42 +30,6 @@
             android:text="Welcome"
             android:textSize="25dp"
             android:textStyle="bold"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/first_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:hint="First Name"
-                android:text="@={signupViewModel.firstName}"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789 "
-                android:inputType="textFilter"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:layout_margin="10dp"
-                android:hint="Last Name"
-                android:text="@={signupViewModel.lastName}"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789 "
-                android:inputType="textFilter"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
