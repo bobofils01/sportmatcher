@@ -14,6 +14,8 @@ import com.example.sportmatcher.viewModels.authentication.SignupViewModel
 import kotlinx.android.synthetic.main.signup_layout.*
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
+import com.example.sportmatcher.domain.utils.isNameValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
 import kotlinx.android.synthetic.main.email_layout.*
@@ -22,6 +24,7 @@ import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 class SignUpFragment : Fragment() {
 
     companion object {
@@ -60,13 +63,21 @@ class SignUpFragment : Fragment() {
         last_name.addTextChangedListener(signUpTextWatcher)
 
         next1.setOnClickListener{
-            hideKeyboard()
+            if(first_name.text.toString().matches(".*\\d.*".toRegex()))
+                first_name.error = "Your name can't contain numbers"
 
-            viewmodel.firstName = first_name.text.toString()
-            viewmodel.lastName = last_name.text.toString()
+            else if(last_name.text.toString().matches(".*\\d.*".toRegex()))
+                last_name.error = "Your name can't contain numbers"
 
-            name.visibility = View.GONE
-            enter_email.visibility = View.VISIBLE
+            else{
+                hideKeyboard()
+
+                viewmodel.firstName = first_name.text.toString()
+                viewmodel.lastName = last_name.text.toString()
+
+                name.visibility = View.GONE
+                enter_email.visibility = View.VISIBLE
+            }
         }
 
         //Débloque le boutton Register lorsque les champs sont remplis
