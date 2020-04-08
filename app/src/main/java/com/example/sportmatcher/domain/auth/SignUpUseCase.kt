@@ -20,8 +20,7 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
             payload.firstName,
             payload.lastName,
             payload.email,
-            payload.passWord,
-            payload.confirmPassword
+            payload.passWord
         )
         Log.d("SignUpUseCaseTest", verifPayload+ " "+ (!verifPayload.isNullOrBlank()).toString())
         if (!verifPayload.isNullOrBlank()) {
@@ -34,14 +33,12 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
     }
 
 
-    private fun verifyPayload(firstName: String?, lastName: String?, email: String?, password: String?, confirmPassword: String?): String? {
+    private fun verifyPayload(firstName: String?, lastName: String?, email: String?, password: String?): String? {
         return if(firstName.isNameValid() && lastName.isNameValid()){
             if (email.isEmailValid()) {
                 if (!password.isPasswordValid())
                     "Invalid Password"
 
-                else if (!password.equals(confirmPassword))
-                    "unmatch password"
                 else
                     null
             }

@@ -27,72 +27,10 @@
             android:visibility="gone"
             layout="@layout/email_layout"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="106dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:text="Welcome"
-            android:textSize="25dp"
-            android:textStyle="bold"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:inputType="textPassword"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:hint="Password"
-            android:text="@={signupViewModel.password}"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:inputType="textPassword"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:hint="Confirm password"
-            android:autofillHints=""
-            android:text="@={signupViewModel.confirmPassword}"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/confirm_register"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="152dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="register"
-            android:background="@drawable/button_selector"
-            android:enabled="false"
-            android:textColor="#fff" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="77dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:text="or"
-            android:textSize="20dp" />
+        <include
+            android:id="@+id/enter_password"
+            android:visibility="gone"
+            layout="@layout/password_layout"/>
 
         <TextView
             android:id="@+id/login"
@@ -105,7 +43,6 @@
             android:clickable="true"
             android:textStyle="bold"
             android:textColor="#1CA6BE"/>
-
 
     </LinearLayout>
 </layout>

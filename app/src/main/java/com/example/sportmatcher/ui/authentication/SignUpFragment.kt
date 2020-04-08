@@ -18,6 +18,7 @@ import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
 import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
+import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 
 
@@ -77,11 +78,10 @@ class SignUpFragment : Fragment() {
             viewmodel.email = email.text.toString()
 
             enter_email.visibility = View.GONE
+            enter_password.visibility = View.VISIBLE
         }
 
-
         password.addTextChangedListener(signUpTextWatcher)
-        confirm_password.addTextChangedListener(signUpTextWatcher)
 
         confirm_register.setOnClickListener {
 
@@ -95,16 +95,12 @@ class SignUpFragment : Fragment() {
                 password.error = "Your password must contain at least 6 characters composed with " +
                         "at least one letter and one number"
 
-            else if(!password.text?.toString().equals(confirm_password.text.toString())!!) {//Si le password et le confirm password ne match pas
-                //Erreur
-                //confirm_password.setText("")
-                //password.setText("")
-                confirm_password.error = "Please verify if you correctly confirmed your password."
-            }
             else{
                 //ProgressBar
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
+
+                viewmodel.password = password.text.toString()
 
                 viewmodel.onRegisterClicked()
             }
@@ -143,9 +139,8 @@ class SignUpFragment : Fragment() {
             next2.isEnabled = email.isNotEmpty()
 
             val password = password.text.toString().trim()
-            val confirmPassword = confirm_password.text.toString().trim()
 
-            confirm_register.isEnabled = password.isNotEmpty() && confirmPassword.isNotEmpty()
+            confirm_register.isEnabled = password.isNotEmpty()
         }
 
         override fun afterTextChanged(s: Editable) {}

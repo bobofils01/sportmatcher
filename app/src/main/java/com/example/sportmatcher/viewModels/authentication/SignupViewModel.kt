@@ -12,8 +12,7 @@ class SignupViewModel: ViewModel() {
     lateinit var firstName: String // = MutableLiveData<String>()
     lateinit var lastName: String //= MutableLiveData<String>()
     lateinit var email: String //= MutableLiveData<String>()
-    var password = MutableLiveData<String>()
-    var confirmPassword = MutableLiveData<String>()
+    lateinit var password: String //= MutableLiveData<String>()
 
     private val compositeDisposable by lazy {
         CompositeDisposable()
@@ -30,8 +29,7 @@ class SignupViewModel: ViewModel() {
                     firstName,
                     lastName,
                     email,
-                    password.value,
-                    confirmPassword.value
+                    password
                 )
             ).subscribe()
             )
