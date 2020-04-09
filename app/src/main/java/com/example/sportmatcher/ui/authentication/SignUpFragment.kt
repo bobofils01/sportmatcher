@@ -63,20 +63,18 @@ class SignUpFragment : Fragment() {
         last_name.addTextChangedListener(signUpTextWatcher)
 
         next1.setOnClickListener{
-            if(first_name.text.toString().matches(".*\\d.*".toRegex()))
-                first_name.error = "Your name can't contain numbers"
+            when {
+                first_name.text.toString().matches(".*\\d.*".toRegex()) -> first_name.error = "Your name can't contain numbers"
+                last_name.text.toString().matches(".*\\d.*".toRegex()) -> last_name.error = "Your name can't contain numbers"
+                else -> {
+                    hideKeyboard()
 
-            else if(last_name.text.toString().matches(".*\\d.*".toRegex()))
-                last_name.error = "Your name can't contain numbers"
+                    viewmodel.firstName = first_name.text.toString()
+                    viewmodel.lastName = last_name.text.toString()
 
-            else{
-                hideKeyboard()
-
-                viewmodel.firstName = first_name.text.toString()
-                viewmodel.lastName = last_name.text.toString()
-
-                name.visibility = View.GONE
-                enter_email.visibility = View.VISIBLE
+                    name.visibility = View.GONE
+                    enter_email.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -84,12 +82,18 @@ class SignUpFragment : Fragment() {
         email.addTextChangedListener(signUpTextWatcher)
 
         next2.setOnClickListener{
-            hideKeyboard()
+            when{
+                !email.text.toString().isNameValid() -> email.error = "Please enter a valid mail address."
 
-            viewmodel.email = email.text.toString()
+                else -> {
+                    hideKeyboard()
 
-            enter_email.visibility = View.GONE
-            enter_password.visibility = View.VISIBLE
+                    viewmodel.email = email.text.toString()
+
+                    enter_email.visibility = View.GONE
+                    enter_password.visibility = View.VISIBLE
+                }
+            }
         }
 
         password.addTextChangedListener(signUpTextWatcher)
@@ -98,9 +102,6 @@ class SignUpFragment : Fragment() {
 
             //Retire le clavier
             hideKeyboard()
-
-            /*if(!email.text.toString().isEmailValid())
-                email.error = "Please enter a valid mail address."*/
 
             if(!password.text.toString().isPasswordValid()) //Si le mot de passe ne suit pas les conditions
                 password.error = "Your password must contain at least 6 characters composed with " +
