@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.SessionListAdapter
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.ui.NavigationActivity
 import com.example.sportmatcher.viewModels.sports.AllSessionsOfAPitchViewModel
 import kotlinx.android.synthetic.main.all_sessions_of_a_pitch_layout.*
 
@@ -36,13 +37,21 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         allSessionsOfAPitchViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
         val listView : ListView = listViewAllSessions as ListView
 
-        pitchAddressAllSessions.text = "All sessions of the pitch "+
-                allSessionsOfAPitchViewModel.pitch.name + " located at " +
-                allSessionsOfAPitchViewModel.pitch.address
+        initTextViews()
+        pitch_name.text = allSessionsOfAPitchViewModel.pitch.name
 
         allSessionsOfAPitchViewModel.getAllSessions().observe(this, Observer { sessions ->
             val adapter = SessionListAdapter(sessions, this)
             listView.adapter = adapter
         })
+    }
+
+    private fun initTextViews(){
+        pitch_name.text = allSessionsOfAPitchViewModel.pitch.name
+        pitch_address.text = allSessionsOfAPitchViewModel.pitch.address
+
+        new_session.setOnClickListener {
+            startActivity(AddSessionToPitchActivity.getIntent(this, allSessionsOfAPitchViewModel.pitch))
+        }
     }
 }

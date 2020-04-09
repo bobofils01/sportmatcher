@@ -1,42 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/sessionPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/sessionTotalNbPlayers"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="79dp">
 
-    <TextView
-        android:id="@+id/sessionTotalNbPlayers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/sessionNbPlayersSigned"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sessionPrice"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:id="@+id/session_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_horizontal"
+            android:text="Session title"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/sessionNbPlayersSigned"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sessionTotalNbPlayers"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        <TextView
+            android:id="@+id/session_description"
+            android:layout_width="231dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="right"
+            android:text="Session description"
+            android:textColor="@android:color/black"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/session_createdby"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="right"
+            android:paddingLeft="4dp"
+            android:text="Created by: me"
+            android:textColor="@android:color/black"
+            android:textSize="10sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/session_time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.894" />
+
+        <TextView
+            android:id="@+id/session_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:text="11/02/2020"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/session_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="48dp"
+            android:text="11:30"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

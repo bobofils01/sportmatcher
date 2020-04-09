@@ -86,6 +86,7 @@ class ShowSessionFragment : Fragment() {
         session_time.text = session.time
         session_description.text = session.description
         session_price_player.text = "${session.pricePlayer} EUR"
+        session_createdby.text="Created by : ${session.createdBy}"
     }
 
     private fun initJoinButton(){
@@ -115,6 +116,7 @@ class ShowSessionFragment : Fragment() {
                 }
             }else{
                 btn_join_session.text = "Join"
+                btn_join_session.setBackgroundResource(R.drawable.button_selector)
                 btn_join_session.setOnClickListener {
                     joinSessionUseCase.execute(
                         ParticipantSessionDTO(

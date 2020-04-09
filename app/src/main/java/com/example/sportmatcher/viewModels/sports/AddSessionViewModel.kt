@@ -37,7 +37,8 @@ class AddSessionViewModel: ViewModel() {
             time = time,
             date = date,
             maxNbPlayers = maxNumberPlayers,
-            pricePlayer = pricePlayer
+            pricePlayer = pricePlayer,
+            createdBy = currentUser?.lastName
         )
     }
 

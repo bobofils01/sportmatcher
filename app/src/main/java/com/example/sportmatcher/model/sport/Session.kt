@@ -16,6 +16,7 @@ data class Session(
     val time: String?="",
     val maxNbPlayers: Int? = -1,
     val nbPlayersSigned: Int? = 0,
-    val pricePlayer: Double? = 0.0) : Parcelable {
+    val pricePlayer: Double? = 0.0,
+    val createdBy:String?="") : Parcelable {
 
 }
