@@ -34,8 +34,8 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
             viewNotNull = view
             viewHolder = FriendItemViewHolder()
             viewHolder.emailFriend = view.emailFriend as TextView
-            //viewHolder.firstNameFriend = view.firstNameFriend as TextView
-            //viewHolder.lastNameFriend = view.lastNameFriend as TextView
+            viewHolder.firstNameFriend = view.firstNameFriend as TextView
+            viewHolder.lastNameFriend = view.lastNameFriend as TextView
             viewHolder.deletionBtn = view.deleteFriendBtn as Button
         } else{
             viewHolder = view.tag as FriendItemViewHolder
