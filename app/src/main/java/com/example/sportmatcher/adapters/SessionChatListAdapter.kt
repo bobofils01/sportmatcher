@@ -47,11 +47,11 @@ class SessionChatListAdapter constructor(sessions: ArrayList<ChatMessage>, ctx :
         }
 
         viewHolder.message!!.text = chatItem.message
-        if(isMyMesage)
+        if(isMyMesage) {
             viewHolder.sender!!.text = "Me"
-        else
+        }else {
             viewHolder.sender!!.text = "From"
-
+        }
         viewReturn!!.tag = viewHolder
 
         return viewReturn

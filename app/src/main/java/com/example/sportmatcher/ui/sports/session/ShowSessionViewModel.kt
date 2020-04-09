@@ -41,12 +41,13 @@ class ShowSessionViewModel : ViewModel() {
     }
 
 
-    fun getSessionParticipants(session: Session) : MutableLiveData<ArrayList<String>>{
-        val participants = MutableLiveData<ArrayList<String>>()
+    fun getSessionParticipants(session: Session) : MutableLiveData<ArrayList<User>>{
+        val participants = MutableLiveData<ArrayList<User>>()
         getParticipantsForASessionUseCase.execute(session).subscribe {
             var isAlreadyPart = false
-            participants.value = it as ArrayList<String>
-            if(it.contains(this.authenticatedUser!!.uid)){
+            participants.value = it as ArrayList<User>
+
+            if(it.map {t -> t.uid}.contains(this.authenticatedUser!!.uid)){
                 isAlreadyPart= true
             }
             isAlreadyParticipantOfSession.value =isAlreadyPart

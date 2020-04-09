@@ -8,12 +8,12 @@
 
     <EditText
         android:id="@+id/editTextChat"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="318dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="4dp"
+        android:background="@android:color/white"
         android:ems="10"
         android:hint="Enter message"
-        android:background="@android:color/white"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_send_chat"

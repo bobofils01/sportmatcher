@@ -22,11 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:background="@drawable/button_not_enabled"
         android:maxWidth="240dp"
-        android:background="@drawable/chat_message"
         android:padding="16dp"
         android:text="this is my message"
         app:layout_constraintStart_toEndOf="@+id/fromTextViewId"
-        app:layout_constraintTop_toTopOf="@+id/fromTextViewId"
-        />
+        app:layout_constraintTop_toTopOf="@+id/fromTextViewId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

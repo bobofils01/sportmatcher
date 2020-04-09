@@ -1,13 +1,17 @@
 package com.example.sportmatcher.ui.sports.session
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider
@@ -15,6 +19,12 @@ import com.example.sportmatcher.di.ServiceProvider.joinSessionUseCase
 import com.example.sportmatcher.dto.sport.ParticipantSessionDTO
 import com.example.sportmatcher.model.sport.Session
 import kotlinx.android.synthetic.main.show_session_fragment.*
+import kotlinx.android.synthetic.main.show_session_fragment.added_players_recycle_view
+import kotlinx.android.synthetic.main.show_session_fragment.session_date
+import kotlinx.android.synthetic.main.show_session_fragment.session_description
+import kotlinx.android.synthetic.main.show_session_fragment.session_price_player
+import kotlinx.android.synthetic.main.show_session_fragment.session_time
+import kotlinx.android.synthetic.main.show_session_fragment.session_title
 
 class ShowSessionFragment : Fragment() {
 
@@ -47,11 +57,38 @@ class ShowSessionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initJoinButton()
+        bindTextViews()
+        initParticipantsList()
+    }
 
-        viewModel.getSessionParticipants(session).observe(requireActivity(), Observer { participants ->
-            Log.i("bobo", "participants: $participants.toString()")
+    private fun initParticipantsList(){
+        viewModel.getSessionParticipants(session).observe(requireActivity(), Observer { playersList ->
+            val emails = playersList.map { t -> t.email }
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, emails)
+            added_players_recycle_view.adapter = adapter
+
+            if(session.maxNbPlayers == -1 ){
+                session_max_players.text = "${emails.size}/_"
+            }else if(emails.size >= session.maxNbPlayers!!){
+                session_max_players.text = "${emails.size}/${session.maxNbPlayers!!}"
+                join_status.text = "This session is full"
+            }else{
+                session_max_players.text = "${emails.size}/${session.maxNbPlayers!!}"
+            }
+
         })
+    }
 
+    private fun bindTextViews(){
+        session_title.text = session.title
+        session_date.text = session.date
+        session_time.text = session.time
+        session_description.text = session.description
+        session_price_player.text = "${session.pricePlayer} EUR"
+    }
+
+    private fun initJoinButton(){
         btn_join_session.text = "Join"
         btn_join_session.setOnClickListener{
             joinSessionUseCase.execute(
@@ -67,6 +104,7 @@ class ShowSessionFragment : Fragment() {
             //set the right button
             if(isParticipant){
                 btn_join_session.text = "Quit"
+                btn_join_session.setBackgroundColor(Color.RED)
                 btn_join_session.setOnClickListener {
                     ServiceProvider.quitSessionUseCase.execute(
                         ParticipantSessionDTO(
@@ -87,9 +125,6 @@ class ShowSessionFragment : Fragment() {
                 }
             }
         })
-
-
-
     }
 
 }
