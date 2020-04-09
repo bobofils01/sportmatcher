@@ -24,7 +24,7 @@
         app:layout_constraintLeft_toRightOf="@id/emailFriend"
         app:layout_constraintRight_toLeftOf="@id/lastNameFriend"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <TextView
@@ -36,16 +36,6 @@
         app:layout_constraintLeft_toRightOf="@id/firstNameFriend"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--<Button
-        android:id="@+id/deleteFriendBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DEL"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/lastNameFriend"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
         android:id="@+id/deleteFriendBtn"

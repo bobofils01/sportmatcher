@@ -31,7 +31,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_marginLeft="80dp"
                     android:text="New session"
-                    android:textColor="@android:color/black"
+                    android:textColor="#ffff"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,11 +146,11 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="41dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:background="@color/colorGrey"
                     android:gravity="center"
-                    android:text="EUR"
+                    android:text="€"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>

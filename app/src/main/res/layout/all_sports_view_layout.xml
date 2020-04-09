@@ -29,6 +29,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/swipe_up"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/swipe_up"/>
+
             <Button
                 android:id="@+id/btn_add_pitch_view"
                 style="@style/Widget.AppCompat.Button"
@@ -42,7 +48,8 @@
                 android:layout_marginRight="215dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/button_enabled"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                app:layout_constraintLeft_toRightOf="@id/swipe_up"/>
 
             <LinearLayout
                 android:id="@+id/search_toolbar"
