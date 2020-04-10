@@ -3,27 +3,20 @@ package com.example.sportmatcher.ui
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.login_layout.*
-import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import kotlinx.android.synthetic.main.settings_layout.*
-import kotlinx.android.synthetic.main.signup_layout.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -71,6 +64,4 @@ class SettingsFragment : Fragment() {
             }}, 2000)
         }
     }
-
-
 }

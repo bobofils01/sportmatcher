@@ -1,6 +1,9 @@
 package com.example.sportmatcher.ui.friendship
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +37,9 @@ class FriendsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val from = getAuthenticatedUserUseCase.execute()
         if (from != null) {
-            friendsViewModel.setUser(from!!)
+            friendsViewModel.setUser(from)
         }
+
         val usersListView = all_users_list as ListView
 
         val friendsListView = friends_list as ListView
@@ -45,6 +49,7 @@ class FriendsFragment: Fragment() {
                 friendsViewModel.deleteFriend(user = userToDelete)
             }
             friendsListView.adapter = adapter
+
         })
 
 
@@ -52,7 +57,20 @@ class FriendsFragment: Fragment() {
             val adapter = UsersListAdapter(users, context!!){userToAdd ->
                 friendsViewModel.addFriend(userToAdd)
             }
+
             usersListView.adapter = adapter
+
+            editTxtFilterAllUsers.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    Log.d("Roman", "Text [$s]")
+                    adapter.filter.filter(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+
         })
     }
 }
