@@ -1,8 +1,12 @@
 package com.example.sportmatcher.ui
 
+import android.R
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,9 +18,7 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.ui.authentication.SignUpFragment
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
-import com.example.sportmatcher.R
-import kotlinx.android.synthetic.main.login_layout.*
-import kotlinx.android.synthetic.main.signup_layout.view.*
+import kotlinx.android.synthetic.main.signup_layout.*
 
 
 @Suppress("DEPRECATION")
@@ -41,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(com.example.sportmatcher.R.layout.activity_login)
         viewModel.loginViewStateLiveData.value = intent.extras?.get(SCREEN_STATE_KEY) as LoginViewState
         initLiveDatas()
     }
@@ -97,5 +99,35 @@ class LoginActivity : AppCompatActivity() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         MultiDex.install(this)
+    }
+
+    override fun onBackPressed(){
+        viewModel.getLoginViewStateLiveData().observe(
+            this, Observer {
+                it?.let{ state ->
+                    when(state) {
+                        LoginViewState.SIGNIN -> {}
+                        LoginViewState.SIGNOUT -> {}
+                        LoginViewState.SIGNUP ->{
+                            if(enter_email.visibility == View.GONE)
+                                enter_email.visibility = View.VISIBLE
+
+                            else if(name.visibility == View.GONE)
+                                name.visibility = View.VISIBLE
+                            
+                            else{
+                                AlertDialog.Builder(this)
+                                    .setTitle("You are about to stop creating your account")
+                                    .setMessage("You will lose all progress you've made")
+                                    .setPositiveButton("Continue", null)
+                                    .setNegativeButton("Stop"){ _, _ -> super.onBackPressed() }
+                                    //.setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show()
+                            }
+                        }
+                    }
+                }
+            })
+
     }
 }

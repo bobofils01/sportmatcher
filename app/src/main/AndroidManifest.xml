@@ -13,24 +13,48 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashScreenActivity"></activity>
+        <activity android:name=".ui.SignUpActivity"></activity>
+        <activity android:name=".ui.SplashScreenActivity" />
         <activity android:name=".ui.NavigationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.sports.session.SessionViewActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.sports.AddSessionToPitchActivity" android:parentActivityName=".ui.sports.session.SessionViewActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.authentication.ForgotPasswordActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.sports.SportHomePageActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.SportActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.FriendsActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.LoginActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.preferences.PreferencesActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.sports.AllSessionOfAPitchActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.SportChoiceActivity" android:windowSoftInputMode="adjustPan|stateVisible"/>
-        <activity android:name=".ui.WelcomeActivity" android:windowSoftInputMode="adjustPan|stateVisible" >
+        <activity
+            android:name=".ui.sports.session.SessionViewActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.sports.AddSessionToPitchActivity"
+            android:parentActivityName=".ui.sports.session.SessionViewActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.authentication.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.sports.SportHomePageActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.SportActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.FriendsActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.preferences.PreferencesActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.sports.AllSessionOfAPitchActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.SportChoiceActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:windowSoftInputMode="adjustPan|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

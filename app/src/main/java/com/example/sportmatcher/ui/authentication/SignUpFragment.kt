@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
+import android.R.attr.name
+import com.example.sportmatcher.domain.utils.isEmailValid
 
 
 @Suppress("CAST_NEVER_SUCCEEDS")
@@ -73,7 +75,6 @@ class SignUpFragment : Fragment() {
                     viewmodel.lastName = last_name.text.toString()
 
                     name.visibility = View.GONE
-                    enter_email.visibility = View.VISIBLE
                 }
             }
         }
@@ -83,7 +84,7 @@ class SignUpFragment : Fragment() {
 
         next2.setOnClickListener{
             when{
-                !email.text.toString().isNameValid() -> email.error = "Please enter a valid mail address."
+                !email.text.toString().isEmailValid() -> email.error = "Please enter a valid mail address."
 
                 else -> {
                     hideKeyboard()
@@ -91,7 +92,6 @@ class SignUpFragment : Fragment() {
                     viewmodel.email = email.text.toString()
 
                     enter_email.visibility = View.GONE
-                    enter_password.visibility = View.VISIBLE
                 }
             }
         }
