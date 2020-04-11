@@ -15,6 +15,7 @@ import com.example.sportmatcher.di.ServiceProvider.sendMessageUseCase
 import com.example.sportmatcher.model.User
 import com.example.sportmatcher.model.sport.ChatMessage
 import com.example.sportmatcher.model.sport.Session
+import com.example.sportmatcher.viewModels.sports.ShowSessionViewModel
 import kotlinx.android.synthetic.main.session_chat_fragment.*
 
 class SessionChatFragment : Fragment() {

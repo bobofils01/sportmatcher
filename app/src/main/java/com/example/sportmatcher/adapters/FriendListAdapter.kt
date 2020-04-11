@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import com.example.sportmatcher.R
 import com.example.sportmatcher.model.User
-import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
 import kotlinx.android.synthetic.main.friend_item.view.*
 
 class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val callbackDeletion : (User)->Unit):
@@ -20,7 +19,7 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
         internal var emailFriend: TextView? = null
         internal var firstNameFriend: TextView? = null
         internal var lastNameFriend: TextView? = null
-        internal var deletionBtn: Button? = null
+        internal var deletionBtn: ImageButton? = null
     }
 
     override fun getView(i: Int, viewParam: View?, viewGroup: ViewGroup): View {
@@ -36,7 +35,7 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
             viewHolder.emailFriend = view.emailFriend as TextView
             viewHolder.firstNameFriend = view.firstNameFriend as TextView
             viewHolder.lastNameFriend = view.lastNameFriend as TextView
-            viewHolder.deletionBtn = view.deleteFriendBtn as Button
+            viewHolder.deletionBtn = view.deleteFriendBtn as ImageButton
         } else{
             viewHolder = view.tag as FriendItemViewHolder
             viewNotNull = view
@@ -49,11 +48,7 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
         viewNotNull.tag = viewHolder
 
         viewHolder.deletionBtn!!.setOnClickListener{callbackDeletion(friendItem)}
-        /*
-        viewHolder.deletionBtn!!.setOnClickListener{
-            friendsViewModel.deleteFriend(friendItem)
-        }
-        */
+
         return viewNotNull
     }
 }
