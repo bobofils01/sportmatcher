@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.example.sportmatcher.R
-import com.example.sportmatcher.adapters.PageAdaptater
+import com.example.sportmatcher.adapters.NavigationPageAdapter
 import kotlinx.android.synthetic.main.navigation_bar_layout.*
 
 class NavigationActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_bar_layout)
 
-        val fragment = PageAdaptater(
+        val fragment = NavigationPageAdapter(
             supportFragmentManager,
             4
         )

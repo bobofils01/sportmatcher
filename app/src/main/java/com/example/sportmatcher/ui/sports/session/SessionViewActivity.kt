@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.viewpager.widget.ViewPager
 import com.example.sportmatcher.R
+import com.example.sportmatcher.adapters.SessionViewPageAdapter
 import com.example.sportmatcher.model.sport.Session
 
 import kotlinx.android.synthetic.main.activity_session_view.*
@@ -33,7 +34,12 @@ class SessionViewActivity : AppCompatActivity() {
 
         val currentSession = intent.extras?.get(SESSION_KEY) as Session
 
-        val fragment = SessionViewPageAdaptater(supportFragmentManager, 2, currentSession)
+        val fragment =
+            SessionViewPageAdapter(
+                supportFragmentManager,
+                2,
+                currentSession
+            )
         val viewPage: ViewPager = findViewById(R.id.containerSessionViewPage)
         viewPage.adapter  = fragment
         tabs_sessions_page.setupWithViewPager(viewPage)
