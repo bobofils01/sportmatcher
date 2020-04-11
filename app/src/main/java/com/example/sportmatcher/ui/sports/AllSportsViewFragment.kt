@@ -1,18 +1,24 @@
 package com.example.sportmatcher.ui.sports
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Color.parseColor
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.RelativeLayout
+import android.widget.*
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
 import androidx.fragment.app.Fragment
@@ -21,6 +27,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.PitchesListAdapter
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -46,7 +54,12 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
                 }
             }
         }
+
+        private const val PERMISSION_ID = 42
     }
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     private lateinit var mMap: GoogleMap
     private lateinit var sportName: String
     private val allSportsViewModel : AllSportsViewModel by lazy {
@@ -76,6 +89,8 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
 
         val listView : ListView = sports_list as ListView
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
         val goCreatePitchBtn = btn_add_pitch_view as Button
         /*goCreatePitchBtn.setBackgroundResource(R.drawable.button_enabled)
         goCreatePitchBtn.setTextColor(resources.getColor(R.color.colorWhite))
@@ -84,6 +99,16 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         goCreatePitchBtn.setOnClickListener{
             allSportsViewModel.onAddPitchClicked()
         }
+
+        /*fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                val pos = LatLng((location!!.latitude), (location.longitude))
+                Log.d("Roman AlSF", pos.toString())
+                mMap.addMarker(MarkerOptions().position(pos).title("Me"))
+            }
+        */
+
+        getLastLocation()
 
         allSportsViewModel.getAllSports(sportName).observe(requireActivity(), Observer{sports ->
             context?.let {
@@ -103,6 +128,67 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         val zone = getLocationFromAddress(timeZone) ?: LatLng(0.0, 0.0)
         val zoomLevel = 10.0f
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        var locationManager: LocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun getLastLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+
+                fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    var location: Location? = task.result
+                    if (location != null) {
+                        val pos = LatLng((location!!.latitude), (location.longitude))
+                        Log.d("Roman AlSF", pos.toString())
+                        mMap.addMarker(MarkerOptions().position(pos).title("Me"))
+                    }
+                }
+            } else {
+                Log.d("Roman AlSF", "Turn on location")
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            requestPermissions()
+        }
+    }
+
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            Companion.PERMISSION_ID
+        )
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == Companion.PERMISSION_ID) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLastLocation()
+            }
+        }
     }
 
     private fun getLocationFromAddress(strAddress: String): LatLng? {
