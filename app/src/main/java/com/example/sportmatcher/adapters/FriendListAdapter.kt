@@ -44,8 +44,8 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
 
         val friendItem = getItem(i)
         viewHolder.emailFriend!!.text = friendItem!!.email
-        viewHolder.firstNameFriend!!.text = friendItem!!.firstName
-        viewHolder.lastNameFriend!!.text = friendItem!!.lastName
+        //viewHolder.firstNameFriend!!.text = friendItem!!.firstName
+        //viewHolder.lastNameFriend!!.text = friendItem!!.lastName
         viewNotNull.tag = viewHolder
 
         viewHolder.deletionBtn!!.setOnClickListener{callbackDeletion(friendItem)}
