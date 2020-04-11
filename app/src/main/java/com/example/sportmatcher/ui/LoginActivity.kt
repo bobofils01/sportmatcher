@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -114,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
 
                             else if(name.visibility == View.GONE)
                                 name.visibility = View.VISIBLE
-                            
+
                             else{
                                 AlertDialog.Builder(this)
                                     .setTitle("You are about to stop creating your account")
@@ -123,6 +124,8 @@ class LoginActivity : AppCompatActivity() {
                                     .setNegativeButton("Stop"){ _, _ -> super.onBackPressed() }
                                     //.setIcon(android.R.drawable.ic_dialog_alert)
                                     .show()
+                                    .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
+                                    //.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
                             }
                         }
                     }
