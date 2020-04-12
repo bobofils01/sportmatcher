@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportmatcher.R
@@ -13,22 +14,23 @@ import kotlinx.android.synthetic.main.friend_item.view.*
 
 class PlayersListAdapter(private val players: ArrayList<User>,private val currentUser: User, private val callbackDeletion : (User)->Unit) : RecyclerView.Adapter<PlayersListAdapter.PlayerItemViewHolder>()  {
 
-    class PlayerItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class PlayerItemViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         internal var idFriend: TextView? = null
         internal var emailFriend: TextView? = null
         internal var firstNameFriend: TextView? = null
         internal var lastNameFriend: TextView? = null
-        internal var deletionBtn: Button? = null
+        internal var deletionBtn: ImageButton? = null
 
         fun bind(user: User, currentUser: User,callbackDeletion : (User)->Unit) {
             emailFriend!!.text = user.email
             if(currentUser == user) {
                 deletionBtn!!.isClickable = false
-                deletionBtn!!.text = "Me"
+                deletionBtn!!.visibility = View.INVISIBLE
+                //deletionBtn!!.text = "Me"
 
             }else {
                 deletionBtn!!.setBackgroundColor(Color.RED)
-                deletionBtn!!.text ="X"
+                //deletionBtn!!.text ="X"
                 deletionBtn!!.setOnClickListener { callbackDeletion(user) }
             }
         }
@@ -37,7 +39,7 @@ class PlayersListAdapter(private val players: ArrayList<User>,private val curren
             emailFriend = view.emailFriend as TextView
             firstNameFriend = view.firstNameFriend as TextView
             lastNameFriend = view.lastNameFriend as TextView
-            deletionBtn = view.deleteFriendBtn as Button
+            deletionBtn = view.deleteFriendBtn as ImageButton
         }
     }
 
