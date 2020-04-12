@@ -48,7 +48,7 @@ class FriendsViewFragment: Fragment() {
             }
             friendsListView.adapter = adapter
             when (friends.size){
-                0 -> nbr_of_friends.text = "No Friend Yet"
+                0 -> nbr_of_friends.text = "No Friend"
                 1 -> nbr_of_friends.text = "1 Friend"
                 else -> nbr_of_friends.text = friends.size.toString() + " Friends"
             }

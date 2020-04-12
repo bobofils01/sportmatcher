@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:id="@+id/friends">
 
-    <TextView
+   <TextView
         android:id="@+id/emailFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,17 +36,19 @@
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/firstNameFriend"
+        app:layout_constraintRight_toLeftOf="@id/deleteFriendBtn"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/deleteFriendBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="36dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginRight="36dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/deletion"
         android:text="DEL"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,5 +56,61 @@
         app:layout_constraintLeft_toRightOf="@id/lastNameFriend"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.499"/>
+
+    <!--<Button
+        android:id="@+id/addFriendBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:text="ADD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/email_user"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        android:textColor="#ffff"
+        android:background="@drawable/button_enabled"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"/>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<TextView
+    android:id="@+id/email_user"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toLeftOf="@id/addFriendBtn"
+    app:layout_constraintTop_toTopOf="parent"/>
+
+<Button
+    android:id="@+id/addFriendBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="36dp"
+    android:layout_marginRight="36dp"
+    android:text="ADD"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/email_user"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.499"
+    android:textColor="#ffff"
+    android:background="@drawable/button_enabled"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>-->
