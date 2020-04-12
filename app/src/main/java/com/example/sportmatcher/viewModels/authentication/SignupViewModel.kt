@@ -1,30 +1,24 @@
 package com.example.sportmatcher.viewModels.authentication
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.authentication.SignupInfo
-import io.reactivex.disposables.CompositeDisposable
+import com.example.sportmatcher.viewModels.AbstractViewModel
 
 
-class SignupViewModel: ViewModel() {
+class SignupViewModel: AbstractViewModel() {
 
     lateinit var firstName: String // = MutableLiveData<String>()
     lateinit var lastName: String //= MutableLiveData<String>()
     lateinit var email: String //= MutableLiveData<String>()
     lateinit var password: String //= MutableLiveData<String>()
 
-    private val compositeDisposable by lazy {
-        CompositeDisposable()
-    }
-
-    private val signupUseCase by lazy{
+    private val signUpUseCase by lazy{
         ServiceProvider.signUpUseCase
     }
 
     fun onRegisterClicked() {
         compositeDisposable.add(
-            signupUseCase.execute(
+            signUpUseCase.execute(
                 SignupInfo(
                     firstName,
                     lastName,
@@ -32,7 +26,6 @@ class SignupViewModel: ViewModel() {
                     password
                 )
             ).subscribe()
-            )
-
+        )
     }
 }

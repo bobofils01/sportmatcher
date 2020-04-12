@@ -1,6 +1,5 @@
 package com.example.sportmatcher.ui
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,8 +20,6 @@ import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.login_layout.*
-import kotlinx.android.synthetic.main.signup_layout.*
 import kotlinx.android.synthetic.main.welcome_layout.*
 
 

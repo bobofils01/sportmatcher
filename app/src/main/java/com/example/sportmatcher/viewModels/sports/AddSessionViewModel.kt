@@ -1,17 +1,16 @@
 package com.example.sportmatcher.viewModels.sports
 
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.di.ServiceProvider.getFriendsUseCase
 import com.example.sportmatcher.dto.sport.ParticipantSessionDTO
 import com.example.sportmatcher.model.User
 import com.example.sportmatcher.model.sport.Pitch
 import com.example.sportmatcher.model.sport.Session
+import com.example.sportmatcher.viewModels.AbstractViewModel
 
-class AddSessionViewModel: ViewModel() {
+class AddSessionViewModel: AbstractViewModel() {
 
     val title_input by lazy { MutableLiveData<String>("") }
     val date_input by lazy { MutableLiveData<String>("") }
@@ -56,14 +55,16 @@ class AddSessionViewModel: ViewModel() {
 
 
     fun onAddSessionClicked(session: Session) {
-        addSessionUseCase.execute(session).subscribe{ addedSession ->
-            //TODO add in players the current useruuid and the listof players ids
-            for(player in players.value!!){
-                joinSessionUseCase.execute(
-                    ParticipantSessionDTO(sessionID = addedSession.uid!!, participantID = player.uid!!)
-                ).subscribe()
+        compositeDisposable.add(
+            addSessionUseCase.execute(session).subscribe{ addedSession ->
+                //TODO add in players the current useruuid and the listof players ids
+                for(player in players.value!!){
+                    joinSessionUseCase.execute(
+                        ParticipantSessionDTO(sessionID = addedSession.uid!!, participantID = player.uid!!)
+                    ).subscribe()
+                }
             }
-        }
+        )
 
     }
 
@@ -80,9 +81,11 @@ class AddSessionViewModel: ViewModel() {
 
         val userUuid = currentUser!!.uid!!
         val friendsMutableData = MutableLiveData<ArrayList<User>>()
-        getFriendsUseCase.execute(userUuid).subscribe{
-            friendsMutableData.value = it as ArrayList<User>
-        }
+        compositeDisposable.add(
+            getFriendsUseCase.execute(userUuid).subscribe{
+                friendsMutableData.value = it as ArrayList<User>
+            }
+        )
         return friendsMutableData
     }
 

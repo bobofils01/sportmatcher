@@ -2,13 +2,12 @@ package com.example.sportmatcher.viewModels.sports
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.sport.Pitch
+import com.example.sportmatcher.viewModels.AbstractViewModel
 
 
-class AllSportsViewModel : ViewModel(){
+class AllSportsViewModel : AbstractViewModel(){
 
     private val getPitchesForUseCase by lazy {
         ServiceProvider.getPitchesForUseCase
@@ -27,9 +26,11 @@ class AllSportsViewModel : ViewModel(){
     fun getAllSports( sportName : String) : MutableLiveData<ArrayList<Pitch>>{
 
         val sportsMutableData = MutableLiveData<ArrayList<Pitch>>()
-        getPitchesForUseCase.execute(sportName).subscribe{
-            sportsMutableData.value = it as ArrayList<Pitch>
-        }
+        compositeDisposable.add(
+            getPitchesForUseCase.execute(sportName).subscribe{
+                sportsMutableData.value = it as ArrayList<Pitch>
+            }
+        )
 
         return sportsMutableData
     }
@@ -37,16 +38,4 @@ class AllSportsViewModel : ViewModel(){
     fun goBackSportHomepage() {
         addPitchClicked.value = false
     }
-
-    /*override fun onCleared() {
-        compositeDisposable.apply {
-            dispose()
-            clear()
-        }
-        super.onCleared()
-    }
-
-    init{
-        compositeDisposable.add(
-    }*/
 }

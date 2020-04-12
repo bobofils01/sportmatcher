@@ -1,20 +1,16 @@
 package com.example.sportmatcher.viewModels.authentication
 
-import android.content.Context
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.authentication.AuthenticationState
 import com.example.sportmatcher.model.authentication.LoginInfo
 import com.example.sportmatcher.model.authentication.NotAuthenticated
 import com.example.sportmatcher.ui.authentication.LoginViewState
-import io.reactivex.disposables.CompositeDisposable
+import com.example.sportmatcher.viewModels.AbstractViewModel
 
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : AbstractViewModel() {
 
     val email by lazy { MutableLiveData<String>() }
     val password by lazy { MutableLiveData<String>() }
@@ -32,9 +28,6 @@ class LoginViewModel : ViewModel() {
     fun getAuthenticationStateLiveData(): LiveData<AuthenticationState> = authenticationState
 
 
-    private val compositeDisposable: CompositeDisposable by lazy {
-        CompositeDisposable()
-    }
     private val signInUseCase by lazy {
         ServiceProvider.signInUseCase
     }
@@ -63,13 +56,6 @@ class LoginViewModel : ViewModel() {
         loginViewStateLiveData.value = LoginViewState.SIGNUP
     }
 
-    override fun onCleared() {
-        compositeDisposable.apply {
-            dispose()
-            clear()
-        }
-        super.onCleared()
-    }
 
     init {
         initAuthenticationStateUseCase()

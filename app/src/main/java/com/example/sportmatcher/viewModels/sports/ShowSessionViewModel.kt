@@ -1,13 +1,13 @@
 package com.example.sportmatcher.viewModels.sports
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.User
 import com.example.sportmatcher.model.sport.ChatMessage
 import com.example.sportmatcher.model.sport.Session
+import com.example.sportmatcher.viewModels.AbstractViewModel
 
-class ShowSessionViewModel : ViewModel() {
+class ShowSessionViewModel : AbstractViewModel() {
 
     lateinit var session:Session
 
@@ -26,25 +26,29 @@ class ShowSessionViewModel : ViewModel() {
 
     fun getChatMessages(session: Session):MutableLiveData<ArrayList<ChatMessage>>{
         val messages = MutableLiveData<ArrayList<ChatMessage>>()
-        getChatMessagesUseCase.execute(session).subscribe {
-            messages.value = it as ArrayList<ChatMessage>
-        }
+        compositeDisposable.add(
+            getChatMessagesUseCase.execute(session).subscribe {
+                messages.value = it as ArrayList<ChatMessage>
+            }
+        )
         return messages
     }
 
 
     fun getSessionParticipants(session: Session) : MutableLiveData<ArrayList<User>>{
         val participants = MutableLiveData<ArrayList<User>>()
-        getParticipantsForASessionUseCase.execute(session).subscribe {
-            var isAlreadyPart = false
-            participants.value = it as ArrayList<User>
+        compositeDisposable.add(
+            getParticipantsForASessionUseCase.execute(session).subscribe {
+                var isAlreadyPart = false
+                participants.value = it as ArrayList<User>
 
-            if(it.map {t -> t.uid}.contains(this.authenticatedUser!!.uid)){
-                isAlreadyPart= true
+                if(it.map {t -> t.uid}.contains(this.authenticatedUser!!.uid)){
+                    isAlreadyPart= true
+                }
+                isAlreadyParticipantOfSession.value =isAlreadyPart
+
             }
-            isAlreadyParticipantOfSession.value =isAlreadyPart
-
-        }
+        )
         return participants
     }
 }
