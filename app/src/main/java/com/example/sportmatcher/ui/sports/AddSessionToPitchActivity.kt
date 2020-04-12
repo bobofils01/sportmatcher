@@ -6,17 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportmatcher.R
-import com.example.sportmatcher.adapters.FriendListAdapter
 import com.example.sportmatcher.adapters.PlayersListAdapter
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.User
@@ -28,8 +25,6 @@ import kotlinx.android.synthetic.main.add_session_layout.*
 import java.util.*
 
 class AddSessionToPitchActivity : AppCompatActivity() {
-
-    //lateinit var binding: AddSessionViewBinding
 
     companion object {
 
@@ -116,7 +111,6 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             }
             added_players_recycle_view.layoutManager=  LinearLayoutManager(this)
             added_players_recycle_view.adapter = adapter
-
         })
     }
 

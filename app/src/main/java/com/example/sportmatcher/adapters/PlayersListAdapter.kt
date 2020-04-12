@@ -29,7 +29,7 @@ class PlayersListAdapter(private val players: ArrayList<User>,private val curren
                 //deletionBtn!!.text = "Me"
 
             }else {
-                deletionBtn!!.setBackgroundColor(Color.RED)
+                //deletionBtn!!.setBackgroundColor(Color.RED)
                 //deletionBtn!!.text ="X"
                 deletionBtn!!.setOnClickListener { callbackDeletion(user) }
             }
@@ -54,7 +54,7 @@ class PlayersListAdapter(private val players: ArrayList<User>,private val curren
     }
 
     override fun onBindViewHolder(holder: PlayerItemViewHolder, position: Int) {
-        val user = players.get(position)
+        val user = players[position]
         holder.bind(user, currentUser, callbackDeletion)
     }
 }

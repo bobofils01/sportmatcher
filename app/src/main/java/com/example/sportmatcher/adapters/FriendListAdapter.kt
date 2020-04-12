@@ -26,11 +26,9 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
         var view = viewParam
         val viewHolder: FriendItemViewHolder
 
-        lateinit var viewNotNull:View
         if (view == null) {
             val inflater = LayoutInflater.from(context)
             view = inflater.inflate(R.layout.friend_item, viewGroup, false)
-            viewNotNull = view
             viewHolder = FriendItemViewHolder()
             viewHolder.emailFriend = view.emailFriend as TextView
             viewHolder.firstNameFriend = view.firstNameFriend as TextView
@@ -38,17 +36,16 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
             viewHolder.deletionBtn = view.deleteFriendBtn as ImageButton
         } else{
             viewHolder = view.tag as FriendItemViewHolder
-            viewNotNull = view
         }
 
         val friendItem = getItem(i)
         viewHolder.emailFriend!!.text = friendItem!!.email
         //viewHolder.firstNameFriend!!.text = friendItem!!.firstName
         //viewHolder.lastNameFriend!!.text = friendItem!!.lastName
-        viewNotNull.tag = viewHolder
+        view!!.tag = viewHolder
 
         viewHolder.deletionBtn!!.setOnClickListener{callbackDeletion(friendItem)}
 
-        return viewNotNull
+        return view
     }
 }
