@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.friendship
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,16 +27,22 @@ class FriendsViewFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.friends_view_layout, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val from = getAuthenticatedUserUseCase.execute()
         if (from != null) {
             friendsViewModel.setUser(from)
+        }
+
+        when {
+            friendsViewModel.getNumberOfFriends() == null -> nbr_of_friends.text = "0 Friend"
+            friendsViewModel.getNumberOfFriends() == 1 -> nbr_of_friends.text = "1 Friend"
+            else -> nbr_of_friends.text = friendsViewModel.getNumberOfFriends().toString() + " Friends"
         }
 
         Log.d("Roman FriendsVF user", from?.toMap().toString())
@@ -46,7 +53,6 @@ class FriendsViewFragment: Fragment() {
                 friendsViewModel.deleteFriend(user = userToDelete)
             }
             friendsListView.adapter = adapter
-
         })
     }
 }

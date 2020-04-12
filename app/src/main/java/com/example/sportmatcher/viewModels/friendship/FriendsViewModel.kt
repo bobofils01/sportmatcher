@@ -60,6 +60,10 @@ class FriendsViewModel: ViewModel() {
         return friendsMutableData
     }
 
+    fun getNumberOfFriends(): Int? {
+        return getAllFriends().value?.size
+    }
+
     fun addFriend(user: User){
         addFriendUseCase.execute(InvitationDTO(from=actualUser.value!!, to=user))
         Log.d("ADDED", actualUser.value!!.email +" "+ user.email)

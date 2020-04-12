@@ -11,6 +11,7 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.FriendsPageAdapter
 import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
 import kotlinx.android.synthetic.main.friends_layout.*
+import kotlinx.android.synthetic.main.friends_view_layout.*
 
 class FriendsFragment: Fragment() {
 
@@ -39,8 +40,8 @@ class FriendsFragment: Fragment() {
         viewPage.adapter  = fragment
 
         tabsFriendsPage.setupWithViewPager(viewPage)
-        tabsFriendsPage.getTabAt(0)?.text = "Friends"
-        tabsFriendsPage.getTabAt(1)?.text = "All Users"
+        tabsFriendsPage.getTabAt(0)?.setIcon(R.drawable.friends_list)
+        tabsFriendsPage.getTabAt(1)?.setIcon(R.drawable.add_friend)
 
     }
 

@@ -7,9 +7,10 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/nbr_of_friends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Friends"
+        android:text=" Nbr Friends"
         android:textSize="30dp"
         android:textStyle="bold" />
 
