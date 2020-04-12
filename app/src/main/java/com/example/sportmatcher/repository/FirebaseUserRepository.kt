@@ -123,7 +123,7 @@ class FirebaseUserRepository : IUserRepository {
 
     override fun getAllFriends(uid: String): Observable<List<User>> {
         return Observable.create { emitter ->
-            userTableRef.child(uid).child(FRIENDS_PATH).addValueEventListener(object : ValueEventListener {
+            userTableRef.child(uid).child(FRIENDS_PATH).orderByChild("email").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val list = dataSnapshot.children.mapNotNull { user ->
                         user.getValue(User::class.java)

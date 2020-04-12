@@ -6,25 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutSearch"
+    <EditText
+        android:id="@+id/editTxtFilterAllUsers"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusableInTouchMode="true">
-
-
-        <EditText
-            android:id="@+id/editTxtFilterAllUsers"
-            android:layout_width="414dp"
-            android:layout_height="52dp"
-            android:drawableLeft="@drawable/glass_loop"
-            android:drawablePadding="5dp"
-            android:hint="Search an user"
-            android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:theme="@style/TextInputLayoutAppearance"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="52dp"
+        android:drawableLeft="@drawable/glass_loop"
+        android:drawablePadding="5dp"
+        android:hint="Search an user"
+        android:maxLines="1"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ListView
         android:id="@+id/all_users_list"

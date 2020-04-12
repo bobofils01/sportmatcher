@@ -39,12 +39,6 @@ class FriendsViewFragment: Fragment() {
             friendsViewModel.setUser(from)
         }
 
-        when {
-            friendsViewModel.getNumberOfFriends() == null -> nbr_of_friends.text = "0 Friend"
-            friendsViewModel.getNumberOfFriends() == 1 -> nbr_of_friends.text = "1 Friend"
-            else -> nbr_of_friends.text = friendsViewModel.getNumberOfFriends().toString() + " Friends"
-        }
-
         Log.d("Roman FriendsVF user", from?.toMap().toString())
         val friendsListView = friends_list as ListView
 
@@ -53,6 +47,11 @@ class FriendsViewFragment: Fragment() {
                 friendsViewModel.deleteFriend(user = userToDelete)
             }
             friendsListView.adapter = adapter
+            when (friends.size){
+                0 -> nbr_of_friends.text = "No Friend Yet"
+                1 -> nbr_of_friends.text = "1 Friend"
+                else -> nbr_of_friends.text = friends.size.toString() + " Friends"
+            }
         })
     }
 }
