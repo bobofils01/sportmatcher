@@ -131,6 +131,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
                 // Display Selected date in TextView
                 session_date.setText("" + dayOfMonth + "/" + month + "/" + year)
             }, year, month, day)
+            dpd.datePicker.minDate = System.currentTimeMillis() - 1000
             dpd.show()
         }
 
