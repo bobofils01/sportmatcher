@@ -30,7 +30,7 @@ import com.example.sportmatcher.model.sport.Session
 import com.example.sportmatcher.ui.utils.UIUtils
 import com.example.sportmatcher.viewModels.sports.AddSessionViewModel
 import kotlinx.android.synthetic.main.add_session_layout.*
-import kotlinx.android.synthetic.main.session_info_layout.*
+import kotlinx.android.synthetic.main.add_session_info_layout.*
 import java.util.*
 
 
