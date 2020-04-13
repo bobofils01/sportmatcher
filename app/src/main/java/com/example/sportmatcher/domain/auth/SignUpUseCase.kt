@@ -27,7 +27,7 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
             return Single.error(IllegalStateException(verifPayload))
         }
 
-        return iAuthService.register(payload.email!!, payload.passWord!!).map{
+        return iAuthService.register(payload.email!!, payload.passWord!!, payload.firstName!!, payload.lastName!!).map{
             it
         }.onErrorResumeNext(Single.just(NotAuthenticated))
     }

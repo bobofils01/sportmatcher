@@ -2,31 +2,27 @@ package com.example.sportmatcher.ui.authentication
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sportmatcher.databinding.SignupViewBinding
-import com.example.sportmatcher.viewModels.authentication.SignupViewModel
-import kotlinx.android.synthetic.main.signup_layout.*
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.Toast
-import com.example.sportmatcher.domain.utils.isNameValid
+import com.example.sportmatcher.R
+import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
+import com.example.sportmatcher.ui.utils.UIUtils
+import com.example.sportmatcher.viewModels.authentication.SignupViewModel
 import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
-import android.R.attr.name
-import com.example.sportmatcher.domain.utils.isEmailValid
+import kotlinx.android.synthetic.main.signup_layout.*
 
 
-@Suppress("CAST_NEVER_SUCCEEDS")
 class SignUpFragment : Fragment() {
 
     companion object {
@@ -40,10 +36,8 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    lateinit var binding: SignupViewBinding
-
     //view models always initialised like this
-    private val viewmodel: SignupViewModel by lazy {
+    private val viewModel: SignupViewModel by lazy {
         ViewModelProvider(this).get(SignupViewModel::class.java)
     }
 
@@ -52,10 +46,7 @@ class SignUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, com.example.sportmatcher.R.layout.signup_layout, container, false)
-        binding.signupViewModel = viewmodel
-
-        return binding.root
+         return inflater.inflate(R.layout.signup_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,15 +55,21 @@ class SignUpFragment : Fragment() {
         first_name.addTextChangedListener(signUpTextWatcher)
         last_name.addTextChangedListener(signUpTextWatcher)
 
+        //first name
+        UIUtils.addOnTextViewChange(first_name, viewModel.firstName)
+        //last name
+        UIUtils.addOnTextViewChange(last_name, viewModel.lastName)
+        //email
+        UIUtils.addOnTextViewChange(email, viewModel.email)
+        //password
+        UIUtils.addOnTextViewChange(password, viewModel.password)
+
         next1.setOnClickListener{
             when {
                 first_name.text.toString().matches(".*\\d.*".toRegex()) -> first_name.error = "Your name can't contain numbers"
                 last_name.text.toString().matches(".*\\d.*".toRegex()) -> last_name.error = "Your name can't contain numbers"
                 else -> {
                     hideKeyboard()
-
-                    viewmodel.firstName = first_name.text.toString()
-                    viewmodel.lastName = last_name.text.toString()
 
                     name.visibility = View.GONE
                 }
@@ -89,7 +86,6 @@ class SignUpFragment : Fragment() {
                 else -> {
                     hideKeyboard()
 
-                    viewmodel.email = email.text.toString()
 
                     enter_email.visibility = View.GONE
                 }
@@ -112,9 +108,7 @@ class SignUpFragment : Fragment() {
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
 
-                viewmodel.password = password.text.toString()
-
-                viewmodel.onRegisterClicked()
+                viewModel.onRegisterClicked()
             }
         }
 /*
