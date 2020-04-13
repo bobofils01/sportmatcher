@@ -48,19 +48,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <!--<ImageView
                         android:id="@+id/new_session"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="110dp"
-                        android:layout_height="35dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/plus"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_enabled"
-                        android:text="New "
-                        android:textAllCaps="false"
-                        android:textColor="#fff"
-                        android:textSize="20sp"
-                        tools:layout_editor_absoluteX="301dp"
-                        tools:layout_editor_absoluteY="75dp" />
+                        android:clickable="true"/>-->
 
                     <TextView
                         android:id="@+id/textView3"
@@ -89,12 +83,22 @@
                     <ListView
                         android:id="@+id/listViewAllSessions"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="546dp" />
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="12dp" />
+
+                <ImageView
+                    android:id="@+id/new_session"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/plus"
+                    android:clickable="true" />
+
             </LinearLayout>
-
-
-
 
 </RelativeLayout>
