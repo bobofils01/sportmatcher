@@ -7,7 +7,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
+            android:id="@+id/session_info"
+            layout="@layout/session_info_layout"/>
+
+        <!--<androidx.appcompat.widget.Toolbar
             android:id="@+id/add_session_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,8 +32,6 @@
                     android:id="@+id/add_session_toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginLeft="80dp"
                     android:text="New session"
                     android:textColor="#ffff"
                     android:textSize="24sp"
@@ -37,7 +39,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <Button
                     android:id="@+id/add_session_toolbar_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,105 +57,26 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/session_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Title" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/session_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="false"
-                    android:editable="false"
-                    android:hint="Date" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="125dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="Add Players"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/session_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:hint="Time" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/session_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Description" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/session_max_players"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Maximum players (Optional)"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="367dp"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/session_price_player"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Price per player (Optional)"
-                        android:inputType="number" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="41dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:background="@color/colorGrey"
-                    android:gravity="center"
-                    android:text="€"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -204,13 +127,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="51dp"
                 android:orientation="horizontal">
 
                 <AutoCompleteTextView
                     android:id="@+id/friends_autoCompleteTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_weight="6"
                     android:completionThreshold="1"
@@ -225,11 +148,24 @@
                     android:layout_weight="1"
                     android:background="@android:drawable/ic_input_add" />
             </LinearLayout>
-
-
-
+            <Button
+                android:id="@+id/add_session_toolbar_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:singleLine="false"
+                android:text="Save"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textIsSelectable="false"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                android:typeface="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/button_enabled"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
-
-
     </LinearLayout>
 </layout>
