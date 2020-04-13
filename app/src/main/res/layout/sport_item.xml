@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pitchDescription" />
 
     <Button
-        android:id="@+id/addSessionToChangeActivityBtn"
+        android:id="@+id/sessions"
         android:background="@drawable/button_enabled"
         android:gravity="left|center"
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:layout_gravity="left|center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:text="Add Session"
+        android:text="Sessions"
         app:layout_constraintLeft_toRightOf="@+id/pitchName"
         app:layout_constraintRight_toRightOf="parent"
         android:textColor="#fff"/>

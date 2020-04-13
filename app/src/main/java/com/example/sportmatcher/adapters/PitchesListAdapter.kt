@@ -20,7 +20,7 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         internal var name: TextView? = null
         internal var address: TextView? = null
         internal var description: TextView? = null
-        internal var addSessionToChangeActivityBtn: Button? = null
+        internal var sessions: Button? = null //////////////////////////////////////////////////////////////////////////////
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
@@ -36,7 +36,7 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
             viewHolder.description = view.findViewById<View>(R.id.pitchDescription) as TextView
             viewHolder.address = view.findViewById<View>(R.id.pitchAddress) as TextView
             viewHolder.pitchPicture = view.findViewById<View>(R.id.pitchPicture) as ImageView
-            viewHolder.addSessionToChangeActivityBtn = view.addSessionToChangeActivityBtn as Button
+            viewHolder.sessions = view.sessions as Button
         } else{
             viewHolder = view.tag as SportItemViewHolder
         }
@@ -48,8 +48,8 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         viewHolder.pitchPicture!!.setImageResource(R.mipmap.ic_launcher_round)
         view.tag = viewHolder
 
-        viewHolder.addSessionToChangeActivityBtn!!.setOnClickListener {
-            context.startActivity(AddSessionToPitchActivity.getIntent(view.context, sportItem))
+        viewHolder.sessions!!.setOnClickListener {
+            context.startActivity(AllSessionOfAPitchActivity.getIntent(view.context, sportItem))
         }
 
         view.setOnClickListener(View.OnClickListener {
