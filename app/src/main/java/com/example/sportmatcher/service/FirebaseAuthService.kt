@@ -63,7 +63,12 @@ class FirebaseAuthService : IAuthService {
     }
 
 
-    override fun register(email: String, password: String): Single<AuthenticationState> {
+    override fun register(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String
+    ): Single<AuthenticationState> {
         return Single.create { emitter ->
             Log.d(TAG, "init:success")
             firebaseAuth
@@ -77,7 +82,7 @@ class FirebaseAuthService : IAuthService {
                         verifyEmail()
 
                         val createdUser =
-                            User(uid = userId, email = email, firstName = email, lastName = email)
+                            User(uid = userId, email = email, firstName = firstName, lastName = lastName)
                         userRepository.createUser(createdUser).subscribe({ user ->
                             Log.d(TAG, "user registered : $user")
                             updateCurrentUser(user, emitter)

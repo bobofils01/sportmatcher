@@ -6,7 +6,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="137dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="New Session"
@@ -16,7 +17,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_title"
@@ -30,7 +32,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_date"
@@ -46,7 +49,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_time"
@@ -58,7 +62,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/TextInputLayoutAppearance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/session_description"
@@ -71,7 +76,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_max_players"
@@ -89,7 +95,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/TextInputLayoutAppearance"
             android:layout_width="367dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/session_price_player"
@@ -103,18 +110,20 @@
         <TextView
             android:id="@+id/textView8"
             android:layout_width="44dp"
-            android:layout_height="54dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="6dp"
             android:background="@color/colorGrey"
             android:gravity="center"
             android:text="€"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="67dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/next"

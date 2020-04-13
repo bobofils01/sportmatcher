@@ -1,5 +1,6 @@
 package com.example.sportmatcher.viewModels.authentication
 
+import androidx.lifecycle.MutableLiveData
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.authentication.SignupInfo
 import com.example.sportmatcher.viewModels.AbstractViewModel
@@ -7,10 +8,14 @@ import com.example.sportmatcher.viewModels.AbstractViewModel
 
 class SignupViewModel: AbstractViewModel() {
 
-    lateinit var firstName: String // = MutableLiveData<String>()
-    lateinit var lastName: String //= MutableLiveData<String>()
-    lateinit var email: String //= MutableLiveData<String>()
-    lateinit var password: String //= MutableLiveData<String>()
+    val firstName by lazy { MutableLiveData<String>() }
+    val lastName by lazy { MutableLiveData<String>() }
+    val email by lazy { MutableLiveData<String>() }
+    val password by lazy { MutableLiveData<String>() }
+    //lateinit var firstName: String // = MutableLiveData<String>()
+    // lateinit var lastName: String //= MutableLiveData<String>()
+    //lateinit var email: String //= MutableLiveData<String>()
+    //lateinit var password: String //= MutableLiveData<String>()
 
     private val signUpUseCase by lazy{
         ServiceProvider.signUpUseCase
@@ -20,10 +25,10 @@ class SignupViewModel: AbstractViewModel() {
         compositeDisposable.add(
             signUpUseCase.execute(
                 SignupInfo(
-                    firstName,
-                    lastName,
-                    email,
-                    password
+                    firstName.value,
+                    lastName.value,
+                    email.value,
+                    password.value
                 )
             ).subscribe()
         )
