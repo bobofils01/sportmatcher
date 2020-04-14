@@ -1,7 +1,6 @@
 package com.example.sportmatcher.ui.sports.session
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,8 +23,7 @@ import kotlinx.android.synthetic.main.show_session_fragment.session_price_player
 import kotlinx.android.synthetic.main.show_session_fragment.session_time
 import kotlinx.android.synthetic.main.show_session_fragment.session_title
 import android.widget.AdapterView
-import android.R
-
+import com.example.sportmatcher.R
 
 
 class ShowSessionFragment : Fragment() {
@@ -111,7 +109,7 @@ class ShowSessionFragment : Fragment() {
             //set the right button
             if(isParticipant){
                 btn_join_session.text = "Quit"
-                btn_join_session.setBackgroundColor(Color.RED)
+                btn_join_session.setBackgroundResource(R.drawable.button_quit)
                 btn_join_session.setOnClickListener {
                     ServiceProvider.quitSessionUseCase.execute(
                         ParticipantSessionDTO(
