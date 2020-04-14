@@ -15,19 +15,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
             android:id="@+id/session_title"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center|center_horizontal"
-            android:hint="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Title"
             android:textAllCaps="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_join_session"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="18dp" />
 
-        <Button
+        <!--<Button
             android:id="@+id/btn_join_session"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -35,7 +29,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:text="Join"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -133,7 +127,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="444dp"
         android:orientation="vertical">
 
 
@@ -185,8 +179,17 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         <ListView
             android:id="@+id/added_players_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="339dp"
             android:isScrollContainer="false" />
+
+        <Button
+            android:id="@+id/btn_join_session"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_enabled"
+            android:text="Join"
+            android:textColor="#ffff" />
 
     </LinearLayout>
 

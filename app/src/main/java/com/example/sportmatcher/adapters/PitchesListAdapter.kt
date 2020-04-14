@@ -20,7 +20,7 @@ class PitchesListAdapter(sportsList : ArrayList<Pitch>, ctx : Context)
         internal var name: TextView? = null
         internal var address: TextView? = null
         internal var description: TextView? = null
-        internal var sessions: Button? = null //////////////////////////////////////////////////////////////////////////////
+        internal var sessions: Button? = null
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {

@@ -12,6 +12,7 @@ import com.example.sportmatcher.adapters.SessionViewPageAdapter
 import com.example.sportmatcher.model.sport.Session
 
 import kotlinx.android.synthetic.main.activity_session_view.*
+import kotlinx.android.synthetic.main.navigation_bar_layout.*
 
 
 class SessionViewActivity : AppCompatActivity() {
@@ -44,8 +45,8 @@ class SessionViewActivity : AppCompatActivity() {
         viewPage.adapter  = fragment
         tabs_sessions_page.setupWithViewPager(viewPage)
 
-        tabs_sessions_page.getTabAt(0)?.text = "Session"
-        tabs_sessions_page.getTabAt(1)?.text = "Chat"
+        tabs_sessions_page.getTabAt(0)?.setIcon(R.drawable.american_football_ball)
+        tabs_sessions_page.getTabAt(1)?.setIcon(R.drawable.chat)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
