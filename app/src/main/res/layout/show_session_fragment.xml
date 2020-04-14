@@ -10,8 +10,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:background="@color/colorGrey">
+        android:layout_height="39dp">
 
         <TextView
             android:id="@+id/session_title"
@@ -19,17 +18,11 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_height="match_parent"
             android:text="Title"
             android:textAllCaps="true"
-            android:textSize="18dp" />
-
-        <!--<Button
-            android:id="@+id/btn_join_session"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/button_enabled"
-            android:text="Join"
+            android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />-->
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -41,13 +34,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Date : "
-            android:gravity="center|center_horizontal"/>
+            android:gravity="center|center_horizontal" />
 
         <TextView
             android:id="@+id/session_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|center_horizontal" />
+            android:gravity="center_vertical|right"/>
 
     </LinearLayout>
 
@@ -60,13 +53,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Time : "
-            android:gravity="center|center_horizontal"/>
+            android:gravity="center|center_horizontal" />
 
         <TextView
             android:id="@+id/session_time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|center_horizontal" />
+            android:gravity="center_vertical|right"/>
 
     </LinearLayout>
     <LinearLayout
@@ -78,13 +71,13 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Description : "
-            android:gravity="center|center_horizontal"/>
+            android:gravity="center|center_horizontal" />
 
         <TextView
             android:id="@+id/session_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|center_horizontal" />
+            android:gravity="center_vertical|right"/>
 
     </LinearLayout>
     <LinearLayout
@@ -102,7 +95,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:id="@+id/session_max_players"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|center_horizontal" />
+            android:gravity="center_vertical|right"/>
 
     </LinearLayout>
 
@@ -115,77 +108,68 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Price per player : "
-            android:gravity="center|center_horizontal"/>
+            android:gravity="center|center_horizontal" />
 
         <TextView
             android:id="@+id/session_price_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center|center_horizontal" />
+            android:gravity="center_vertical|right"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="444dp"
+        android:layout_height="480dp"
         android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/session_createdby"
+            android:layout_width="204dp"
+            android:layout_height="16dp"
+            android:gravity="left"
+            android:text="Created byn: me"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:background="@color/colorGrey">
-
-            <TextView
-                android:id="@+id/session_createdby"
-                android:layout_width="204dp"
-                android:layout_height="16dp"
-                android:gravity="right"
-                android:paddingLeft="4dp"
-                android:text="Created by: me"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.894" />
-
-            <TextView
-                android:id="@+id/join_status"
-                android:layout_width="204dp"
-                android:layout_height="16dp"
-                android:paddingLeft="4dp"
-                android:text="Join these players and have fun."
-                android:textSize="10sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="54dp">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginBottom="4dp"
                 android:text="Players"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/join_status"
+            android:layout_width="204dp"
+            android:layout_height="16dp"
+            android:paddingLeft="4dp"
+            android:text="Join these players and have fun."
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/added_players_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="339dp"
+            android:layout_height="298dp"
             android:isScrollContainer="false" />
 
         <Button
             android:id="@+id/btn_join_session"
-            android:layout_width="180dp"
-            android:layout_height="match_parent"
+            android:layout_width="208dp"
+            android:layout_height="51dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_enabled"
             android:text="Join"
