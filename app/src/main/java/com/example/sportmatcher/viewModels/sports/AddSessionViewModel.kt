@@ -69,8 +69,10 @@ class AddSessionViewModel: AbstractViewModel() {
     }
 
     fun addPlayer( user : User){
-        players.value!!.add(user)
-        players.value = players.value
+        if(!players.value!!.contains(user)) {
+            players.value!!.add(user)
+            players.value = players.value
+        }
     }
 
     fun deletePlayer( user : User){
