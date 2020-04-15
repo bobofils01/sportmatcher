@@ -3,6 +3,7 @@ package com.example.sportmatcher.ui.authentication
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sportmatcher.R
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import kotlinx.android.synthetic.main.signup_layout.*
+import android.R.attr.name
+import kotlinx.android.synthetic.main.login_layout.*
 
 
 class SignUpFragment : Fragment() {
@@ -46,11 +48,15 @@ class SignUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         return inflater.inflate(R.layout.signup_layout, container, false)
+         return inflater.inflate(com.example.sportmatcher.R.layout.signup_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        first_name.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+
+        last_name.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
 
         first_name.addTextChangedListener(signUpTextWatcher)
         last_name.addTextChangedListener(signUpTextWatcher)
@@ -80,8 +86,11 @@ class SignUpFragment : Fragment() {
         email.addTextChangedListener(signUpTextWatcher)
 
         next2.setOnClickListener{
-            when{
-                !email.text.toString().isEmailValid() -> email.error = "Please enter a valid mail address."
+
+            if(email.text.toString().endsWith(" ")) //Vérifie s'il n'y a pas d'espace en trop dans l'adresse mail
+                email.setText(editTextEmailID.text.toString().trim())
+
+            when{!email.text.toString().isEmailValid() -> email.error = "Please enter a valid mail address."
 
                 else -> {
                     hideKeyboard()

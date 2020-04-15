@@ -12,10 +12,6 @@ class SignupViewModel: AbstractViewModel() {
     val lastName by lazy { MutableLiveData<String>() }
     val email by lazy { MutableLiveData<String>() }
     val password by lazy { MutableLiveData<String>() }
-    //lateinit var firstName: String // = MutableLiveData<String>()
-    // lateinit var lastName: String //= MutableLiveData<String>()
-    //lateinit var email: String //= MutableLiveData<String>()
-    //lateinit var password: String //= MutableLiveData<String>()
 
     private val signUpUseCase by lazy{
         ServiceProvider.signUpUseCase

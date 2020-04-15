@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/fromTextViewId"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="105dp"
+        android:layout_height="41dp"
         android:text="From"
         android:textAllCaps="false"
         android:textStyle="bold|italic"

@@ -19,11 +19,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.app.AlertDialog
 import android.os.Handler
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.model.authentication.AuthenticatedState
 import com.example.sportmatcher.model.authentication.AuthenticationInProgress
+import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
+import java.lang.Character.isWhitespace
 
 
 @Suppress("DEPRECATION")
@@ -66,8 +69,11 @@ class LoginFragment : Fragment() {
         editTextEmailID.addTextChangedListener(loginTextWatcher)
         editTextPasswordID.addTextChangedListener(loginTextWatcher)
 
+
         // listen to buttons
         btn_login.setOnClickListener {
+            if(editTextEmailID.text.toString().endsWith(" ")) //Vérifie s'il n'y a pas d'espace en trop dans l'adresse mail
+                editTextEmailID.setText(editTextEmailID.text.toString().trim())
 
             //Retire le clavier
             hideKeyboard()
