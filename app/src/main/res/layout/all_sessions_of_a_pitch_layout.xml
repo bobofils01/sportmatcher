@@ -16,14 +16,6 @@
                     android:layout_height="109dp"
                     android:background="@color/colorGrey">
 
-                    <ImageView
-                        android:id="@+id/new_session"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/plus"
-                        android:clickable="true" />
-
                     <TextView
                         android:id="@+id/pitch_address"
                         android:layout_width="0dp"
@@ -81,7 +73,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:id="@+id/linearLayoutListViewAllSessions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,8 +85,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                </LinearLayout>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/new_session"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/plus"
+                        app:useCompatPadding="true" />
+
+                </FrameLayout>
+
 
             </LinearLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_my_icon"
+        android:contentDescription="@string/submit"
+        android:layout_margin="16dp" />-->
 
 </RelativeLayout>
