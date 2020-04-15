@@ -1,6 +1,8 @@
 package com.example.sportmatcher.ui.sports.session
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -111,12 +113,22 @@ class ShowSessionFragment : Fragment() {
                 btn_join_session.text = "Quit"
                 btn_join_session.setBackgroundResource(R.drawable.button_quit)
                 btn_join_session.setOnClickListener {
-                    ServiceProvider.quitSessionUseCase.execute(
-                        ParticipantSessionDTO(
-                            sessionID = session.uid!!,
-                            participantID = viewModel.authenticatedUser?.uid!!
-                        )
-                    ).subscribe()
+
+                    AlertDialog.Builder(activity)
+                        .setTitle("You are about to quit this session")
+                        .setMessage("Do you want to quit this session ?")
+                        .setNegativeButton("Yes"){ _, _ ->
+                            ServiceProvider.quitSessionUseCase.execute(
+                                ParticipantSessionDTO(
+                                    sessionID = session.uid!!,
+                                    participantID = viewModel.authenticatedUser?.uid!!
+                                )
+                            ).subscribe()
+                        }
+                        .setPositiveButton("No", null)
+                        //.setIcon(android.R.drawable.ic_dialog_alert)
+                        .show()
+                        .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
                 }
             }else{
                 btn_join_session.text = "Join"

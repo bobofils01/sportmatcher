@@ -6,9 +6,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true"
+        android:layout_height="110dp"
         android:gravity="center"
         android:text="New Session"
         android:textSize="25dp"
@@ -17,7 +15,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -25,15 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_date"
@@ -49,8 +45,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_time"
@@ -59,25 +54,26 @@
             android:editable="false"
             android:hint="Time" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:theme="@style/TextInputLayoutAppearance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/session_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description" />
-        </com.google.android.material.textfield.TextInputLayout>
-
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:theme="@style/TextInputLayoutAppearance">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/session_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/session_max_players"
@@ -89,14 +85,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
             android:theme="@style/TextInputLayoutAppearance"
             android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/session_price_player"
@@ -120,10 +115,10 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
+
     <View
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="61dp" />
 
     <Button
         android:id="@+id/next"

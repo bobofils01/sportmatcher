@@ -27,5 +27,6 @@
         android:padding="16dp"
         android:text="this is my message"
         app:layout_constraintEnd_toStartOf="@+id/fromTextViewId"
-        app:layout_constraintTop_toTopOf="@+id/fromTextViewId" />
+        app:layout_constraintTop_toTopOf="@+id/fromTextViewId"
+        android:textColor="#ffff"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

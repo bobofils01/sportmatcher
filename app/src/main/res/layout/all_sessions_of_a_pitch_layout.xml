@@ -16,6 +16,14 @@
                     android:layout_height="109dp"
                     android:background="@color/colorGrey">
 
+                    <ImageView
+                        android:id="@+id/new_session"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/plus"
+                        android:clickable="true" />
+
                     <TextView
                         android:id="@+id/pitch_address"
                         android:layout_width="0dp"
@@ -77,27 +85,15 @@
                     android:id="@+id/linearLayoutListViewAllSessions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbarAllSession">
+                    app:layout_constraintTop_toBottomOf="@+id/toolbarAllSession"
+                    android:orientation="vertical">
 
                     <ListView
                         android:id="@+id/listViewAllSessions"
                         android:layout_width="match_parent"
-                        android:layout_height="546dp" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp" />
-
-                <ImageView
-                    android:id="@+id/new_session"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/plus"
-                    android:clickable="true" />
 
             </LinearLayout>
 
