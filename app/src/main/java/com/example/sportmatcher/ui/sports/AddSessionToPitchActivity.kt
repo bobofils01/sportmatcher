@@ -13,15 +13,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.size
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sportmatcher.R
-import com.example.sportmatcher.R.*
+import com.example.sportmatcher.R.layout
 import com.example.sportmatcher.adapters.PlayersListAdapter
 import com.example.sportmatcher.di.ServiceProvider
 import com.example.sportmatcher.model.User
@@ -29,8 +28,8 @@ import com.example.sportmatcher.model.sport.Pitch
 import com.example.sportmatcher.model.sport.Session
 import com.example.sportmatcher.ui.utils.UIUtils
 import com.example.sportmatcher.viewModels.sports.AddSessionViewModel
-import kotlinx.android.synthetic.main.add_session_layout.*
 import kotlinx.android.synthetic.main.add_session_info_layout.*
+import kotlinx.android.synthetic.main.add_session_layout.*
 import java.util.*
 
 
@@ -72,20 +71,20 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         initDateTimePicker()
 
         //Permet de débloquer le button Next
-        findViewById<EditText>(id.session_title).addTextChangedListener(infoTextWatcher)
-        findViewById<EditText>(id.session_date).addTextChangedListener(infoTextWatcher)
-        findViewById<EditText>(id.session_time).addTextChangedListener(infoTextWatcher)
-        findViewById<EditText>(id.session_description).addTextChangedListener(infoTextWatcher)
+        session_title.addTextChangedListener(infoTextWatcher)
+        session_date.addTextChangedListener(infoTextWatcher)
+        session_time.addTextChangedListener(infoTextWatcher)
+        session_description.addTextChangedListener(infoTextWatcher)
 
-        findViewById<Button>(id.next).setOnClickListener(){
+        next.setOnClickListener {
             hideKeyboard(this)
 
-            findViewById<LinearLayout>(id.session_info).visibility = View.GONE
+            session_info.visibility = View.GONE
         }
     }
 
     //Retire le clavier de l'écran
-    fun hideKeyboard(activity: Activity) {
+    private fun hideKeyboard(activity: Activity) {
         val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         var view = activity.currentFocus
         if (view == null)
@@ -99,18 +98,18 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            val title = findViewById<EditText>(id.session_title).text.toString().trim()
-            val date = findViewById<EditText>(id.session_date).text.toString().trim()
-            val time = findViewById<EditText>(id.session_time).text.toString().trim()
-            val description = findViewById<EditText>(id.session_description).text.toString().trim()
+            val title = session_title.text.toString().trim()
+            val date = session_date.text.toString().trim()
+            val time = session_time.text.toString().trim()
+            val description = session_description.text.toString().trim()
 
-            findViewById<Button>(id.next).isEnabled = title.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty() && description.isNotEmpty()
+            next.isEnabled = title.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty() && description.isNotEmpty()
         }
 
         override fun afterTextChanged(s: Editable) {}
     }
 
-    fun initDateTimePicker(){
+    private fun initDateTimePicker(){
 
         val c = Calendar.getInstance()
         var year = c.get(Calendar.YEAR)
@@ -129,7 +128,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             }
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                session_date.setText("" + dayOfMonth + "/" + month + "/" + year)
+                session_date.setText("$dayOfMonth/$month/$year")
             }, year, month, day)
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000
             dpd.show()
@@ -144,24 +143,24 @@ class AddSessionToPitchActivity : AppCompatActivity() {
                 minutes = spr[1].toInt()
             }
             val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                session_time.setText(""+hourOfDay+":"+minute)
+                session_time.setText("$hourOfDay:$minute")
             }, hour, minutes,true)
             tpd.show()
         }
     }
 
-    fun initPlayersListView(){
+    private fun initPlayersListView(){
         addSessionViewModel.players.observe(this, Observer { players ->
             friends_autoCompleteTextView.setTextColor(Color.BLACK)
             val adapter = PlayersListAdapter(players, addSessionViewModel.currentUser!!){ userToDelete ->
                 addSessionViewModel.deletePlayer(user = userToDelete)
             }
-            added_players_recycle_view.layoutManager=  LinearLayoutManager(this)
+            added_players_recycle_view.layoutManager = LinearLayoutManager(this)
             added_players_recycle_view.adapter = adapter
         })
     }
 
-    fun initPlayersSuggestionAdaptater(){
+    private fun initPlayersSuggestionAdaptater(){
 
         addSessionViewModel.getAllFriends().observe (this, Observer { playersList ->
             val emails = playersList.map { t -> t.email }
@@ -176,19 +175,19 @@ class AddSessionToPitchActivity : AppCompatActivity() {
 
     }
 
-    fun initAddPlayerBtn() {
+    private fun initAddPlayerBtn() {
 
         add_player_btn.setOnClickListener {
             val playerText = friends_autoCompleteTextView.text
             addSessionViewModel.getAllFriends().observe(this, Observer { friends ->
-                var isAfriend: User? = null
+                var isAFriend: User? = null
                 for (p in friends) {
                     if (p.email.equals(playerText.toString())){
-                        isAfriend = p
+                        isAFriend = p
                     }
                 }
-                if (isAfriend != null && !addSessionViewModel.players.value!!.contains(isAfriend)) {
-                    addSessionViewModel.addPlayer(isAfriend)
+                if (isAFriend != null && !addSessionViewModel.players.value!!.contains(isAFriend)) {
+                    addSessionViewModel.addPlayer(isAFriend)
                     friends_autoCompleteTextView.setText("")
                 } else {
                     friends_autoCompleteTextView.setTextColor(Color.RED)
@@ -197,7 +196,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         }
     }
 
-    fun initSaveBtn(){
+    private fun initSaveBtn(){
 
         /*//when back is pressed
         add_session_toolbar.setNavigationOnClickListener {
@@ -213,17 +212,17 @@ class AddSessionToPitchActivity : AppCompatActivity() {
                     .setTitle("You did not add any player")
                     .setMessage("Anyone will be able to join the session.")
                     .setPositiveButton("Add Players", null)
-                    .setNegativeButton("Continue"){ _, _ -> CreateSession()}
+                    .setNegativeButton("Continue"){ _, _ -> createSession()}
                     //.setIcon(android.R.drawable.ic_dialog_alert)
                     .show()
                     .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
             }
             else
-                CreateSession()
+                createSession()
         }
     }
 
-    fun CreateSession(){
+    private fun createSession(){
         val session = addSessionViewModel.getSession()
         //TODO handle error in isSession valid (empty mandatory stuffs) )by checking
         if(isSessionValid(session)) {
@@ -234,11 +233,12 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         }
     }
 
-    fun  isSessionValid(session: Session): Boolean{
+    private fun isSessionValid(session: Session): Boolean{
         //TODO belami
         return true
     }
-    fun initTextViewChangeListeners(){
+    
+    private fun initTextViewChangeListeners(){
         //title
         UIUtils.addOnTextViewChange(session_title, addSessionViewModel.title_input)
         //description
@@ -255,8 +255,8 @@ class AddSessionToPitchActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(findViewById<LinearLayout>(id.session_info).visibility == View.GONE)
-            findViewById<LinearLayout>(id.session_info).visibility = View.VISIBLE
+        if(session_info.visibility == View.GONE)
+            session_info.visibility = View.VISIBLE
         else{
             AlertDialog.Builder(this)
                 .setTitle("You are about to stop creating a session")
