@@ -88,7 +88,7 @@ class SignUpFragment : Fragment() {
         next2.setOnClickListener{
 
             if(email.text.toString().endsWith(" ")) //Vérifie s'il n'y a pas d'espace en trop dans l'adresse mail
-                email.setText(editTextEmailID.text.toString().trim())
+                email.setText(email.text.toString().trim())
 
             when{!email.text.toString().isEmailValid() -> email.error = "Please enter a valid mail address."
 
