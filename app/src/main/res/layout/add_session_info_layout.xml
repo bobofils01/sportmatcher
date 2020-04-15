@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_weight="2"
+        android:layout_height="0dp"
         android:gravity="center"
         android:text="New Session"
         android:textSize="25dp"
@@ -15,6 +19,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -29,6 +34,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -45,6 +51,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:theme="@style/TextInputLayoutAppearance"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -59,6 +66,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -73,6 +81,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:theme="@style/TextInputLayoutAppearance">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,17 +95,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:theme="@style/TextInputLayoutAppearance"
-            android:layout_width="367dp"
-            android:layout_height="wrap_content">
+            android:id="@+id/session_price_playerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="19"
+            android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/session_price_player"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Price per player (Optional)"
                 android:inputType="number" />
 
@@ -104,26 +116,28 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="44dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
             android:background="@color/colorGrey"
             android:gravity="center"
             android:text="€"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:textStyle="bold" />
 
+    </LinearLayout>
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="61dp" />
+        android:layout_weight="0"
+        android:layout_height="0dp"/>
 
     <Button
         android:id="@+id/next"
         android:layout_width="255dp"
-        android:layout_height="56dp"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_selector"
         android:enabled="false"
