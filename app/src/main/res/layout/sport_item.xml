@@ -1,60 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/pitchPicture"
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/pitchDescription"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/pitchAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pitchName" />
 
     <TextView
         android:id="@+id/pitchName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="pitch name"
         android:textSize="35dp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/pitchPicture"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="165dp" />
+        app:layout_constraintEnd_toStartOf="@+id/sessions"
+        app:layout_constraintStart_toStartOf="@+id/pitchPicture" />
 
     <TextView
         android:id="@+id/pitchDescription"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintLeft_toRightOf="@+id/pitchPicture"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pitchName"
-        android:layout_marginVertical="50dp"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:text=" description new pitchs"
+        app:layout_constraintBottom_toTopOf="@+id/pitchAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessions" />
 
     <TextView
         android:id="@+id/pitchAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="rue promenade de marie 12, 1000 Bruxelles"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/pitchPicture"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pitchDescription" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sessions"
-        android:background="@drawable/button_enabled"
-        android:gravity="left|center"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|center"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_selector"
         android:text="Sessions"
-        app:layout_constraintLeft_toRightOf="@+id/pitchName"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
