@@ -8,14 +8,15 @@
             type="com.example.sportmatcher.viewModels.sports.AddPitchViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <fragment android:id="@+id/autocomplete_fragment"
+        <androidx.fragment.app.FragmentContainerView android:id="@+id/autocomplete_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
 
 
@@ -60,14 +61,7 @@
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="501dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:hint="Name of the pitch"
             android:text="@={addPitchViewModel.namePitch}" />
@@ -75,14 +69,9 @@
         <EditText
             android:id="@+id/editTextDescriptionPitchID"
             style="@style/Widget.AppCompat.EditText"
-            android:layout_width="391dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="11dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="435dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:hint="Description of the pitch"
             android:text="@={addPitchViewModel.description}" />
@@ -92,9 +81,7 @@
             style="@style/Widget.AppCompat.Button"
             android:layout_width="152dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
+            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="329dp"
@@ -103,5 +90,5 @@
             android:text="Add Pitch"
             android:textColor="#fff" />
 
-    </RelativeLayout>
+    </LinearLayout>
 </layout>
