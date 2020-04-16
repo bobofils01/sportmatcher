@@ -14,7 +14,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,8 +34,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.all_sports_view_layout.*
 import java.io.IOException
 import java.util.*
-
-
 
 
 @Suppress("DEPRECATION")
@@ -82,7 +81,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         //TODO use ListAdapter to show list in other layout.
         //TODO add also item touchhelper listener
 
-        val listView : ListView = sports_list as ListView
+        val listView: ListView = sports_list as ListView
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -91,7 +90,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         goCreatePitchBtn.setTextColor(resources.getColor(R.color.colorWhite))
         //goCreatePitchBtn.gravity = Gravity.CENTER*/
 
-        goCreatePitchBtn.setOnClickListener{
+        goCreatePitchBtn.setOnClickListener {
             allSportsViewModel.onAddPitchClicked()
         }
 
@@ -103,13 +102,11 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
             }
         */
 
-        getLastLocation()
-
-        allSportsViewModel.getAllSports(sportName).observe(requireActivity(), Observer{sports ->
+        allSportsViewModel.getAllSports(sportName).observe(requireActivity(), Observer { sports ->
             context?.let {
                 val adapter = PitchesListAdapter(sports, requireContext())
-                listView.adapter =  adapter
-                sports.forEach{
+                listView.adapter = adapter
+                sports.forEach {
                     val tmp = LatLng(it.latitude!!, it.longitude!!)
                     mMap.addMarker(MarkerOptions().position(tmp).title(it.name))
                 }
@@ -123,6 +120,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         val zone = getLocationFromAddress(timeZone) ?: LatLng(0.0, 0.0)
         val zoomLevel = 10.0f
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zone, zoomLevel))
+        getLastLocation()
     }
 
     private fun isLocationEnabled(): Boolean {
