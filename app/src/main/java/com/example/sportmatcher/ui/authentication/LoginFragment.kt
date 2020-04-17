@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.signup_layout.*
 import android.text.Editable
 import android.text.TextWatcher
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Handler
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -104,6 +105,7 @@ class LoginFragment : Fragment() {
                                         .setNegativeButton(R.string.ok, null)
                                         //.setIcon(android.R.drawable.ic_dialog_alert)
                                         .show()
+                                        .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
                                 } }, 5000)
                             }
                         }

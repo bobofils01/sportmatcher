@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/friends">
+    android:id="@+id/friends"
+    android:clickable="true">
 
    <TextView
         android:id="@+id/emailFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+       android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/firstNameFriend"
@@ -22,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/emailFriend"
         app:layout_constraintRight_toLeftOf="@id/lastNameFriend"
@@ -34,14 +37,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/firstNameFriend"
-        app:layout_constraintRight_toLeftOf="@id/deleteFriendBtn"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/deleteFriendBtn"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -50,13 +53,22 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/deletion"
-        android:text="DEL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/lastNameFriend"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
-        android:gravity="left|center"/>
+        android:gravity="left|center"/>-->
+
+    <ImageButton
+        android:id="@+id/deleteFriendBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:background="@drawable/deletion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lastNameFriend" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

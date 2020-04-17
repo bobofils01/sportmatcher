@@ -166,6 +166,18 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_height="0dp"
             android:layout_weight="1">
 
+            <TextView
+                android:id="@+id/join_status"
+                android:layout_width="wrap_content"
+                android:text="Join these players and have fun."
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toLeftOf="@+id/btn_join_session"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
             <Button
                 android:id="@+id/btn_join_session"
                 android:layout_width="137dp"
@@ -176,22 +188,10 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:textColor="#ffff"
                 tools:layout_editor_absoluteX="2dp"
                 tools:layout_editor_absoluteY="7dp"
-                app:layout_constraintRight_toLeftOf="@+id/join_status"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/join_status"
-                android:layout_width="wrap_content"
-                android:text="Join these players and have fun."
-                android:textSize="10sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/btn_join_session"
+                app:layout_constraintLeft_toRightOf="@+id/join_status"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_height="wrap_content" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

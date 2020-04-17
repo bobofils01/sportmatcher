@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.sports
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.sportmatcher.R
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.sportmatcher.ui.NavigationActivity
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 
 class SportHomePageActivity : AppCompatActivity() {
@@ -72,5 +74,9 @@ class SportHomePageActivity : AppCompatActivity() {
                 fragment,
                 tag
             ).commit()
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, NavigationActivity::class.java))
     }
 }

@@ -14,11 +14,11 @@
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Enter message"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_send_chat"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/btn_send_chat"

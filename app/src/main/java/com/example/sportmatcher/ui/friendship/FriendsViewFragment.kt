@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.FriendListAdapter
 import com.example.sportmatcher.di.ServiceProvider.getAuthenticatedUserUseCase
+import com.example.sportmatcher.ui.ProfileActivity
 import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
+import kotlinx.android.synthetic.main.friend_item.*
 import kotlinx.android.synthetic.main.friends_view_layout.*
 
 class FriendsViewFragment: Fragment() {
@@ -34,6 +36,7 @@ class FriendsViewFragment: Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val from = getAuthenticatedUserUseCase.execute()
         if (from != null) {
             friendsViewModel.setUser(from)
