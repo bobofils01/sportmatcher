@@ -21,8 +21,6 @@ import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import kotlinx.android.synthetic.main.signup_layout.*
-import android.R.attr.name
-import kotlinx.android.synthetic.main.login_layout.*
 
 
 class SignUpFragment : Fragment() {

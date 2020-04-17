@@ -3,8 +3,6 @@ package com.example.sportmatcher.ui.sports
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,9 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.SessionListAdapter
 import com.example.sportmatcher.model.sport.Pitch
-import com.example.sportmatcher.ui.NavigationActivity
 import com.example.sportmatcher.viewModels.sports.AllSessionsOfAPitchViewModel
 import kotlinx.android.synthetic.main.all_sessions_of_a_pitch_layout.*
+
 
 class AllSessionOfAPitchActivity: AppCompatActivity() {
     companion object {
@@ -54,5 +52,14 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         new_session.setOnClickListener {
             startActivity(AddSessionToPitchActivity.getIntent(this, allSessionsOfAPitchViewModel.pitch))
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, SportHomePageActivity::class.java).apply {
+            putExtra("SPORT_NAME", allSessionsOfAPitchViewModel.pitch.sport)
+        }
+        startActivity(intent)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
     }
 }

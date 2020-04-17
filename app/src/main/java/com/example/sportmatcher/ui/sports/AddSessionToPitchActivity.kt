@@ -234,7 +234,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
     }
 
     private fun isSessionValid(session: Session): Boolean{
-        //TODO belami
+        //TODO Belami
         return true
     }
     
