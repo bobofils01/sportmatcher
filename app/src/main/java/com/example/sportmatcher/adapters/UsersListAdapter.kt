@@ -16,11 +16,11 @@ import kotlinx.android.synthetic.main.user_item.view.*
 class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, private val callbackAddFriend: (User)->Unit):
     ArrayAdapter<User>(ctx, R.layout.user_item, userList), Filterable {
 
-    private val originalFriends = userList.clone() as ArrayList<User>//ArrayList<User>().addAll(userList)
+    private val originalFriends = userList.clone() as ArrayList<User>
     private var userFilter: Filter? = null
 
     private class UserItemViewHolder {
-        internal var email: TextView? = null
+        internal var name: TextView? = null
         internal var addFriendBtn: Button? = null
     }
 
@@ -34,7 +34,8 @@ class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, pri
             view = inflater.inflate(R.layout.user_item, viewGroup, false)
             viewNotNull = view
             viewHolder = UserItemViewHolder()
-            viewHolder.email = view.email_user as TextView
+
+            viewHolder.name = view.name_all_user as TextView
             viewHolder.addFriendBtn = view.addFriendBtn as Button
 
         } else {
@@ -43,7 +44,9 @@ class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, pri
         }
 
         val userItem = getItem(i)
-        viewHolder.email!!.text = userItem!!.email
+
+        val nameDisplayed = userItem!!.firstName + " "+ userItem.lastName!![0].toUpperCase() + (if(userItem.lastName!!.length > 0) "." else "")
+        viewHolder.name!!.text = nameDisplayed
         viewNotNull.tag = viewHolder
 
         viewHolder.addFriendBtn!!.setOnClickListener{callbackAddFriend(userItem)}
@@ -68,7 +71,8 @@ class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, pri
                 val nUserList = ArrayList<User>()
                 for (p in originalFriends.listIterator()) {
                     Log.d("Roman for", p.email.toString())
-                    if (p.email.toLowerCase().startsWith(constraint.toString().toLowerCase())) {
+                    if (p.email.toLowerCase().startsWith(constraint.toString().toLowerCase()) ||
+                        p.firstName!!.toLowerCase().startsWith(constraint.toString().toLowerCase())) {
                         nUserList.add(p)
                     }
                 }

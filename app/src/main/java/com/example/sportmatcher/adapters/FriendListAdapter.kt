@@ -16,7 +16,7 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
 
     private class FriendItemViewHolder {
         internal var idFriend: TextView? = null
-        internal var emailFriend: TextView? = null
+        internal var displayedName: TextView? = null
         internal var firstNameFriend: TextView? = null
         internal var lastNameFriend: TextView? = null
         internal var deletionBtn: ImageButton? = null
@@ -30,7 +30,7 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
             val inflater = LayoutInflater.from(context)
             view = inflater.inflate(R.layout.friend_item, viewGroup, false)
             viewHolder = FriendItemViewHolder()
-            viewHolder.emailFriend = view.emailFriend as TextView
+            viewHolder.displayedName = view.displayedName as TextView
             viewHolder.firstNameFriend = view.firstNameFriend as TextView
             viewHolder.lastNameFriend = view.lastNameFriend as TextView
             viewHolder.deletionBtn = view.deleteFriendBtn as ImageButton
@@ -39,7 +39,10 @@ class FriendListAdapter(friends: ArrayList<User>, ctx: Context, private val call
         }
 
         val friendItem = getItem(i)
-        viewHolder.emailFriend!!.text = friendItem!!.email
+
+        val nameDisplayed = friendItem!!.firstName + " "+ friendItem.lastName!![0].toUpperCase() + (if(friendItem.lastName!!.length > 0) "." else "")
+
+        viewHolder.displayedName!!.text = nameDisplayed
         //viewHolder.firstNameFriend!!.text = friendItem!!.firstName
         //viewHolder.lastNameFriend!!.text = friendItem!!.lastName
         view!!.tag = viewHolder

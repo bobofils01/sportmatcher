@@ -12,17 +12,19 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.model.User
 import kotlinx.android.synthetic.main.friend_item.view.*
 
-class PlayersListAdapter(private val players: ArrayList<User>,private val currentUser: User, private val callbackDeletion : (User)->Unit) : RecyclerView.Adapter<PlayersListAdapter.PlayerItemViewHolder>()  {
+class PlayersListAdapter(private val players: ArrayList<User>,private val currentUser: User, private val callbackDeletion : (User)->Unit):
+    RecyclerView.Adapter<PlayersListAdapter.PlayerItemViewHolder>()  {
 
     class PlayerItemViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         internal var idFriend: TextView? = null
-        internal var emailFriend: TextView? = null
+        internal var displayedName: TextView? = null
         internal var firstNameFriend: TextView? = null
         internal var lastNameFriend: TextView? = null
         internal var deletionBtn: ImageButton? = null
 
         fun bind(user: User, currentUser: User,callbackDeletion : (User)->Unit) {
-            emailFriend!!.text = user.email
+            val nameDisplayed = user.firstName + " "+ user.lastName!![0].toUpperCase() + (if(user.lastName!!.length > 0) "." else "")
+            displayedName!!.text = nameDisplayed
             if(currentUser == user) {
                 deletionBtn!!.isClickable = false
                 deletionBtn!!.visibility = View.INVISIBLE
@@ -36,7 +38,7 @@ class PlayersListAdapter(private val players: ArrayList<User>,private val curren
         }
 
         init {
-            emailFriend = view.emailFriend as TextView
+            displayedName = view.displayedName as TextView
             firstNameFriend = view.firstNameFriend as TextView
             lastNameFriend = view.lastNameFriend as TextView
             deletionBtn = view.deleteFriendBtn as ImageButton
