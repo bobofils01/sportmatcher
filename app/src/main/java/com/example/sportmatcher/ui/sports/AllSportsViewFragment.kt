@@ -133,7 +133,6 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
     private fun getLastLocation() {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
-
                 fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
                     var location: Location? = task.result
                     if (location != null) {
@@ -172,13 +171,13 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
         ActivityCompat.requestPermissions(
             requireActivity(),
             arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
-            Companion.PERMISSION_ID
+            PERMISSION_ID
         )
     }
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == Companion.PERMISSION_ID) {
+        if (requestCode == PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 getLastLocation()
             }

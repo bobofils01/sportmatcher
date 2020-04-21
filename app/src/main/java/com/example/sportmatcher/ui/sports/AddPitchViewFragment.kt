@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.sports
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,7 +21,6 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import kotlinx.android.synthetic.main.add_pitch_layout.*
-import kotlinx.android.synthetic.main.all_sports_empty_view_layout.*
 
 
 class AddPitchViewFragment: Fragment(){
@@ -104,8 +104,18 @@ class AddPitchViewFragment: Fragment(){
         editTextDescriptionPitchID.addTextChangedListener(pitchTextWatcher)
 
         addPitchBtn.setOnClickListener {
-            viewmodel.onAddPitchClicked()
-            allSportsViewModel.goBackSportHomepage()
+            if(viewmodel.address.value.isNullOrBlank()){
+                AlertDialog.Builder(context)
+                    .setTitle("Missing location of the pitch")
+                    .setMessage("Where is this new pitch? Please try again.")
+                    .setNegativeButton(android.R.string.ok, null)
+                    //.setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
+            }
+            else {
+                viewmodel.onAddPitchClicked()
+                allSportsViewModel.goBackSportHomepage()
+            }
         }
 
         /*
