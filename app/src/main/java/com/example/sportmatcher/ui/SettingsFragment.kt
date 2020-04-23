@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.sportmatcher.R
 import com.example.sportmatcher.di.ServiceProvider
+import com.example.sportmatcher.ui.friendship.FriendsFragment
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 import kotlinx.android.synthetic.main.settings_layout.*
 
@@ -32,7 +32,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_layout, container, false)
+        return inflater.inflate(com.example.sportmatcher.R.layout.settings_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +49,18 @@ class SettingsFragment : Fragment() {
         logoSize.setMargins(0, 0, 75, 0)
         open_door.layoutParams = logoSize
 
+        //friends_icon.layoutParams = logoSize
+
         log_out_text.setTextSize(TypedValue.COMPLEX_UNIT_SP,25F)
+
+        //friends_text.setTextSize(TypedValue.COMPLEX_UNIT_SP,25F)
+
+        /*friends.setOnClickListener{
+            val nextFrag = FriendsFragment()
+            activity!!.supportFragmentManager.beginTransaction()
+                .replace(this.id, nextFrag, "findThisFragment")
+                .addToBackStack(null).commit()
+        }*/
 
         log_out.setOnClickListener{
             progress.show()
