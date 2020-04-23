@@ -33,4 +33,13 @@
         <item name="colorControlActivated">@color/colorApp</item>
         <item name="colorControlHighlight">@color/colorApp</item>
     </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">#ffff</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">#ffff</item>
+    </style>
 </resources>

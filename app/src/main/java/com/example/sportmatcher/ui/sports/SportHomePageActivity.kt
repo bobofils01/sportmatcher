@@ -3,13 +3,14 @@ package com.example.sportmatcher.ui.sports
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.example.sportmatcher.R
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.ui.NavigationActivity
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
+
 
 class SportHomePageActivity : AppCompatActivity() {
 
@@ -27,9 +28,17 @@ class SportHomePageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.map_layout)
+        setContentView(com.example.sportmatcher.R.layout.map_layout)
+
+        //Toolbar
+        setSupportActionBar(findViewById(com.example.sportmatcher.R.id.toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         sportName = intent.getStringExtra("SPORT_NAME")
+
+        //Place le nom de su sport dans le toolbar
+        supportActionBar?.title = sportName.toLowerCase().capitalize()
 
         initLiveDatas()
     }
@@ -70,7 +79,7 @@ class SportHomePageActivity : AppCompatActivity() {
     private fun setFragment(fragment: Fragment, tag: String? = null) {
         supportFragmentManager.beginTransaction()
             .replace(
-                R.id.sportHomePageFragment,
+                com.example.sportmatcher.R.id.sportHomePageFragment,
                 fragment,
                 tag
             ).commit()
@@ -78,5 +87,18 @@ class SportHomePageActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         startActivity(Intent(this, NavigationActivity::class.java))
+    }
+
+    //Si on appuie sur le boutton back du toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                // todo: goto back activity from here
+                startActivity(Intent(this, NavigationActivity::class.java))
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
