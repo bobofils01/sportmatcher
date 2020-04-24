@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.domain.utils.isEmailValid
@@ -16,6 +17,7 @@ import com.example.sportmatcher.domain.utils.isPasswordValid
 import com.example.sportmatcher.ui.LoginActivity
 import com.example.sportmatcher.ui.utils.UIUtils
 import com.example.sportmatcher.viewModels.authentication.SignupViewModel
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.android.synthetic.main.email_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
@@ -115,7 +117,16 @@ class SignUpFragment : Fragment() {
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
 
-                viewModel.onRegisterClicked()
+
+                try{
+                    viewModel.onRegisterClicked()
+                }
+                catch (e: FirebaseAuthUserCollisionException){ //Dans le cas où l'email a déjà été utilisé
+                }
+                finally{
+                    startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
+                    Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
+                }
             }
         }
 /*
@@ -163,4 +174,14 @@ class SignUpFragment : Fragment() {
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
+
+    /*fun isCheckEmail(email: String, listener: OnEmailCheckListener) {
+        mAuth.fetchProvidersForEmail(email)
+            .addOnCompleteListener(OnCompleteListener<ProviderQueryResult> { task ->
+                val check = !task.result!!.providers!!.isEmpty()
+
+                listener.onSucess(check)
+            })
+
+    }*/
 }

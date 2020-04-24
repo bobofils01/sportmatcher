@@ -33,6 +33,7 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.all_sessions_of_a_pitch_layout)
+
         allSessionsOfAPitchViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
         val listView : ListView = listViewAllSessions as ListView
 

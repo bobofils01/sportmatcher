@@ -14,7 +14,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="109dp"
-                    android:background="@color/colorGrey">
+                    android:background="@color/colorApp">
 
                     <TextView
                         android:id="@+id/pitch_address"
@@ -24,7 +24,7 @@
                         android:gravity="center|center_horizontal"
                         android:paddingLeft="4dp"
                         android:text="Pitch address"
-                        android:textColor="@android:color/black"
+                        android:textColor="#FFFFFF"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
                         android:gravity="center_horizontal"
                         android:paddingLeft="4dp"
                         android:text="Pitch name"
-                        android:textColor="@android:color/black"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/pitch_address"
@@ -64,7 +64,7 @@
                         android:layout_marginLeft="4dp"
                         android:layout_marginBottom="4dp"
                         android:text="All sessions"
-                        android:textColor="@android:color/black"
+                        android:textColor="#FFFFFF"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"

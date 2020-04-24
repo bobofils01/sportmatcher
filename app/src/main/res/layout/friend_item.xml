@@ -32,18 +32,6 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
 
-    <TextView
-        android:id="@+id/lastNameFriend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/firstNameFriend"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
     <!--<ImageButton
         android:id="@+id/deleteFriendBtn"
         android:layout_width="20dp"
@@ -61,7 +49,7 @@
         app:layout_constraintVertical_bias="0.499"
         android:gravity="left|center"/>-->
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/deleteFriendBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -69,6 +57,27 @@
         android:background="@drawable/deletion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lastNameFriend" />-->
+
+    <TextView
+        android:id="@+id/lastNameFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/firstNameFriend"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/deleteFriendBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/deletion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lastNameFriend" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

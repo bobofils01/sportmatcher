@@ -64,7 +64,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:hint="Name of the pitch"
-            android:text="@={addPitchViewModel.namePitch}" />
+            android:text="@={addPitchViewModel.namePitch}"
+            android:inputType="textCapSentences"/>
 
         <EditText
             android:id="@+id/editTextDescriptionPitchID"
@@ -74,7 +75,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:hint="Description of the pitch"
-            android:text="@={addPitchViewModel.description}" />
+            android:text="@={addPitchViewModel.description}"
+            android:inputType="textCapSentences"/>
 
         <Button
             android:id="@+id/addPitchBtn"
