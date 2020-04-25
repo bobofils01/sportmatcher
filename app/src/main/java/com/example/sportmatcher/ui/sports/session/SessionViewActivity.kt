@@ -6,14 +6,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.SessionViewPageAdapter
 import com.example.sportmatcher.model.sport.Session
+import com.example.sportmatcher.ui.NavigationActivity
 
 import kotlinx.android.synthetic.main.activity_session_view.*
 import kotlinx.android.synthetic.main.navigation_bar_layout.*
-
+import kotlinx.android.synthetic.main.show_session_fragment.session_title
 
 class SessionViewActivity : AppCompatActivity() {
 
@@ -33,6 +36,11 @@ class SessionViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_session_view)
 
+        //Toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         val currentSession = intent.extras?.get(SESSION_KEY) as Session
 
         val fragment =
@@ -49,8 +57,16 @@ class SessionViewActivity : AppCompatActivity() {
         tabs_sessions_page.getTabAt(1)?.setIcon(R.drawable.chat)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
-        return super.onCreateOptionsMenu(menu)
+    //Si on appuie sur le boutton back du toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                super.onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
+

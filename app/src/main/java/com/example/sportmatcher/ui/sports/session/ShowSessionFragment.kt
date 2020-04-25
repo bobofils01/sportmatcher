@@ -31,7 +31,7 @@ import com.example.sportmatcher.R
 class ShowSessionFragment : Fragment() {
 
     companion object {
-        private const val SESSION_KEY = "SESSION_KEY"
+        const val SESSION_KEY = "SESSION_KEY"
         fun newInstance(session : Session) :Fragment = ShowSessionFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(SESSION_KEY, session)
