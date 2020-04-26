@@ -122,8 +122,6 @@ class SignUpFragment : Fragment() {
                     viewModel.onRegisterClicked()
                 }
                 catch (e: FirebaseAuthUserCollisionException){ //Dans le cas où l'email a déjà été utilisé
-                }
-                finally{
                     startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
                     Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
                 }

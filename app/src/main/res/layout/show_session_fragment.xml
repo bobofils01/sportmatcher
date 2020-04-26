@@ -47,13 +47,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Date : "
-            android:gravity="center|center_horizontal" />
+            android:gravity="center|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/session_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"/>
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
 
@@ -67,13 +70,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Time : "
-            android:gravity="center|center_horizontal" />
+            android:gravity="center|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/session_time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"/>
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -86,13 +92,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Description : "
-            android:gravity="center|center_horizontal" />
+            android:gravity="center|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/session_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"/>
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
     <LinearLayout
@@ -105,13 +114,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center|center_horizontal"
-            android:text="Max players : " />
+            android:text="Max players : "
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/session_max_players"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"/>
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
 
@@ -125,13 +137,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Price per player : "
-            android:gravity="center|center_horizontal" />
+            android:gravity="center|center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
 
         <TextView
             android:id="@+id/session_price_player"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right"/>
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="30dp"/>
 
     </LinearLayout>
 
