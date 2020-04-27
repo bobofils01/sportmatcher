@@ -1,7 +1,11 @@
 package com.example.sportmatcher.ui.authentication
 
+import android.R
+import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -11,14 +15,19 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.domain.utils.isEmailValid
 import com.example.sportmatcher.domain.utils.isPasswordValid
+import com.example.sportmatcher.model.authentication.AuthenticatedState
+import com.example.sportmatcher.model.authentication.AuthenticationInProgress
 import com.example.sportmatcher.ui.LoginActivity
 import com.example.sportmatcher.ui.utils.UIUtils
+import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import com.example.sportmatcher.viewModels.authentication.SignupViewModel
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.android.synthetic.main.email_layout.*
+import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
@@ -43,6 +52,9 @@ class SignUpFragment : Fragment() {
         ViewModelProvider(this).get(SignupViewModel::class.java)
     }
 
+    private val viewmodelLogin: LoginViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -118,13 +130,33 @@ class SignUpFragment : Fragment() {
                 progressBar.visibility = View.VISIBLE
 
 
-                try{
-                    viewModel.onRegisterClicked()
-                }
-                catch (e: FirebaseAuthUserCollisionException){ //Dans le cas où l'email a déjà été utilisé
-                    startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
-                    Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
-                }
+
+                viewModel.onRegisterClicked()
+
+                viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
+                    it?.let { state ->
+                        when (state) {
+                            is AuthenticatedState -> {}
+                            is AuthenticationInProgress -> {}
+                            else -> {
+                                val handler = Handler()
+                                handler.postDelayed({run{
+                                    progressBar.visibility = View.GONE
+
+                                    AlertDialog.Builder(context)
+                                        .setTitle("Mail adress error.")
+                                        .setMessage("The email address you entered is already used. Please use another.")
+                                        /*.setPositiveButton(R.string.yes, DialogInterface.OnClickListener() {
+                                            void onClick(DialogInterface dialog, int which){}})*/
+                                        .setNegativeButton(R.string.ok, null)
+                                        //.setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show()
+                                        .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
+                                } }, 5000)
+                            }
+                        }
+                    }
+                })
             }
         }
 /*
