@@ -18,16 +18,16 @@ class NavigationPageAdapter(fm: FragmentManager, private var tabCount: Int) : Fr
         Log.d("Roman NavigationPageAda", position.toString())
         return when (position){
             0 -> {
-                SportChoiceFragment()
+                SportChoiceFragment() //Lance la liste des sports à l'appuie du boutton d'indice 0 dans la bar de navigation
             }
             1 -> {
-                PreferencesFragment()
+                PreferencesFragment() //Lance la gestion des préférences à l'appuie du boutton d'indice 1 dans la bar de navigation
             }
             2 -> {
-                FriendsFragment()
+                FriendsFragment() //Lance la liste d'amis à l'appuie du boutton d'indice 2 dans la bar de navigation
             }
             else -> {
-                SettingsFragment()
+                SettingsFragment() //Lance les paramètres à l'appuie du boutton d'indice 3 dans la bar de navigation
             }
         }
     }

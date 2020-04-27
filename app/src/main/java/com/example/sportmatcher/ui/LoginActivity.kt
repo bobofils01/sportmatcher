@@ -102,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
         MultiDex.install(this)
     }
 
+    //Quand l'utilisateur souhaite faire un retour en arrière si qui cause l'arrêt de la création de son compte
     override fun onBackPressed(){
         viewModel.getLoginViewStateLiveData().observe(
             this, Observer {
@@ -116,6 +117,7 @@ class LoginActivity : AppCompatActivity() {
                             else if(name.visibility == View.GONE)
                                 name.visibility = View.VISIBLE
 
+                            //Affiche le message de prévention comme quoi l'utilisateur va quitter la création du compte
                             else{
                                 AlertDialog.Builder(this)
                                     .setTitle("You are about to stop creating your account")

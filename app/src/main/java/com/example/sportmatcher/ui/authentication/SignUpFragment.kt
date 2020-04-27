@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.login_layout.*
 import kotlinx.android.synthetic.main.name_layout.*
 import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
+import kotlinx.android.synthetic.main.sign_up_first_step.*
 import kotlinx.android.synthetic.main.signup_layout.*
 
 
@@ -82,11 +83,19 @@ class SignUpFragment : Fragment() {
         //password
         UIUtils.addOnTextViewChange(password, viewModel.password)
 
+        //Ecran d'acceuil
+        first_next.setOnClickListener{
+            welcome.visibility = View.GONE
+        }
+
+        //Lorsque l'utilisateur a entré son nom et prénom
         next1.setOnClickListener{
             when {
+                //Vérifie que le nom et prénom ne contiennent pas de chiffres
                 first_name.text.toString().matches(".*\\d.*".toRegex()) -> first_name.error = "Your name can't contain numbers"
                 last_name.text.toString().matches(".*\\d.*".toRegex()) -> last_name.error = "Your name can't contain numbers"
                 else -> {
+                    //Cache le clavier
                     hideKeyboard()
 
                     name.visibility = View.GONE
@@ -97,16 +106,17 @@ class SignUpFragment : Fragment() {
         //Débloque le boutton Register lorsque les champs sont remplis
         email.addTextChangedListener(signUpTextWatcher)
 
-        next2.setOnClickListener{
+        next2.setOnClickListener{//Lorsque l'utilisateur à entré son adresse mail
 
             if(email.text.toString().endsWith(" ")) //Vérifie s'il n'y a pas d'espace en trop dans l'adresse mail
                 email.setText(email.text.toString().trim())
 
+            //Si l'adresse mail n'est pas valide
             when{!email.text.toString().isEmailValid() -> email.error = "Please enter a valid mail address."
 
                 else -> {
+                    //Cache le clavier
                     hideKeyboard()
-
 
                     enter_email.visibility = View.GONE
                 }
@@ -115,12 +125,13 @@ class SignUpFragment : Fragment() {
 
         password.addTextChangedListener(signUpTextWatcher)
 
-        confirm_register.setOnClickListener {
+        confirm_register.setOnClickListener { //Dernière étape de l'inscription
 
             //Retire le clavier
             hideKeyboard()
 
-            if(!password.text.toString().isPasswordValid()) //Si le mot de passe ne suit pas les conditions
+            //Si le mot de passe ne suit pas les conditions
+            if(!password.text.toString().isPasswordValid())
                 password.error = "Your password must contain at least 6 characters composed with " +
                         "at least one letter and one number"
 
@@ -129,10 +140,15 @@ class SignUpFragment : Fragment() {
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
 
+                try{ //L'utilisateur est alors inscrit si l'adresse mail qu'il a donné n'a pas encore été utilisée
+                    viewModel.onRegisterClicked()
+                }
+                catch (e: FirebaseAuthUserCollisionException){ //Dans le cas où l'email a déjà été utilisé
+                    startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
+                    Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
+                }
 
-
-                viewModel.onRegisterClicked()
-
+                //Dans le cas où l'email a déjà été utilisé
                 viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
                     it?.let { state ->
                         when (state) {
@@ -142,6 +158,7 @@ class SignUpFragment : Fragment() {
                                 val handler = Handler()
                                 handler.postDelayed({run{
                                     progressBar.visibility = View.GONE
+                                    enter_email.visibility = View.VISIBLE
 
                                     AlertDialog.Builder(context)
                                         .setTitle("Mail adress error.")
@@ -152,7 +169,7 @@ class SignUpFragment : Fragment() {
                                         //.setIcon(android.R.drawable.ic_dialog_alert)
                                         .show()
                                         .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
-                                } }, 5000)
+                                } }, 3000)
                             }
                         }
                     }
@@ -174,11 +191,13 @@ class SignUpFragment : Fragment() {
 
         })*/
 
-        login.setOnClickListener{ //Si l'utilisateur a déjà un compte
+        //Si l'utilisateur a déjà un compte
+        login.setOnClickListener{
             startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
         }
     }
 
+    //Débloque les bouttons dès que les champs vides sont remplis
     private val signUpTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
@@ -200,7 +219,8 @@ class SignUpFragment : Fragment() {
         override fun afterTextChanged(s: Editable) {}
     }
 
-    private fun hideKeyboard(){  //Retire le clavier
+    //Retire le clavier
+    private fun hideKeyboard(){
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
     }

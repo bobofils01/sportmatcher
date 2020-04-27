@@ -62,6 +62,7 @@ class SettingsFragment : Fragment() {
                 .addToBackStack(null).commit()
         }*/
 
+        //Déconnexion
         log_out.setOnClickListener{
             progress.show()
 

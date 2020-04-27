@@ -60,6 +60,7 @@ class FriendsViewFragment: Fragment() {
                     .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
             }
             friendsListView.adapter = adapter
+            //Affiche le nombre d'amis
             when (friends.size){
                 0 -> nbr_of_friends.text = "No Friend"
                 1 -> nbr_of_friends.text = "1 Friend"

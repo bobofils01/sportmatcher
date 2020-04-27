@@ -7,6 +7,10 @@
         android:layout_height="match_parent">
 
         <include
+            android:id="@+id/welcome"
+            layout="@layout/sign_up_first_step"/>
+
+        <include
             android:id="@+id/progressBar"
             android:visibility="gone"
             layout="@layout/progress_bar_layout"/>
@@ -22,18 +26,6 @@
         <include
             android:id="@+id/enter_password"
             layout="@layout/password_layout"/>
-
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="77dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:text="Already have an account?"
-            android:textSize="15dp"
-            android:clickable="true"
-            android:textStyle="bold"
-            android:textColor="#1CA6BE"/>
 
     </LinearLayout>
 </layout>

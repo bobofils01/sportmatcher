@@ -35,6 +35,7 @@ class SportChoiceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Liste contenant les logos utilisés pour chaque sport
+        //TODO mettre les images dans la database
         val sportsLogo = ArrayList<Int>()
         sportsLogo.add(com.example.sportmatcher.R.drawable.basketball)
         sportsLogo.add(com.example.sportmatcher.R.drawable.soccer)
@@ -106,64 +107,10 @@ class SportChoiceFragment : Fragment() {
 
     }
 
-    private fun dpToPx(dp: Int): Int {
-        val density: Float = resources
-            .displayMetrics.density
-        return Math.round(dp.toFloat() * density)
-    }
-
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.sport ->{
-            Toast.makeText(this,"Sports", Toast.LENGTH_LONG).show()
-            true
-        }
-
-        R.id.friends -> {
-            startActivity(Intent(this, FriendsActivity::class.java))
-            true
-        }
-
-        R.id.preferences -> {
-            startActivity(Intent(this, PreferencesActivity::class.java))
-            true
-        }
-
-        R.id.log_out ->{
-            viewModel.onLogoutClicked()
-            Toast.makeText(this,"Logged out", Toast.LENGTH_LONG).show()
-            //finish()
-            startActivity(Intent(this, WelcomeActivity::class.java))
-            true
-        }
-
-        /*android.R.id.home ->{
-            Toast.makeText(this,"Home action",Toast.LENGTH_LONG).show()
-            true
-        }*/
-
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }*/
-
     private fun onSportClick(sportName: String) {
         val intent = Intent(activity, SportHomePageActivity::class.java).apply {
             putExtra("SPORT_NAME", sportName)
         }
         startActivity(intent)
     }
-
-    /*override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_HOME)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-    }*/
-
-
 }

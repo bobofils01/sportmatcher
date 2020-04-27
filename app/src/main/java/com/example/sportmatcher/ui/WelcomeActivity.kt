@@ -81,65 +81,15 @@ class WelcomeActivity : AppCompatActivity(){
 
         }}, 2000)
 
+        //Quand l'utilisateur appuie sur le boutton login
         login.setOnClickListener {
             startActivity(LoginActivity.getIntent(this, LoginViewState.SIGNIN))
         }
 
+        //Quand l'utilisateur appuie sur le boutton signup
         signup.setOnClickListener {
             startActivity(LoginActivity.getIntent(this, LoginViewState.SIGNUP))
         }
-    }
-
-    private fun initLiveDatas(){
-        viewModel.getAuthenticationStateLiveData().observe(this, Observer {
-            it?.let { state ->
-                when (state) {
-                    is AuthenticatedState -> {
-                        /*val progressBar: ProgressBar = findViewById(R.id.progress_bar)
-                        progressBar.visibility = View.VISIBLE*/
-                        val intent = Intent(this, SportChoiceActivity::class.java)
-                        startActivity(intent)
-                    }
-                    is AuthenticationInProgress -> {
-                        //TODO show progress bar
-                        Toast.makeText(this, "In progress", Toast.LENGTH_LONG).show()
-                    }
-                    else -> {
-                        Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        })
-
-        viewModel.getLoginViewStateLiveData().observe(this, Observer {
-            it?.let{
-                    state ->
-                when(state) {
-                    LoginViewState.SIGNIN -> {
-                        setFragment(getFragment(LoginActivity.LOGIN_FRAG_TAG),
-                            LoginActivity.LOGIN_FRAG_TAG
-                        )
-                    }
-                }
-            }
-        })
-    }
-
-    private fun getFragment(tag: String): Fragment {
-        return when (tag) {
-            LoginActivity.LOGIN_FRAG_TAG -> LoginFragment.newInstance("vide")
-            //LoginActivity.SIGN_UP_FRAG_TAG -> SignUpFragment.newInstance("dhdh")
-            else -> throw IllegalArgumentException("Key doesn't exist")
-        }
-    }
-
-    private fun setFragment(fragment: Fragment, tag: String? = null) {
-        supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.loginContainer,
-                fragment,
-                tag
-            ).commit()
     }
 
     override fun attachBaseContext(base: Context) {

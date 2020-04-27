@@ -14,12 +14,12 @@ class SessionViewPageAdapter(fm: FragmentManager, private var tabCount: Int, pri
     override fun getItem(position: Int): Fragment {
         return when (position){
             0 -> {
-                ShowSessionFragment.newInstance(
+                ShowSessionFragment.newInstance( //Montre la session à l'appuie du boutton d'indice 0 dans la bar de navigation
                     session
                 )
             }
             else -> {
-                SessionChatFragment.newInstance(
+                SessionChatFragment.newInstance( //Lance le chat à l'appuie du boutton d'indice 1 dans la bar de navigation
                     session
                 )
             }

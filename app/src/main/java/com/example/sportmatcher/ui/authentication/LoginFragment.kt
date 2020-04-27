@@ -114,11 +114,11 @@ class LoginFragment : Fragment() {
             }
         }
 
-        signup_btn.setOnClickListener {
+        signup_btn.setOnClickListener {//Si l'utilisateur souhaite s'inscrire
             viewmodel.onSignUpClicked()
         }
 
-        forgot_password_btn.setOnClickListener {
+        forgot_password_btn.setOnClickListener {//Si l'utilisateur oublie son mot de passe
             startActivity(Intent(view.context, ForgotPasswordActivity::class.java))
         }
 

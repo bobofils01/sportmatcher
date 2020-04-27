@@ -18,6 +18,7 @@ class NavigationActivity : AppCompatActivity() {
             supportFragmentManager,
             4
         )
+        //Bar de navigation de l'écran d'acceuil une fois connecté
         val viewPage: ViewPager = findViewById(R.id.container)
         viewPage.adapter  = fragment
         tabs.setupWithViewPager(viewPage)
@@ -27,6 +28,7 @@ class NavigationActivity : AppCompatActivity() {
         tabs.getTabAt(3)?.setIcon(R.drawable.settings)
     }
 
+    //Quand l'utilisateur souhaite faire un retour en arrière
     override fun onBackPressed() { //Empêche l'utilisateur de se déconnecter et lui fait quitter l'application en cas de retour en arrière
         if(tabs.selectedTabPosition != 0)
             tabs.getTabAt(0)?.select()

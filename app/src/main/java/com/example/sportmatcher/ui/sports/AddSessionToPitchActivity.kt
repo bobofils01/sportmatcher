@@ -254,6 +254,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
 
     }
 
+    //Quand l'utilisateur souhaite faire un retour en arrière
     override fun onBackPressed() {
         if(session_info.visibility == View.GONE)
             session_info.visibility = View.VISIBLE

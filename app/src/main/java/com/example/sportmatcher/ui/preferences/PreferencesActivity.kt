@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
-import com.example.sportmatcher.ui.FriendsActivity
 import com.example.sportmatcher.ui.SportChoiceActivity
 import com.example.sportmatcher.ui.WelcomeActivity
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
@@ -33,39 +32,4 @@ class PreferencesActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.sport ->{
-            startActivity(Intent(this, SportChoiceActivity::class.java))
-            true
-        }
-
-        R.id.friends -> {
-            startActivity(Intent(this, FriendsActivity::class.java))
-            true
-        }
-
-        R.id.preferences -> {
-            Toast.makeText(this, "Preferences", Toast.LENGTH_SHORT).show()
-            true
-        }
-
-        R.id.log_out ->{
-            viewModel.onLogoutClicked()
-            Toast.makeText(this,"Logged out", Toast.LENGTH_LONG).show()
-            //finish()
-            startActivity(Intent(this, WelcomeActivity::class.java))
-            true
-        }
-
-        /*android.R.id.home ->{
-            Toast.makeText(this,"Home action",Toast.LENGTH_LONG).show()
-            true
-        }*/
-
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
 }

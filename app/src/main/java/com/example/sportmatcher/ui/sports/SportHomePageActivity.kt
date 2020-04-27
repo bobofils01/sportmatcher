@@ -85,6 +85,7 @@ class SportHomePageActivity : AppCompatActivity() {
             ).commit()
     }
 
+    //Quand l'utilisateur souhaite faire un retour en arrière
     override fun onBackPressed() {
         startActivity(Intent(this, NavigationActivity::class.java))
     }

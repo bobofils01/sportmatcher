@@ -35,6 +35,7 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.all_sessions_of_a_pitch_layout)
 
+        //Assure la transparence du boutton d'ajout
         new_session.alpha = 0.40f
 
         allSessionsOfAPitchViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
@@ -58,6 +59,7 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         }
     }
 
+    //Quand l'utilisateur souhaite faire un retour en arrière
     override fun onBackPressed() {
         val intent = Intent(this, SportHomePageActivity::class.java).apply {
             putExtra("SPORT_NAME", allSessionsOfAPitchViewModel.pitch.sport)

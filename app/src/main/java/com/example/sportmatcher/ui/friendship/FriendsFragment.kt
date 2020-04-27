@@ -39,6 +39,7 @@ class FriendsFragment: Fragment() {
         val viewPage: ViewPager = containerFriendsViewPage
         viewPage.adapter  = fragment
 
+        //Bar de navigation de l'onglet amis
         tabsFriendsPage.setupWithViewPager(viewPage)
         tabsFriendsPage.getTabAt(0)?.setIcon(R.drawable.friends_list)
         tabsFriendsPage.getTabAt(1)?.setIcon(R.drawable.add_friend)
