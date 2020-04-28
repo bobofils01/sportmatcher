@@ -11,22 +11,16 @@ import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.FriendsPageAdapter
 import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
 import kotlinx.android.synthetic.main.friends_layout.*
-import kotlinx.android.synthetic.main.friends_view_layout.*
 
 class FriendsFragment: Fragment() {
-
-    private val friendsViewModel : FriendsViewModel by lazy {
-        ViewModelProvider(this).get(FriendsViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.friends_layout, container, false)
         // Inflate the layout for this fragment
-        return view
+        return inflater.inflate(R.layout.friends_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -204,7 +204,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
             e.stackTrace
         }
 
-        return p1;
+        return p1
     }
 
 }

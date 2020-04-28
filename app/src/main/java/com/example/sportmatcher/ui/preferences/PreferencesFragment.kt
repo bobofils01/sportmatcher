@@ -1,5 +1,6 @@
 package com.example.sportmatcher.ui.preferences
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -10,6 +11,7 @@ import com.example.sportmatcher.di.ServiceProvider.updateSportsFavouriteUseCase
 
 class PreferencesFragment : PreferenceFragmentCompat() {
 
+    @SuppressLint("CheckResult")
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         getAllSportsUseCase.execute().subscribe{sports ->
