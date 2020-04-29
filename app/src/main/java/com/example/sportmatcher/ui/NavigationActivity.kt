@@ -14,6 +14,12 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_bar_layout)
 
+        //Toolbar
+        setSupportActionBar(findViewById(com.example.sportmatcher.R.id.toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = "Sportmatcher"
+
         val fragment = NavigationPageAdapter(
             supportFragmentManager,
             4

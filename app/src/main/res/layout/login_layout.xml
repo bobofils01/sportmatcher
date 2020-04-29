@@ -21,6 +21,14 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="Sportmatcher"
+            android:textSize="35dp" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="106dp"
             android:layout_alignParentBottom="true"
             android:gravity="center"

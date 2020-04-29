@@ -8,6 +8,18 @@
     android:background="#fff"
     tools:context=".ui.LoginActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="292dp"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="Sportmatcher"
+        android:textColor="@color/colorApp"
+        android:textSize="50dp" />
+
     <Button
         android:id="@+id/btn_login"
         style="@style/Widget.AppCompat.Button"
@@ -54,8 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="280dp"
-        android:src="@drawable/sportmatcher"/>
+        android:layout_marginBottom="296dp"
+        android:src="@drawable/sportmatcher" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -67,7 +79,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="164dp"
         android:layout_marginRight="164dp"
-        android:layout_marginBottom="215dp"
+        android:layout_marginBottom="183dp"
         android:indeterminateTint="#1CA6BE" />
 
 

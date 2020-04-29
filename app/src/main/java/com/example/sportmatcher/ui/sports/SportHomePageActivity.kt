@@ -37,7 +37,7 @@ class SportHomePageActivity : AppCompatActivity() {
 
         sportName = intent.getStringExtra("SPORT_NAME")
 
-        //Place le nom de su sport dans le toolbar
+        //Place le nom de du sport dans le toolbar
         supportActionBar?.title = sportName.toLowerCase().capitalize()
 
         initLiveDatas()
