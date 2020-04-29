@@ -33,6 +33,12 @@ import kotlinx.android.synthetic.main.password_layout.*
 import kotlinx.android.synthetic.main.progress_bar_layout.view.*
 import kotlinx.android.synthetic.main.sign_up_first_step.*
 import kotlinx.android.synthetic.main.signup_layout.*
+import androidx.appcompat.app.AppCompatActivity
+import android.R.attr.name
+import android.content.Intent
+import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
+import com.example.sportmatcher.ui.NavigationActivity
 
 
 class SignUpFragment : Fragment() {
@@ -67,6 +73,14 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar as Toolbar?)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        //Place un titre dans le toolbar
+        (activity as AppCompatActivity).supportActionBar?.title = "Create an account"
+
         first_name.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
 
         last_name.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
@@ -86,6 +100,9 @@ class SignUpFragment : Fragment() {
         //Ecran d'acceuil
         first_next.setOnClickListener{
             welcome.visibility = View.GONE
+
+            //Place un titre dans le toolbar
+            (activity as AppCompatActivity).supportActionBar?.title = "Name"
         }
 
         //Lorsque l'utilisateur a entré son nom et prénom
@@ -99,6 +116,9 @@ class SignUpFragment : Fragment() {
                     hideKeyboard()
 
                     name.visibility = View.GONE
+
+                    //Place un titre dans le toolbar
+                    (activity as AppCompatActivity).supportActionBar?.title = "Email address"
                 }
             }
         }
@@ -119,6 +139,8 @@ class SignUpFragment : Fragment() {
                     hideKeyboard()
 
                     enter_email.visibility = View.GONE
+                    //Place un titre dans le toolbar
+                    (activity as AppCompatActivity).supportActionBar?.title = "Password"
                 }
             }
         }
@@ -136,6 +158,9 @@ class SignUpFragment : Fragment() {
                         "at least one letter and one number"
 
             else{
+                //Retire le toolbar
+                toolbar.visibility = View.GONE
+
                 //ProgressBar
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
@@ -157,14 +182,15 @@ class SignUpFragment : Fragment() {
                             else -> {
                                 val handler = Handler()
                                 handler.postDelayed({run{
+                                    //Replace le toolbar
+                                    toolbar.visibility = View.VISIBLE
+
                                     progressBar.visibility = View.GONE
                                     enter_email.visibility = View.VISIBLE
 
                                     AlertDialog.Builder(context)
                                         .setTitle("Mail adress error.")
                                         .setMessage("The email address you entered is already used. Please use another.")
-                                        /*.setPositiveButton(R.string.yes, DialogInterface.OnClickListener() {
-                                            void onClick(DialogInterface dialog, int which){}})*/
                                         .setNegativeButton(R.string.ok, null)
                                         //.setIcon(android.R.drawable.ic_dialog_alert)
                                         .show()
@@ -224,14 +250,4 @@ class SignUpFragment : Fragment() {
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
-
-    /*fun isCheckEmail(email: String, listener: OnEmailCheckListener) {
-        mAuth.fetchProvidersForEmail(email)
-            .addOnCompleteListener(OnCompleteListener<ProviderQueryResult> { task ->
-                val check = !task.result!!.providers!!.isEmpty()
-
-                listener.onSucess(check)
-            })
-
-    }*/
 }

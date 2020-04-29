@@ -7,6 +7,10 @@
         android:layout_height="match_parent">
 
         <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
+
+        <include
             android:id="@+id/welcome"
             layout="@layout/sign_up_first_step"/>
 

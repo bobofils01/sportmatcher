@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -111,15 +112,13 @@ class LoginActivity : AppCompatActivity() {
                         LoginViewState.SIGNIN -> {}
                         LoginViewState.SIGNOUT -> {}
                         LoginViewState.SIGNUP ->{
-                            if(enter_email.visibility == View.GONE)
-                                enter_email.visibility = View.VISIBLE
+                            when {
+                                enter_email.visibility == View.GONE -> enter_email.visibility = View.VISIBLE
+                                name.visibility == View.GONE -> name.visibility = View.VISIBLE
 
-                            else if(name.visibility == View.GONE)
-                                name.visibility = View.VISIBLE
 
-                            //Affiche le message de prévention comme quoi l'utilisateur va quitter la création du compte
-                            else{
-                                AlertDialog.Builder(this)
+                                //Affiche le message de prévention comme quoi l'utilisateur va quitter la création du compte
+                                else -> AlertDialog.Builder(this)
                                     .setTitle("You are about to stop creating your account")
                                     .setMessage("You will lose all progress you've made")
                                     .setPositiveButton("Continue", null)
@@ -127,12 +126,56 @@ class LoginActivity : AppCompatActivity() {
                                     //.setIcon(android.R.drawable.ic_dialog_alert)
                                     .show()
                                     .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
-                                    //.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
+
+                                //.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
                             }
                         }
                     }
                 }
             })
 
+    }
+
+    //Si on appuie sur le boutton back du toolbar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        setSupportActionBar(findViewById(com.example.sportmatcher.R.id.toolbar))
+
+        return when (item.itemId) {
+            R.id.home -> {
+
+                when {
+                    welcome.visibility == View.VISIBLE -> super.onBackPressed()
+
+                    enter_email.visibility == View.GONE ->{
+                        enter_email.visibility = View.VISIBLE
+
+                        //Place titre dans le toolbar
+                        supportActionBar?.title = "Email"
+                    }
+                    name.visibility == View.GONE ->{
+                        name.visibility = View.VISIBLE
+
+                        //Place titre dans le toolbar
+                        supportActionBar?.title = "Name"
+                    }
+
+                    //Affiche le message de prévention comme quoi l'utilisateur va quitter la création du compte
+                    else -> AlertDialog.Builder(this)
+                        .setTitle("You are about to stop creating your account")
+                        .setMessage("You will lose all progress you've made")
+                        .setPositiveButton("Continue", null)
+                        .setNegativeButton("Stop"){ _, _ -> super.onBackPressed() }
+                        //.setIcon(android.R.drawable.ic_dialog_alert)
+                        .show()
+                        .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1CA6BE"))
+
+                    //.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
+                }
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

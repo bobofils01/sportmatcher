@@ -94,7 +94,6 @@ class SportHomePageActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // todo: goto back activity from here
                 startActivity(Intent(this, NavigationActivity::class.java))
                 true
             }
