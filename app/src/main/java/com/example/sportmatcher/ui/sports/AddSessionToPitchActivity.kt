@@ -118,6 +118,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         var hour  =  c.get(Calendar.HOUR_OF_DAY)
         var minutes = c.get(Calendar.MINUTE)
 
+        session_date.requestFocus()
         session_date.setOnClickListener{
             val date = session_date.text.toString()
             if(!date.isNullOrBlank()){
@@ -134,7 +135,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             dpd.show()
         }
 
-
+        session_time.requestFocus()
         session_time.setOnClickListener {
             val time = session_time.text.toString()
             if(!time.isNullOrBlank()){
