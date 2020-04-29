@@ -164,7 +164,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
     private fun initPlayersSuggestionAdaptater(){
 
         addSessionViewModel.getAllFriends().observe (this, Observer { playersList ->
-            val emails = playersList.map { t -> t.email }
+            val emails = playersList.map { t -> t.firstName + " " + t.lastName }
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, emails)
             friends_autoCompleteTextView.threshold = 0
             friends_autoCompleteTextView.setAdapter(adapter)
@@ -183,7 +183,8 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             addSessionViewModel.getAllFriends().observe(this, Observer { friends ->
                 var isAFriend: User? = null
                 for (p in friends) {
-                    if (p.email.equals(playerText.toString())){
+                    val name = p.firstName + " " + p.lastName
+                    if (name.equals(playerText.toString())){
                         isAFriend = p
                     }
                 }
