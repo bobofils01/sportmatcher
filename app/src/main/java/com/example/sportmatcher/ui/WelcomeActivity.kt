@@ -7,16 +7,10 @@ import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.multidex.MultiDex
 import com.example.sportmatcher.R
-import com.example.sportmatcher.model.authentication.AuthenticatedState
-import com.example.sportmatcher.model.authentication.AuthenticationInProgress
-import com.example.sportmatcher.ui.authentication.LoginFragment
 import com.example.sportmatcher.ui.authentication.LoginViewState
 import com.example.sportmatcher.viewModels.authentication.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -36,10 +30,6 @@ class WelcomeActivity : AppCompatActivity(){
                 putExtra(SCREEN_STATE_KEY, state)
             }
         }
-    }
-
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

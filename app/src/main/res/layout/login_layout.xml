@@ -102,7 +102,8 @@
             android:text="Forgot password ?"
             android:textColor="#1CA6BE"
             android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible"/>
 
         <TextView
             android:layout_width="match_parent"

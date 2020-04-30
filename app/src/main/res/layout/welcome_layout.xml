@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,66 +9,66 @@
     android:background="#fff"
     tools:context=".ui.LoginActivity">
 
-
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="292dp"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text="Sportmatcher"
-        android:textColor="@color/colorApp"
-        android:textSize="50dp" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_login"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="71dp"
-        android:background="#F04527"
-        android:text="@string/log_in"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="35sp"
-        android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/sportmatcher"
+            app:layout_constraintBottom_toTopOf="@id/sportmartcherTextView"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/sportmartcherTextView"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="Sportmatcher"
+            android:textColor="@color/colorApp"
+            android:textSize="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/icon"/>
 
-    <Button
-        android:id="@+id/signup_btn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="2dp"
-        android:background="#1CA6BE"
-        android:text="Sign Up"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="35sp"
-        android:visibility="gone"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/sportmartcherTextView">
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#F04527"
+            android:text="@string/log_in"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_btn"
+            android:visibility="gone"/>
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="296dp"
-        android:src="@drawable/sportmatcher" />
+        <Button
+            android:id="@+id/signup_btn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:background="#1CA6BE"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="35sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            android:visibility="gone"/>
+        </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progress"
@@ -75,12 +76,15 @@
         android:layout_height="84dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="164dp"
-        android:layout_marginRight="164dp"
-        android:layout_marginBottom="183dp"
-        android:indeterminateTint="#1CA6BE" />
+        android:indeterminateTint="#1CA6BE"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sportmartcherTextView"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
