@@ -9,7 +9,10 @@ import com.example.sportmatcher.repository.IPitchesRepository
 import com.example.sportmatcher.repository.ISessionRepository
 import com.google.android.gms.tasks.Tasks.await
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.add_session_info_layout.*
 import kotlinx.coroutines.awaitAll
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRepository,
                                      private val iSessionRepository: ISessionRepository)
@@ -30,12 +33,37 @@ class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRep
                 for(i in it.indices){
                     iSessionRepository.getSession(it[i]).subscribe{ session->
                         sessions.add(session)
-                        if(i == it.size - 1)
-                            emitter.onNext(sessions)
+                        if(i == it.size - 1) {
+                            val filteredSessions = sessions.filter{!isExpiredDate(it)}
+                            emitter.onNext(filteredSessions)
+                        }
                     }
                 }
             }
 
         }
+    }
+
+    private fun isExpiredDate(sess: Session): Boolean {
+        val c = Calendar.getInstance()
+        var currentYear = c.get(Calendar.YEAR)
+        var currentMonth = c.get(Calendar.MONTH)
+        var currentDay = c.get(Calendar.DAY_OF_MONTH)
+        val date = sess.date
+        if(!date.isNullOrBlank()){
+            val spr = date.split("/")
+            val day = spr[0].toInt()
+            val month = spr[1].toInt()
+            val year = spr[2].toInt()
+
+            if(currentYear > year)
+                return true
+            if(currentMonth > month)
+                return true
+
+            if(currentDay > day)
+                return true
+        }
+        return false
     }
 }
