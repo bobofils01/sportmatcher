@@ -28,6 +28,10 @@ class SignUpUseCase(private val iAuthService: IAuthService) :
         }
 
         return iAuthService.register(payload.email!!, payload.passWord!!, payload.firstName!!, payload.lastName!!).map{
+            //After signup enable all notifications.
+            ServiceProvider.getAllSportsUseCase.execute().subscribe { sports ->
+                ServiceProvider.updateSportsFavouriteUseCase.execute(sports)
+            }
             it
         }.onErrorResumeNext(Single.just(NotAuthenticated))
     }
