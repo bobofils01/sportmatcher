@@ -46,7 +46,7 @@ class FirebaseMessagingService : FirebaseMessagingService(), INotificationServic
         handler.post(Runnable {
 
             val layout = LinearLayout(applicationContext)
-            layout.setBackgroundResource(R.drawable.button_enabled)
+            layout.setBackgroundResource(R.drawable.button_not_enabled)
             layout.orientation= LinearLayout.HORIZONTAL
             layout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT)
 

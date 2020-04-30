@@ -47,7 +47,7 @@ class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRep
     private fun isExpiredDate(sess: Session): Boolean {
         val c = Calendar.getInstance()
         var currentYear = c.get(Calendar.YEAR)
-        var currentMonth = c.get(Calendar.MONTH)
+        var currentMonth = c.get(Calendar.MONTH) +1 //android month start from 0
         var currentDay = c.get(Calendar.DAY_OF_MONTH)
         val date = sess.date
         if(!date.isNullOrBlank()){
@@ -58,10 +58,9 @@ class GetAllSessionsForAPitchUseCase(private val iPitchesRepository: IPitchesRep
 
             if(currentYear > year)
                 return true
-            if(currentMonth > month)
+            else if(currentYear == year && currentMonth > month)
                 return true
-
-            if(currentDay > day)
+            else if(currentYear == year && currentMonth == month && currentDay > day)
                 return true
         }
         return false

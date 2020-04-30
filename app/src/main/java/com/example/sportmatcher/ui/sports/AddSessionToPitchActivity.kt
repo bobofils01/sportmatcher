@@ -129,7 +129,7 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             }
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                session_date.setText("$dayOfMonth/$monthOfYear/$year")
+                session_date.setText("$dayOfMonth/${monthOfYear + 1}/$year")
             }, year, month, day)
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000
             dpd.show()
