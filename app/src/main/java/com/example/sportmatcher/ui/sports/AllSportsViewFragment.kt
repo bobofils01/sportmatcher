@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
+import com.example.sportmatcher.R.layout
 import com.example.sportmatcher.adapters.PitchesListAdapter
 import com.example.sportmatcher.viewModels.sports.AllSportsViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -67,7 +68,7 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
     ): View? {
         sportName = arguments?.getString(EXTRA_SPORT)!!
 
-        val view = inflater.inflate(R.layout.all_sports_view_layout, container, false)
+        val view = inflater.inflate(layout.all_sports_view_layout, container, false)
 
         val mapFragment : SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 

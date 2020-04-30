@@ -30,13 +30,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/swipe_up"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center|center_horizontal"
-                android:background="@drawable/swipe_up" />
-
             <Button
                 android:id="@+id/btn_add_pitch_view"
                 style="@style/Widget.AppCompat.Button"
@@ -47,7 +40,8 @@
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/button_enabled"
                 android:text="New Pitch"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:layout_marginTop="15dp"/>
 
             <LinearLayout
                 android:id="@+id/list_view"
