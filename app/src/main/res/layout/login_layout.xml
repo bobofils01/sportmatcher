@@ -21,7 +21,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
             android:fontFamily="@font/baloo"
             android:gravity="center"
             android:text="Sportmatcher"
@@ -29,7 +30,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="106dp"
+            android:layout_height="80dp"
+            android:layout_weight="2"
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:text="Log in"
@@ -40,7 +42,8 @@
             android:theme="@style/TextInputLayoutAppearance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextEmailID"
@@ -60,7 +63,8 @@
             android:theme="@style/TextInputLayoutAppearance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPasswordID"
@@ -82,6 +86,7 @@
             android:id="@+id/btn_login"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="152dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
@@ -97,6 +102,7 @@
             android:id="@+id/forgot_password_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:layout_gravity="center"
             android:clickable="true"
             android:text="Forgot password ?"
@@ -107,7 +113,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="77dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:text="or"
@@ -117,6 +124,7 @@
             android:id="@+id/signup_btn"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="152dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
