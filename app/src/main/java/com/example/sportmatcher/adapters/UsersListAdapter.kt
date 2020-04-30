@@ -1,16 +1,12 @@
 package com.example.sportmatcher.adapters
 
 import android.content.Context
-import android.database.DataSetObserver
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.sportmatcher.R
-import com.example.sportmatcher.domain.friendship.AddFriendUseCase
 import com.example.sportmatcher.model.User
-import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
 import kotlinx.android.synthetic.main.user_item.view.*
 
 class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, private val callbackAddFriend: (User)->Unit):
@@ -64,19 +60,16 @@ class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, pri
             val results = FilterResults()
             // No filter implemented we return all the list
             if (constraint.isNullOrBlank()) {
-                Log.d("Roman gros?", originalFriends.size.toString())
                 results.values = originalFriends
                 results.count = originalFriends.size
             } else { // We perform filtering operation
                 val nUserList = ArrayList<User>()
                 for (p in originalFriends.listIterator()) {
-                    Log.d("Roman for", p.email.toString())
                     if (p.email.toLowerCase().startsWith(constraint.toString().toLowerCase()) ||
                         p.firstName!!.toLowerCase().startsWith(constraint.toString().toLowerCase())) {
                         nUserList.add(p)
                     }
                 }
-                Log.d("Roman", nUserList.size.toString() + nUserList.toString())
                 results.values = nUserList
                 results.count = nUserList.size
             }
@@ -90,7 +83,6 @@ class UsersListAdapter (private var userList: ArrayList<User>, ctx: Context, pri
             else {
                 userList.clear()
                 userList.addAll(results.values as ArrayList<User>)
-                Log.d("Roman publish", userList.size.toString())
                 notifyDataSetChanged()
             }
         }

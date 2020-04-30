@@ -3,7 +3,6 @@ package com.example.sportmatcher.ui.sports.session
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,14 +44,14 @@ class ShowSessionFragment : Fragment() {
         viewModel.authenticatedUser = user
 
 
-        return inflater.inflate(com.example.sportmatcher.R.layout.show_session_fragment, container, false)
+        return inflater.inflate(R.layout.show_session_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initParticipantsList()
         initJoinButton()
         bindTextViews()
-        initParticipantsList()
 
         //Profile player not implemented
         /*

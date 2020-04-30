@@ -1,6 +1,5 @@
 package com.example.sportmatcher.adapters
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -15,7 +14,6 @@ class NavigationPageAdapter(fm: FragmentManager, private var tabCount: Int) : Fr
 
     override fun getItem(position: Int): Fragment {
 
-        Log.d("Roman NavigationPageAda", position.toString())
         return when (position){
             0 -> {
                 SportChoiceFragment() //Lance la liste des sports à l'appuie du boutton d'indice 0 dans la bar de navigation

@@ -2,10 +2,8 @@ package com.example.sportmatcher.ui.friendship
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.R
 import com.example.sportmatcher.adapters.FriendListAdapter
 import com.example.sportmatcher.di.ServiceProvider.getAuthenticatedUserUseCase
-import com.example.sportmatcher.ui.ProfileActivity
 import com.example.sportmatcher.viewModels.friendship.FriendsViewModel
-import kotlinx.android.synthetic.main.friend_item.*
 import kotlinx.android.synthetic.main.friends_view_layout.*
 
 class FriendsViewFragment: Fragment() {
@@ -44,7 +40,6 @@ class FriendsViewFragment: Fragment() {
             friendsViewModel.setUser(from)
         }
 
-        Log.d("Roman FriendsVF user", from?.toMap().toString())
         val friendsListView = friends_list as ListView
 
         friendsViewModel.getAllFriends().observe(viewLifecycleOwner, Observer { friends ->

@@ -10,7 +10,6 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,14 +94,6 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
             allSportsViewModel.onAddPitchClicked()
         }
 
-        /*fusedLocationClient.lastLocation
-            .addOnSuccessListener { location : Location? ->
-                val pos = LatLng((location!!.latitude), (location.longitude))
-                Log.d("Roman AlSF", pos.toString())
-                mMap.addMarker(MarkerOptions().position(pos).title("Me"))
-            }
-        */
-
         allSportsViewModel.getAllSports(sportName).observe(requireActivity(), Observer { sports ->
             context?.let {
                 val adapter = PitchesListAdapter(sports, requireContext())
@@ -138,13 +129,11 @@ class AllSportsViewFragment: Fragment(), OnMapReadyCallback{
                     var location: Location? = task.result
                     if (location != null) {
                         val pos = LatLng((location!!.latitude), (location.longitude))
-                        Log.d("Roman AlSF", pos.toString())
                         mMap.addMarker(MarkerOptions().position(pos).title("Your Position").alpha(0.5f))
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 10.0f))
                     }
                 }
             } else {
-                Log.d("Roman AlSF", "Turn on location")
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }

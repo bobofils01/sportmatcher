@@ -3,12 +3,10 @@ package com.example.sportmatcher.ui.friendship
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,7 +36,6 @@ class AllUsersFragment: Fragment() {
         if (from != null) {
             friendsViewModel.setUser(from)
         }
-        Log.d("Roman AllUFr user", from?.toMap().toString())
 
         friendsViewModel.getAllFriends().observe(viewLifecycleOwner , Observer {})
 
@@ -55,7 +52,6 @@ class AllUsersFragment: Fragment() {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    Log.d("Roman", "Text [$s]")
                     adapter.filter.filter(s.toString())
                 }
 

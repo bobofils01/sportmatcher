@@ -13,7 +13,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportmatcher.di.ServiceProvider
-import com.example.sportmatcher.ui.friendship.FriendsFragment
 import com.example.sportmatcher.viewModels.authentication.LogOutViewModel
 import kotlinx.android.synthetic.main.settings_layout.*
 
