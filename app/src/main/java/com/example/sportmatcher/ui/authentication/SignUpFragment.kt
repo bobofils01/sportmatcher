@@ -173,33 +173,35 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
                 }
 
-                //Dans le cas où l'email a déjà été utilisé
-                viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
-                    it?.let { state ->
-                        when (state) {
-                            is AuthenticatedState -> {}
-                            is AuthenticationInProgress -> {}
-                            else -> {
-                                val handler = Handler()
-                                handler.postDelayed({run{
-                                    //Replace le toolbar
-                                    toolbar.visibility = View.VISIBLE
+                finally{
+                    //Dans le cas où l'email a déjà été utilisé
+                    viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
+                        it?.let { state ->
+                            when (state) {
+                                is AuthenticatedState -> {}
+                                is AuthenticationInProgress -> {}
+                                else -> {
+                                    val handler = Handler()
+                                    handler.postDelayed({run{
+                                        //Replace le toolbar
+                                        toolbar.visibility = View.VISIBLE
 
-                                    progressBar.visibility = View.GONE
-                                    enter_email.visibility = View.VISIBLE
+                                        progressBar.visibility = View.GONE
+                                        enter_email.visibility = View.VISIBLE
 
-                                    AlertDialog.Builder(context)
-                                        .setTitle("Mail adress error.")
-                                        .setMessage("The email address you entered is already used. Please use another.")
-                                        .setNegativeButton(R.string.ok, null)
-                                        //.setIcon(android.R.drawable.ic_dialog_alert)
-                                        .show()
-                                        .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
-                                } }, 3000)
+                                        AlertDialog.Builder(context)
+                                            .setTitle("Mail adress error.")
+                                            .setMessage("The email address you entered is already used. Please use another.")
+                                            .setNegativeButton(R.string.ok, null)
+                                            //.setIcon(android.R.drawable.ic_dialog_alert)
+                                            .show()
+                                            .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
+                                    } }, 4000)
+                                }
                             }
                         }
-                    }
-                })
+                    })
+                }
             }
         }
 /*

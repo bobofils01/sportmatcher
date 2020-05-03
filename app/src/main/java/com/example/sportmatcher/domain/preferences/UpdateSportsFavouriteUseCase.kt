@@ -41,9 +41,6 @@ class UpdateSportsFavouriteUseCase(
                 }
             }
         }
-
-
-
         return true
     }
 

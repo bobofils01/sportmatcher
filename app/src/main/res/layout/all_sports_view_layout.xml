@@ -30,6 +30,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/swipe_up"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|center_horizontal"
+                android:background="@drawable/swipe_up" />
+
             <Button
                 android:id="@+id/btn_add_pitch_view"
                 style="@style/Widget.AppCompat.Button"
