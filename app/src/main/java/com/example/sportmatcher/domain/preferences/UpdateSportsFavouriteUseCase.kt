@@ -36,12 +36,8 @@ class UpdateSportsFavouriteUseCase(
 
                     }
                 }
-                is NotAuthenticated ->{
-                    throw IllegalStateException("can't sync preferences without being authenticated.")
-                }
             }
         }
-
 
 
         return true
