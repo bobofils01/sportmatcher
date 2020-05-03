@@ -20,42 +20,23 @@
             android:layout_alignParentBottom="true"
             android:src="@drawable/sportmatcher"
             app:layout_constraintBottom_toTopOf="@id/sportmartcherTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sportmartcherTextView"
             android:layout_width="match_parent"
+            android:id="@+id/sportmartcherTextView"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
             android:gravity="center"
             android:text="Sportmatcher"
             android:textColor="@color/colorApp"
             android:textSize="50dp"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
+            app:layout_constraintTop_toBottomOf="@+id/icon"/>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="52dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_enabled"
-            android:backgroundTint="#FF6347"
-            android:text="@string/log_in"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="25sp"
-            app:layout_constraintRight_toLeftOf="@+id/signup_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress"
-            android:layout_marginTop="140dp"
-            android:visibility="gone"/>
-
-        <!--<androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/sportmartcherTextView">
 
             <Button
@@ -63,6 +44,10 @@
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_enabled"
                 android:backgroundTint="@color/colorAccent"
@@ -70,57 +55,43 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="35sp"
-                app:layout_constraintRight_toLeftOf="@+id/signup_btn"
-                tools:layout_editor_absoluteY="0dp" />
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/signup_btn" />
 
             <Button
-            android:id="@+id/signup_btn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_enabled"
-            android:text="Sign Up"
-            android:layout_marginTop="5dp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="35sp"
-            app:layout_constraintLeft_toRightOf="@+id/btn_login" />
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
+                android:id="@+id/signup_btn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_enabled"
+                android:text="Sign Up"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login"
+                android:visibility="gone"/>
+        </LinearLayout>
 
-
-        <Button
-            android:id="@+id/signup_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="52dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_enabled"
-            android:text="Sign Up"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/btn_login"
-            app:layout_constraintTop_toBottomOf="@+id/progress"
-            android:layout_marginTop="140dp"
-            android:visibility="gone"/>
 
         <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="79dp"
-        android:layout_height="84dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:indeterminateTint="#1CA6BE"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sportmartcherTextView"/>
+            android:id="@+id/progress"
+            android:layout_width="79dp"
+            android:layout_height="84dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:indeterminateTint="#1CA6BE"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sportmartcherTextView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
