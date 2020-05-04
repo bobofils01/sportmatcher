@@ -165,26 +165,19 @@ class SignUpFragment : Fragment() {
                 progressBar.pbText.text = "Signing up"
                 progressBar.visibility = View.VISIBLE
 
-                try{ //L'utilisateur est alors inscrit si l'adresse mail qu'il a donné n'a pas encore été utilisée
-                    viewModel.onRegisterClicked()
-                }
-                catch (e: FirebaseAuthUserCollisionException){ //Dans le cas où l'email a déjà été utilisé
-                    startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
-                    Toast.makeText(activity, "You've already signed up with this email you may sign in instead", Toast.LENGTH_LONG).show()
-                }
+                viewModel.onRegisterClicked()
 
-                finally{
-                    //Dans le cas où l'email a déjà été utilisé
-                    viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
-                        it?.let { state ->
-                            when (state) {
-                                is AuthenticatedState -> {}
-                                is AuthenticationInProgress -> {}
-                                else -> {
-                                    val handler = Handler()
-                                    handler.postDelayed({run{
-                                        //Replace le toolbar
-                                        toolbar.visibility = View.VISIBLE
+                //Dans le cas où l'email a déjà été utilisé
+                viewmodelLogin.getAuthenticationStateLiveData().observe(viewLifecycleOwner, Observer {
+                    it?.let { state ->
+                        when (state) {
+                            is AuthenticatedState -> {}
+                            is AuthenticationInProgress -> {}
+                            else -> {
+                                val handler = Handler()
+                                handler.postDelayed({run{
+                                    //Replace le toolbar
+                                    toolbar.visibility = View.VISIBLE
 
                                         progressBar.visibility = View.GONE
                                         enter_email.visibility = View.VISIBLE
@@ -196,13 +189,16 @@ class SignUpFragment : Fragment() {
                                             //.setIcon(android.R.drawable.ic_dialog_alert)
                                             .show()
                                             .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1CA6BE"))
-                                    } }, 4000)
-                                }
+                                } }, 4000)
                             }
                         }
-                    })
-                }
+                    }
+                })
             }
+        }
+        //Si l'utilisateur a déjà un compte
+        login.setOnClickListener{
+            startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
         }
 /*
         //set Listener of authenticated user and show the right
@@ -218,11 +214,6 @@ class SignUpFragment : Fragment() {
             }
 
         })*/
-
-        //Si l'utilisateur a déjà un compte
-        login.setOnClickListener{
-            startActivity(activity?.let { it1 -> LoginActivity.getIntent(it1, LoginViewState.SIGNIN) })
-        }
     }
 
     //Débloque les bouttons dès que les champs vides sont remplis
