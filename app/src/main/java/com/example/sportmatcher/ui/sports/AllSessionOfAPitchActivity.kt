@@ -36,7 +36,7 @@ class AllSessionOfAPitchActivity: AppCompatActivity() {
         setContentView(R.layout.all_sessions_of_a_pitch_layout)
 
         //Assure la transparence du boutton d'ajout
-        new_session.alpha = 0.40f
+        //new_session.alpha = 0.40f
 
         allSessionsOfAPitchViewModel.pitch = intent.extras?.get(PITCH_KEY) as Pitch
         val listView : ListView = listViewAllSessions as ListView

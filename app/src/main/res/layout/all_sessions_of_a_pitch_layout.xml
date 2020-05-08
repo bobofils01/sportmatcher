@@ -1,103 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:id="@+id/toolbarAllSession"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="8">
 
-            <LinearLayout
-                android:id="@+id/toolbarAllSession"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/colorApp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="109dp"
-                    android:background="@color/colorApp">
+        <TextView
+            android:id="@+id/pitch_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_horizontal"
+            android:paddingLeft="4dp"
+            android:text="Pitch name"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/pitch_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/pitch_address"
-                        android:layout_width="0dp"
-                        android:layout_height="43dp"
-                        android:layout_marginTop="32dp"
-                        android:gravity="center|center_horizontal"
-                        android:paddingLeft="4dp"
-                        android:text="Pitch address"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.497"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/pitch_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
+            android:gravity="center|center_horizontal"
+            android:text="Pitch address"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pitch_name" />
 
-                    <TextView
-                        android:id="@+id/pitch_name"
-                        android:layout_width="201dp"
-                        android:layout_height="28dp"
-                        android:layout_marginBottom="4dp"
-                        android:gravity="center_horizontal"
-                        android:paddingLeft="4dp"
-                        android:text="Pitch name"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/pitch_address"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <!--<ImageView
+            android:id="@+id/new_session"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/plus"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"/>-->
 
-                    <!--<ImageView
-                        android:id="@+id/new_session"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:background="@drawable/plus"
-                        android:layout_gravity="center_horizontal"
-                        android:clickable="true"/>-->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
+            android:text="All sessions"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pitch_address" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="All sessions"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/linearLayoutListViewAllSessions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@+id/linearLayoutListViewAllSessions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbarAllSession"
-                    android:orientation="vertical">
+        <ListView
+            android:id="@+id/listViewAllSessions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-                    <ListView
-                        android:id="@+id/listViewAllSessions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+    </FrameLayout>
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/new_session"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="16dp"
-                        android:src="@drawable/plus"
-                        app:useCompatPadding="true" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_session"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/plus"
+        app:useCompatPadding="true" />
 
-                </FrameLayout>
-
-
-            </LinearLayout>
+</LinearLayout>
 
     <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -107,5 +102,3 @@
         android:src="@drawable/ic_my_icon"
         android:contentDescription="@string/submit"
         android:layout_margin="16dp" />-->
-
-</RelativeLayout>
