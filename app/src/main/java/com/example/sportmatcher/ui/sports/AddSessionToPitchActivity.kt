@@ -118,8 +118,8 @@ class AddSessionToPitchActivity : AppCompatActivity() {
         var hour  =  c.get(Calendar.HOUR_OF_DAY)
         var minutes = c.get(Calendar.MINUTE)
 
-        session_date.requestFocus()
         session_date.setOnClickListener{
+            hideKeyboard(this)
             val date = session_date.text.toString()
             if(!date.isNullOrBlank()){
                 val spr = date.split("/")
@@ -135,8 +135,8 @@ class AddSessionToPitchActivity : AppCompatActivity() {
             dpd.show()
         }
 
-        session_time.requestFocus()
         session_time.setOnClickListener {
+            hideKeyboard(this)
             val time = session_time.text.toString()
             if(!time.isNullOrBlank()){
                 val spr = time.split(":")
